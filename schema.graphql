@@ -1,6 +1,22 @@
-type ExampleEntity @entity {
+type Payment @entity {
   id: ID!
-  count: BigInt!
-  tokenAddress: Bytes! # address
-  to: Bytes! # address
+  contractAddress: Bytes!
+  tokenAddress: Bytes!
+  to: Bytes!
+  from: Bytes!
+  reference: Bytes!
+  block: Int!
+  timestamp: Int!
+  txHash: Bytes!
+  amount: BigDecimal!
+
+  # fee values
+  feeAmount: BigDecimal
+  feeAddress: Bytes
+
+  # conversion values
+  currency: Bytes
+  amountInCrypto: BigDecimal
+  feeAmountInCrypto: BigDecimal
+  maxRateTimespan: Int
 }

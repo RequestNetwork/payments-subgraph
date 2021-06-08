@@ -42,16 +42,44 @@
     "name": "TransferWithReferenceAndFee",
     "type": "event"
   },
-  { "payable": true, "stateMutability": "payable", "type": "fallback" },
+  {
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
   {
     "constant": false,
     "inputs": [
-      { "internalType": "address", "name": "_tokenAddress", "type": "address" },
-      { "internalType": "address", "name": "_to", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "bytes", "name": "_paymentReference", "type": "bytes" },
-      { "internalType": "uint256", "name": "_feeAmount", "type": "uint256" },
-      { "internalType": "address", "name": "_feeAddress", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_tokenAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_to",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_paymentReference",
+        "type": "bytes"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_feeAmount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_feeAddress",
+        "type": "address"
+      }
     ],
     "name": "transferFromWithReferenceAndFee",
     "outputs": [],

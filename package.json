@@ -3,14 +3,23 @@
   "license": "UNLICENSED",
   "scripts": {
     "codegen": "graph codegen",
+    "prepare": "ts-node scripts/prepare.ts",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ benjlevesque/rn-payments",
-    "create-local": "graph create --node http://localhost:8020/ benjlevesque/rn-payments",
-    "remove-local": "graph remove --node http://localhost:8020/ benjlevesque/rn-payments",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 benjlevesque/rn-payments"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/",
+    "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-rinkeby",
+    "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-rinkeby",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-rinkeby"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
-    "@graphprotocol/graph-ts": "0.20.0"
+    "@graphprotocol/graph-ts": "0.20.0",
+    "@requestnetwork/smart-contracts": "^0.27.0"
+  },
+  "devDependencies": {
+    "@types/mustache": "^4.1.1",
+    "ethers": "^5.2.0",
+    "mustache": "^4.2.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.2.4"
   }
 }

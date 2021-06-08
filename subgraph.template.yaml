@@ -1,0 +1,92 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  {{#proxy}}
+  - kind: ethereum/contract
+    name: ERC20Proxy
+    network: {{network}}
+    source:
+      address: "{{proxy.address}}"
+      abi: ERC20Proxy
+      startBlock: {{proxy.creationBlockNumber}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20Proxy
+          file: ./abis/ERC20Proxy.json
+      eventHandlers:
+        - event: TransferWithReference(address,address,uint256,indexed bytes)
+          handler: handleTransferWithReference
+      file: ./src/erc20Proxy.ts
+  {{/proxy}}
+  {{#feeProxy}}
+  - kind: ethereum/contract
+    name: ERC20FeeProxy
+    network: {{network}}
+    source:
+      address: "{{feeProxy.address}}"
+      abi: ERC20FeeProxy
+      startBlock: {{feeProxy.creationBlockNumber}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy
+          file: ./abis/ERC20FeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20FeeProxy.ts
+  {{#conversionProxy}}
+  - kind: ethereum/contract
+    name: ERC20FeeProxyForConversion
+    network: {{network}}
+    source:
+      address: "{{conversionProxy.address}}"
+      abi: ERC20FeeProxy
+      startBlock: {{conversionProxy.creationBlockNumber}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy
+          file: ./abis/ERC20FeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20ConversionProxy.ts
+  - kind: ethereum/contract
+    name: ERC20ConversionProxy
+    network: {{network}}
+    source:
+      address: "{{conversionProxy.address}}"
+      abi: ERC20ConversionProxy
+      startBlock: {{conversionProxy.creationBlockNumber}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20ConversionProxy
+          file: ./abis/ERC20ConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+      file: ./src/erc20ConversionProxy.ts  
+  {{/conversionProxy}}
+  {{/feeProxy}}
+
+  

@@ -1,23 +1,26 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Contract
-    network: mainnet
+    name: ERC20FeeProxy
+    network: matic
     source:
-      address: "0x370de27fdb7d1ff1e1baa7d11c5820a324cf623c"
-      abi: Contract
+      address: "0x2171a0dc12a9E5b1659feF2BB20E54c84Fa7dB0C"
+      abi: ERC20FeeProxy
+      startBlock: 14163521
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.2
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - TransferWithReferenceAndFee
+        - Payment
       abis:
-        - name: Contract
-          file: ./abis/Contract.json
+        - name: ERC20FeeProxy
+          file: ./abis/ERC20FeeProxy.json
       eventHandlers:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
-      file: ./src/mapping.ts
+      file: ./src/erc20FeeProxy.ts
+
+  
