@@ -22,8 +22,8 @@ export function handleTransferWithReferenceAndFee(
     event.transaction.hash.toHexString()
   ]);
   let payment = createPaymentForFeeProxy(event);
+  payment.amountInCrypto = event.params.amount.toBigDecimal();
   payment.feeAmountInCrypto = event.params.feeAmount.toBigDecimal();
-  payment.feeAddress = event.params.feeAddress;
 
   payment.save();
 }
