@@ -1,6 +1,11 @@
 {
-  "name": "rn-payments",
-  "license": "UNLICENSED",
+  "name": "payments-subgraph",
+  "license": "MIT",
+  "homepage": "https://request.network",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
+  },
   "scripts": {
     "codegen": "graph codegen",
     "prepare": "ts-node scripts/prepare.ts",
