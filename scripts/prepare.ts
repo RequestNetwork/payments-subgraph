@@ -28,6 +28,10 @@ for (const network of networks) {
   const proxy = safeGetInfo(erc20ProxyArtifact, network);
   const feeProxy = safeGetInfo(erc20FeeProxyArtifact, network);
   const conversionProxy = safeGetInfo(erc20ConversionProxy, network);
+  if (!proxy && !feeProxy && !conversionProxy) {
+    console.warn(`No contract found for ${network}`);
+    continue;
+  }
   const result = mustache.render(template, {
     network,
     proxy,

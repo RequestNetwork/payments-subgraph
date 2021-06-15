@@ -88,5 +88,3 @@ dataSources:
       file: ./src/erc20ConversionProxy.ts  
   {{/conversionProxy}}
   {{/feeProxy}}
-
-  
