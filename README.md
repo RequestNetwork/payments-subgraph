@@ -60,3 +60,13 @@ yarn deploy requestnetwork/request-payments-matic  --access-token $TOKEN ./subgr
 ```
 http POST 'https://api.thegraph.com/index-node/graphql'  query="{ indexingStatusForPendingVersion(subgraphName: \"requestnetwork/request-payments-rinkeby\") { subgraph fatalError { message } nonFatalErrors {message } } }" | jq .data
 ```
+
+### Build issue `TS6054: File '~lib/allocator/arena.ts' not found.`
+You probably have an issue in the package resolution of `assemblyscript`. 
+
+See next issue for resolution.
+
+### Install issue `Couldn't find match for ...`
+This is related to the fact TheGraph uses a very old version of assemblyscript (see [This PR](https://github.com/graphprotocol/graph-ts/pull/185/files) for migration to the latest version).
+
+In the meantime, `yarn cache clean` should resolve it. 
