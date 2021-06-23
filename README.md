@@ -4,6 +4,7 @@ This repo contains the code and configuration for Request Payment subgraphs:
 - Mainnet (coming soon)
 - [Rinkeby](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-rinkeby)
 - [Matic](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
+- [Celo](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-celo)
 
 It indexes Request's proxy smart-contracts for easy querying of payment data.
 
