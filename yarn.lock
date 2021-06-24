@@ -402,10 +402,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@requestnetwork/smart-contracts@^0.27.1-next.1459":
-  version "0.27.1-next.1459"
-  resolved "https://registry.yarnpkg.com/@requestnetwork/smart-contracts/-/smart-contracts-0.27.1-next.1459.tgz#53871a9cc27eba402058e99f6a59d0f3c27fddcb"
-  integrity sha512-KK0nxZXjdqUk8zE46IV5vHhNhdJurGXevNa7SSrzIfak8XwWgEzVzGuOHoD+Kfvb9t95Orc6jHMfj7y/pjj9Yg==
+"@requestnetwork/smart-contracts@^0.28.0":
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/@requestnetwork/smart-contracts/-/smart-contracts-0.28.0.tgz#f01689124e59ce78a886d89927b3fc386f5d7846"
+  integrity sha512-Xp4rkSsYWdpp8NVYz5XEkCmr87HM41TLjX2Jk2iwdvXGucfMcnXaAxMVOur/cEYyAamCpcAcP2UjSCfiLi9axA==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"
