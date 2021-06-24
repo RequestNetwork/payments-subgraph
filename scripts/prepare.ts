@@ -8,7 +8,7 @@ import {
   erc20ConversionProxy
 } from "@requestnetwork/smart-contracts";
 
-const networks = ["rinkeby", "matic"];
+const networks = ["rinkeby", "matic", "celo"];
 
 const safeGetInfo = (artifact: ContractArtifact<any>, network: string) => {
   try {
