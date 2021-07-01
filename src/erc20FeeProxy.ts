@@ -18,6 +18,8 @@ export function createPaymentForFeeProxy(
   payment.block = event.block.number.toI32();
   payment.timestamp = event.block.timestamp.toI32();
   payment.txHash = event.transaction.hash;
+  payment.gasUsed = event.transaction.gasUsed;
+  payment.gasPrice = event.transaction.gasPrice;
   payment.amount = event.params.amount.toBigDecimal();
   payment.feeAmount = event.params.feeAmount.toBigDecimal();
   payment.feeAddress = event.params.feeAddress;
