@@ -8,6 +8,8 @@ type Payment @entity {
   block: Int!
   timestamp: Int!
   txHash: Bytes!
+  gasUsed: BigInt!
+  gasPrice: BigInt!
   amount: BigDecimal!
 
   # fee values

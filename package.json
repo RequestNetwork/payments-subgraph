@@ -7,7 +7,7 @@
     "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
   },
   "scripts": {
-    "codegen": "graph codegen",
+    "codegen": "graph codegen ./subgraph.rinkeby.yaml",
     "prepare": "ts-node scripts/prepare.ts",
     "build": "graph build",
     "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/",
