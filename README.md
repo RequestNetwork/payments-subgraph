@@ -25,9 +25,7 @@ cp .env.sample .env # don't forget to edit the WEB3_URL and, if required, the NE
 
 # install dependencies
 yarn
-# generate types
-yarn codegen
-# generate subgraph manifests
+# generate ABIs & subgraph manifests, and generate types
 yarn prepare
 
 # Run a local Graph Node
