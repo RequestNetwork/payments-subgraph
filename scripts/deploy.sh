@@ -11,4 +11,4 @@ fi
 
 echo "Deploying requestnetwork/request-payments-$1"
 
-yarn deploy requestnetwork/request-payments-$1  --access-token $TOKEN ./subgraph.$1.yaml
+npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ requestnetwork/request-payments-$1  --access-token $TOKEN ./subgraph.$1.yaml

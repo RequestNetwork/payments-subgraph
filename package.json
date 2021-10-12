@@ -10,15 +10,15 @@
     "codegen": "graph codegen ./subgraph.rinkeby.yaml",
     "prepare": "ts-node scripts/prepare.ts && yarn codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/",
-    "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-rinkeby",
-    "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-rinkeby",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-rinkeby"
+    "deploy": "./scripts/deploy.sh $NETWORK",
+    "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
+    "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-$NETWORK ./subgraph.$NETWORK.yaml"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
     "@graphprotocol/graph-ts": "0.20.0",
-    "@requestnetwork/smart-contracts": "^0.28.1-next.1482"
+    "@requestnetwork/smart-contracts": "^0.28.1-next.1529"
   },
   "devDependencies": {
     "@types/mustache": "^4.1.1",
