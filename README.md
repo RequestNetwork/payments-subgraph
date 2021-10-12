@@ -46,33 +46,17 @@ The subgraphs manifests are automatically generated using the [prepare script](.
 ### Local
 
 ```
+export NETWORK=rinkeby
 yarn create-local
-yarn deploy-local ./subgraph.rinkeby.yaml
+yarn deploy-local
 ```
 
 ### Networks
 
 ```
 export TOKEN=xxx
-yarn deploy requestnetwork/request-payments-{chainname}  --access-token $TOKEN ./subgraph.{chainname}.yaml
-```
-
-#### Example: Rinkeby
-
-```
-yarn deploy requestnetwork/request-payments-rinkeby  --access-token $TOKEN ./subgraph.rinkeby.yaml
-```
-
-#### Example: Matic
-
-```
-yarn deploy requestnetwork/request-payments-matic  --access-token $TOKEN ./subgraph.matic.yaml
-```
-
-#### Example: Celo
-
-```
-yarn deploy requestnetwork/request-payments-celo  --access-token $TOKEN ./subgraph.celo.yaml
+export NETWORK=rinkeby
+yarn deploy
 ```
 
 ## Example query
