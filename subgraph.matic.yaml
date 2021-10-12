@@ -22,3 +22,46 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/erc20FeeProxy.ts
+  - kind: ethereum/contract
+    name: ERC20FeeProxy-0.2.0
+    network: matic
+    source:
+      address: "0x0DfbEe143b42B41eFC5A6F87bFD1fFC78c2f0aC9"
+      abi: ERC20FeeProxy
+      startBlock: 17427742
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy
+          file: ./abis/ERC20FeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20FeeProxy.ts
+  - kind: ethereum/contract
+    name: ERC20ConversionProxy
+    network: matic
+    source:
+      address: "0xf0f49873C50765239F6f9534Ba13c4fe16eD5f2E"
+      abi: ERC20ConversionProxy
+      startBlock: 17427747
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20ConversionProxy
+          file: ./abis/ERC20ConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20ConversionProxy.ts
+  

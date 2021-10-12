@@ -22,3 +22,4 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/erc20FeeProxy.ts
+  

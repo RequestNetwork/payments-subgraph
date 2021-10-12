@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ERC20Proxy
-    network: rinkeby
+    network: mainnet
     source:
-      address: "0x162edb802fae75b9ee4288345735008ba51a4ec9"
+      address: "0x5f821c20947ff9be22e823edc5b3c709b33121b3"
       abi: ERC20Proxy
-      startBlock: 5628198
+      startBlock: 9119380
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -24,11 +24,11 @@ dataSources:
       file: ./src/erc20Proxy.ts
   - kind: ethereum/contract
     name: ERC20FeeProxy
-    network: rinkeby
+    network: mainnet
     source:
-      address: "0xda46309973bFfDdD5a10cE12c44d2EE266f45A44"
+      address: "0x370DE27fdb7D1Ff1e1BaA7D11c5820a324Cf623C"
       abi: ERC20FeeProxy
-      startBlock: 7118080
+      startBlock: 10774767
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -44,11 +44,11 @@ dataSources:
       file: ./src/erc20FeeProxy.ts
   - kind: ethereum/contract
     name: ERC20ConversionProxy
-    network: rinkeby
+    network: mainnet
     source:
-      address: "0x78334ed20da456e89cd7e5a90de429d705f5bc88"
+      address: "0xe72Ecea44b6d8B2b3cf5171214D9730E86213cA2"
       abi: ERC20ConversionProxy
-      startBlock: 8014584
+      startBlock: 12225751
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -66,11 +66,11 @@ dataSources:
       file: ./src/erc20ConversionProxy.ts
   - kind: ethereum/contract
     name: EthProxy
-    network: rinkeby
+    network: mainnet
     source:
-      address: "0x9c6c7817e3679c4b3f9ef9486001eae5aaed25ff"
+      address: "0x37a8f5f64f2a84f2377481537f04d2a59c9f59b6"
       abi: EthProxy
-      startBlock: 5955681
+      startBlock: 9466832
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
