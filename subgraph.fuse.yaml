@@ -1,0 +1,25 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ERC20FeeProxy
+    network: fuse
+    source:
+      address: "0xee07ef5B414955188d2A9fF50bdCE784A49031Fc"
+      abi: ERC20FeeProxy
+      startBlock: 11068489
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy
+          file: ./abis/ERC20FeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20FeeProxy.ts
+  

@@ -11,7 +11,16 @@ import {
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
 
-const networks = ["mainnet", "rinkeby", "matic", "celo", "bsc", "xdai"];
+const networks = [
+  "mainnet",
+  "rinkeby",
+  "matic",
+  "celo",
+  "bsc",
+  "xdai",
+  "fantom",
+  "fuse"
+];
 
 const paymentNetworks = {
   ERC20Proxy: erc20ProxyArtifact,
