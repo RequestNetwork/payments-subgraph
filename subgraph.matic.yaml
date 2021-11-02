@@ -84,4 +84,46 @@ dataSources:
         - event: TransferWithReference(address,uint256,indexed bytes)
           handler: handleTransferWithReference
       file: ./src/ethProxy.ts
+  - kind: ethereum/contract
+    name: EthFeeProxy
+    network: matic
+    source:
+      address: "0xC6E23a20C0a1933ACC8E30247B5D1e2215796C1F"
+      abi: EthFeeProxy
+      startBlock: 20670475
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthFeeProxy
+          file: ./abis/EthFeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy
+    network: matic
+    source:
+      address: "0xCa3353a15fCb5C83a1Ff64BFf055781aC5c4d2F4"
+      abi: EthConversionProxy
+      startBlock: 20670503
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy
+          file: ./abis/EthConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethConversionProxy.ts
   
