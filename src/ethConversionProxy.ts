@@ -1,26 +1,56 @@
 import { log } from "@graphprotocol/graph-ts";
-import { TransferWithReference } from "../generated/EthProxy/EthProxy";
+import { TransferWithConversionAndReference } from "../generated/EthConversionProxy/EthConversionProxy";
+import { TransferWithReferenceAndFee } from "../generated/EthFeeProxy/EthFeeProxy";
+import {createPaymentForFeeProxy} from "./ethFeeProxy";
 import { Payment } from "../generated/schema";
 import { generateId } from "./shared";
 
-export function handleTransferWithReference(
-  event: TransferWithReference
+
+//
+// ETHConversionProxy calls ETHFeeProxy internally.
+// Hence, we need to first parse the ETHFeeProxy event (TransferWithReferenceAndFee), then
+// parse the TransferWithConversionAndReference event
+//
+
+/**
+ * Handle the TransferWithReferenceAndFee event, emitted by the external call to the ETHFeeProxy contract.
+ * @param event
+ */
+
+export function handleTransferWithReferenceAndFee(
+  event: TransferWithReferenceAndFee
 ): void {
   log.info("ethProxy for tx {}", [event.transaction.hash.toHexString()]);
-  let payment = new Payment(
-    generateId(event.transaction, event.params.paymentReference)
-  );
-  // TODO
-  // payment.contractAddress = event.address;
-  // payment.reference = event.params.paymentReference;
-  // payment.to = event.params.to;
-  // payment.from = event.transaction.from;
-  // payment.block = event.block.number.toI32();
-  // payment.timestamp = event.block.timestamp.toI32();
-  // payment.txHash = event.transaction.hash;
-  // payment.gasUsed = event.transaction.gasUsed;
-  // payment.gasPrice = event.transaction.gasPrice;
-  // payment.amount = event.params.amount.toBigDecimal();
+  let payment = createPaymentForFeeProxy(event);
+  payment.save();
+}
+
+/**
+ * Handle the TransferWithConversionAndReference event, emitted by EthConversionProxy
+ * Here we expect the payment to be already created by the event handler above
+ * @param event
+ */
+
+export function handleTransferWithConversionAndReference(
+    event: TransferWithConversionAndReference
+): void {
+  log.info("ethConversionProxy for tx {}", [event.transaction.hash.toHex()]);
+  let id = generateId(event.transaction, event.params.paymentReference);
+  let payment = Payment.load(id);
+
+  if(!payment) {
+    log.error("payment entity {} should already exist. (tx: {})", [
+        id,
+        event.transaction.hash.toHexString()
+    ]);
+    return;
+  }
+  payment.contractAddress = event.address;
+  payment.amount = event.params.amount.toBigDecimal()
+
+  payment.currency = event.params.currency;
+  payment.feeAmount = event.params.feeAmount.toBigDecimal();
+  payment.maxRateTimespan = event.params.maxRateTimespan.toI32();
 
   payment.save();
 }
