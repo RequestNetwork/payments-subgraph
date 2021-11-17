@@ -6,7 +6,9 @@ import {
   ContractArtifact,
   erc20ProxyArtifact,
   erc20ConversionProxy,
-  ethereumProxyArtifact
+  ethereumProxyArtifact,
+  ethereumFeeProxyArtifact,
+  ethConversionArtifact
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
@@ -26,7 +28,9 @@ const paymentNetworks = {
   ERC20Proxy: erc20ProxyArtifact,
   ERC20FeeProxy: erc20FeeProxyArtifact,
   ERC20ConversionProxy: erc20ConversionProxy,
-  EthProxy: ethereumProxyArtifact
+  EthProxy: ethereumProxyArtifact,
+  EthFeeProxy: ethereumFeeProxyArtifact,
+  EthConversionProxy: ethConversionArtifact
 };
 
 type DataSource = {
