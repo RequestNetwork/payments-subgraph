@@ -1,9 +1,9 @@
-import { log } from "@graphprotocol/graph-ts";
-import { TransferWithConversionAndReference } from "../generated/EthConversionProxy/EthConversionProxy";
-import { TransferWithReferenceAndFee } from "../generated/EthFeeProxy/EthFeeProxy";
+import {log} from "@graphprotocol/graph-ts";
+import {TransferWithConversionAndReference} from "../generated/EthConversionProxy/EthConversionProxy";
+import {TransferWithReferenceAndFee} from "../generated/EthFeeProxy/EthFeeProxy";
 import {createPaymentForFeeProxy} from "./ethFeeProxy";
-import { Payment } from "../generated/schema";
-import { generateId } from "./shared";
+import {Payment} from "../generated/schema";
+import {generateId} from "./shared";
 
 
 //
@@ -18,11 +18,11 @@ import { generateId } from "./shared";
  */
 
 export function handleTransferWithReferenceAndFee(
-  event: TransferWithReferenceAndFee
+    event: TransferWithReferenceAndFee
 ): void {
-  log.info("ethProxy for tx {}", [event.transaction.hash.toHexString()]);
-  let payment = createPaymentForFeeProxy(event);
-  payment.save();
+    log.info("ethProxy for tx {}", [event.transaction.hash.toHexString()]);
+    let payment = createPaymentForFeeProxy(event);
+    payment.save();
 }
 
 /**
@@ -34,23 +34,23 @@ export function handleTransferWithReferenceAndFee(
 export function handleTransferWithConversionAndReference(
     event: TransferWithConversionAndReference
 ): void {
-  log.info("ethConversionProxy for tx {}", [event.transaction.hash.toHex()]);
-  let id = generateId(event.transaction, event.params.paymentReference);
-  let payment = Payment.load(id);
+    log.info("ethConversionProxy for tx {}", [event.transaction.hash.toHex()]);
+    let id = generateId(event.transaction, event.params.paymentReference);
+    let payment = Payment.load(id);
 
-  if(!payment) {
-    log.error("payment entity {} should already exist. (tx: {})", [
-        id,
-        event.transaction.hash.toHexString()
-    ]);
-    return;
-  }
-  payment.contractAddress = event.address;
-  payment.amount = event.params.amount.toBigDecimal()
+    if (!payment) {
+        log.error("payment entity {} should already exist. (tx: {})", [
+            id,
+            event.transaction.hash.toHexString()
+        ]);
+        return;
+    }
+    payment.contractAddress = event.address;
+    payment.amount = event.params.amount.toBigDecimal()
 
-  payment.currency = event.params.currency;
-  payment.feeAmount = event.params.feeAmount.toBigDecimal();
-  payment.maxRateTimespan = event.params.maxRateTimespan.toI32();
+    payment.currency = event.params.currency;
+    payment.feeAmount = event.params.feeAmount.toBigDecimal();
+    payment.maxRateTimespan = event.params.maxRateTimespan.toI32();
 
-  payment.save();
+    payment.save();
 }
