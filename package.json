@@ -8,6 +8,7 @@
   },
   "scripts": {
     "codegen": "graph codegen ./subgraph.rinkeby.yaml",
+    "codegen-near": "graph codegen ./subgraph.near.yaml",
     "prepare": "ts-node scripts/prepare.ts && yarn codegen",
     "build": "graph build",
     "deploy": "./scripts/deploy.sh $NETWORK",
@@ -19,7 +20,7 @@
     "monitor": "ts-node scripts/monitor"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.20.0",
+    "@graphprotocol/graph-cli": "0.24.1",
     "@graphprotocol/graph-ts": "0.20.0",
     "@requestnetwork/smart-contracts": "0.28.1-next.1692",
     "graphql-request": "^3.5.0",

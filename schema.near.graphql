@@ -1,0 +1,24 @@
+type Payment @entity {
+  id: ID!
+  contractAddress: String!
+  tokenAddress: Bytes
+  to: String!
+  from: String!
+  reference: String!
+  block: BigInt!
+  timestamp: BigInt!
+  txHash: Bytes!
+  gasUsed: BigInt!
+  gasPrice: BigInt!
+  amount: BigDecimal!
+
+  # fee values
+  feeAmount: BigDecimal
+  feeAddress: Bytes
+
+  # conversion values
+  currency: Bytes
+  amountInCrypto: BigDecimal
+  feeAmountInCrypto: BigDecimal
+  maxRateTimespan: Int
+}
