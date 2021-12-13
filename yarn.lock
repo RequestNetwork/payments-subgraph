@@ -402,10 +402,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@requestnetwork/smart-contracts@^0.28.1-next.1561":
-  version "0.28.1-next.1561"
-  resolved "https://registry.yarnpkg.com/@requestnetwork/smart-contracts/-/smart-contracts-0.28.1-next.1561.tgz#623fdfa2865d6fe03f1acbc492518dc0db2d6b93"
-  integrity sha512-2xiWRdPiME22BgAXYKi15jPXxlvpKrsY4SrSsid0XpwuuOU4++5BVO1bFj8X/4g6vvSnLXyoFUWMUHkAzXnuzg==
+"@requestnetwork/smart-contracts@^0.28.1-next.1590":
+  version "0.28.1-next.1590"
+  resolved "https://registry.yarnpkg.com/@requestnetwork/smart-contracts/-/smart-contracts-0.28.1-next.1590.tgz#04984903b2fae4215a30c1b21370153d4ab4b04b"
+  integrity sha512-93AKkdz2ZOyjS6MhfP61yW0glnWy+b61yp+zKtZe/OlnBLCTSg2uwofRv7YrjnPgzUwfy4gzlmp4gZWor4dI8A==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.8"
@@ -3357,6 +3357,11 @@ ts-node@^10.0.0:
     make-error "^1.1.1"
     source-map-support "^0.5.17"
     yn "3.1.1"
+
+tslib@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
+  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"
