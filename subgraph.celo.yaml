@@ -22,4 +22,88 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/erc20FeeProxy.ts
+  - kind: ethereum/contract
+    name: ERC20ConversionProxy
+    network: celo
+    source:
+      address: "0xf0f49873C50765239F6f9534Ba13c4fe16eD5f2E"
+      abi: ERC20ConversionProxy
+      startBlock: 10141033
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20ConversionProxy
+          file: ./abis/ERC20ConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20ConversionProxy.ts
+  - kind: ethereum/contract
+    name: EthProxy
+    network: celo
+    source:
+      address: "0x27c60BE17e853c47A9F1d280B05365f483c2dFAF"
+      abi: EthProxy
+      startBlock: 10141029
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthProxy
+          file: ./abis/EthProxy.json
+      eventHandlers:
+        - event: TransferWithReference(address,uint256,indexed bytes)
+          handler: handleTransferWithReference
+      file: ./src/ethProxy.ts
+  - kind: ethereum/contract
+    name: EthFeeProxy
+    network: celo
+    source:
+      address: "0xC6E23a20C0a1933ACC8E30247B5D1e2215796C1F"
+      abi: EthFeeProxy
+      startBlock: 10141037
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthFeeProxy
+          file: ./abis/EthFeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy
+    network: celo
+    source:
+      address: "0xCa3353a15fCb5C83a1Ff64BFf055781aC5c4d2F4"
+      abi: EthConversionProxy
+      startBlock: 10141038
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy
+          file: ./abis/EthConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethConversionProxy.ts
   
