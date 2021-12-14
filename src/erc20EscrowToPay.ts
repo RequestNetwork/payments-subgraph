@@ -3,7 +3,6 @@ import {
   InitiatedEmergencyClaim,
   RequestFrozen,
   RevertedEmergencyClaim,
-  ERC20EscrowToPayProxy,
 } from "../generated/ERC20EscrowToPayProxy/ERC20EscrowToPayProxy";
 import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
 import { Escrow, EscrowEvent } from "../generated/schema";
@@ -39,11 +38,11 @@ export function handleTransferWithReferenceAndFee(
     escrow.feeAddress = event.params.feeAddress;
 
     escrow.escrowState = "inEscrow";
-    let escrowContract = ERC20EscrowToPayProxy.bind(event.address);
-    let escrowRequestData = escrowContract.requestMapping(paymentReference);
-    escrow.payee = escrowRequestData.value1;
-    escrow.payer = escrowRequestData.value2;
+    escrow.payer = event.transaction.from;
   } else {
+    if (event.transaction.to !== escrow.payer) {
+      escrow.payee = event.transaction.to;
+    }
     escrow.escrowState = "closed";
   }
   escrow.save();
