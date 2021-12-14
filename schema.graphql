@@ -35,3 +35,18 @@ type EscrowEvent @entity {
   gasUsed: BigInt!
   gasPrice: BigInt!
 }
+
+type Escrow @entity {
+  id: ID!
+  contractAddress: Bytes!
+  reference: Bytes!
+  creationBlock: Int!
+  creationTimestamp: Int!
+  escrowState: String!
+  tokenAddress: Bytes!
+  amount: BigDecimal!
+  feeAmount: BigDecimal!
+  feeAddress: Bytes!
+  payer: Bytes!
+  payee: Bytes!
+}
