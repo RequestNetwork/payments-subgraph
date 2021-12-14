@@ -8,7 +8,8 @@ import {
   erc20ConversionProxy,
   ethereumProxyArtifact,
   ethereumFeeProxyArtifact,
-  ethConversionArtifact
+  ethConversionArtifact,
+  erc20EscrowToPayArtifact,
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
@@ -21,7 +22,7 @@ const networks = [
   "bsc",
   "xdai",
   "fantom",
-  "fuse"
+  "fuse",
 ];
 
 const paymentNetworks = {
@@ -30,7 +31,8 @@ const paymentNetworks = {
   ERC20ConversionProxy: erc20ConversionProxy,
   EthProxy: ethereumProxyArtifact,
   EthFeeProxy: ethereumFeeProxyArtifact,
-  EthConversionProxy: ethConversionArtifact
+  EthConversionProxy: ethConversionArtifact,
+  ERC20EscrowToPay: erc20EscrowToPayArtifact,
 };
 
 type DataSource = {
@@ -49,14 +51,14 @@ type DataSource = {
 const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
   return artifact
     .getAllAddresses(network)
-    .filter(x => Boolean(x.address))
+    .filter((x) => Boolean(x.address))
     .map(({ version }) => ({
       ...artifact.getDeploymentInformation(network, version),
-      version
+      version,
     }))
     .filter(
       (artifact, index, self) =>
-        self.findIndex(x => x.address === artifact.address) === index
+        self.findIndex((x) => x.address === artifact.address) === index
     );
 };
 
@@ -79,13 +81,13 @@ for (const network of networks) {
     infoArray.forEach(({ address, creationBlockNumber, version }, i) => {
       const events = artifact
         .getContractAbi()
-        .filter(x => x.type === "event")
-        .map(x => ({
+        .filter((x) => x.type === "event")
+        .map((x) => ({
           handlerName: "handle" + x.name,
           eventSignature: EventFragment.fromObject(x)
             .format("minimal")
             .replace(/^event /, "")
-            .replace(/([\w]+) indexed/, "indexed $1")
+            .replace(/([\w]+) indexed/, "indexed $1"),
         }));
 
       dataSources.push({
@@ -95,7 +97,7 @@ for (const network of networks) {
         network,
         address,
         creationBlockNumber,
-        events
+        events,
       });
     });
   });

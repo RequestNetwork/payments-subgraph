@@ -22,3 +22,16 @@ type Payment @entity {
   feeAmountInCrypto: BigDecimal
   maxRateTimespan: Int
 }
+
+type EscrowEvent @entity {
+  id: ID!
+  contractAddress: Bytes!
+  reference: Bytes!
+  block: Int!
+  timestamp: Int!
+  txHash: Bytes!
+  eventType: String!
+  from: Bytes!
+  gasUsed: BigInt!
+  gasPrice: BigInt!
+}
