@@ -40,8 +40,8 @@ export function handleTransferWithReferenceAndFee(
     escrow.escrowState = "inEscrow";
     escrow.payer = event.transaction.from;
   } else {
-    if (event.transaction.to !== escrow.payer) {
-      escrow.payee = event.transaction.to;
+    if (event.params.to !== escrow.payer) {
+      escrow.payee = event.params.to;
     }
     escrow.escrowState = "closed";
   }

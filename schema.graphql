@@ -48,5 +48,5 @@ type Escrow @entity {
   feeAmount: BigDecimal!
   feeAddress: Bytes!
   payer: Bytes!
-  payee: Bytes!
+  payee: Bytes
 }
