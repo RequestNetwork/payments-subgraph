@@ -41,7 +41,7 @@ The subgraphs manifests are automatically generated using the [prepare script](.
 
 ## Deployment
 
-> Hint: You can get your token from your [Dashboard](https://thegraph.com/explorer/dashboard?account=requestnetwork), under RequestNetwork organization.
+> Hint: You can get your token from your [Dashboard](https://thegraph.com/hosted-service/dashboard), under RequestNetwork organization.
 
 ### Local
 
