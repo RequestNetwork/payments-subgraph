@@ -9,7 +9,5 @@ export function generateId(
 }
 
 export function generateEscrowId(paymentReference: Bytes): string {
-  return crypto
-    .keccak256(ByteArray.fromHexString(paymentReference.toHex()))
-    .toHex();
+  return paymentReference.toHex();
 }
