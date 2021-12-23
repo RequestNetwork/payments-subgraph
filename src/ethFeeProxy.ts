@@ -17,6 +17,7 @@ export function createPaymentForFeeProxy(
   payment.timestamp = event.block.timestamp.toI32();
   payment.txHash = event.transaction.hash;
   payment.gasUsed = event.transaction.gasUsed;
+  // TODO check that for Near: payment.gasUsed = event.transaction.gasLimit;
   payment.gasPrice = event.transaction.gasPrice;
   payment.amount = event.params.amount.toBigDecimal();
   payment.feeAmount = event.params.feeAmount.toBigDecimal();
