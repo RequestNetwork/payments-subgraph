@@ -2,10 +2,15 @@
 
 This repo contains the code and configuration for Request Payment subgraphs:
 
-- Mainnet (coming soon)
+- [Mainnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mainnet)
 - [Rinkeby](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-rinkeby)
 - [Matic](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
 - [Celo](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-celo)
+- [BSC](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-bsc)
+- [xDai (Gnosis Chain)](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-xdai)
+- [Fuse](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fuse)
+- [Fantom](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fantom)
+- [Near](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near)
 
 It indexes Request's proxy smart-contracts for easy querying of payment data.
 
@@ -14,6 +19,7 @@ Smart-contract addresses can be found here:
 - [ERC20 Proxy](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/smart-contracts/src/lib/artifacts/ERC20Proxy/index.ts)
 - [ERC20 Fee Proxy](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/smart-contracts/src/lib/artifacts/ERC20FeeProxy/index.ts)
 - [ERC20 Conversion Proxy](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/smart-contracts/src/lib/artifacts/Erc20ConversionProxy/index.ts)
+- [requestnetwork.near](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/payment-detection/src/near-detector.ts)
 
 [Learn more about TheGraph](https://thegraph.com/)
 
@@ -40,6 +46,13 @@ The subgraphs manifests are automatically generated using the [prepare script](.
 One manifest can refer to many different versions of proxies dealing with the same payment network. The first version found is not explicitely mentionned in generated files and data sources naming. Example; `EthProxy` implicitely refers to the version `0.1.0`. Further versions are referenced in this format: `EthProxy_0_2_0` for the contract `EthProxy` of abi version `0.2.0`.
 
 > Note: The `TransferWithReferenceAndFee` event is configured twice. That is because the Conversion proxy makes an internal call to the ERC20 Fee proxy. Both `TransferWithReferenceAndFee` and `TransferWithConversionAndReference` need to be parsed for the Conversion smart-contract.
+
+### Build
+
+```
+export NETWORK=rinkeby
+yarn build
+```
 
 ## Deployment
 

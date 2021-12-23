@@ -10,7 +10,7 @@ import {
   BigDecimal,
   typeConversion,
 } from "@graphprotocol/graph-ts";
-import { Payment } from "../generated/schema";
+import { NearPayment } from "../generated/near/schema";
 
 export function handleReceipt(receipt: near.ReceiptWithOutcome): void {
   const actions = receipt.receipt.actions;
@@ -85,20 +85,24 @@ function savePayment(
 ): void {
   const receipt = receiptWithOutcome.receipt;
   // TODO generateId not sufficient
-  let payment = new Payment(generateId(receipt.id));
+  let payment = new NearPayment(generateId(receipt.id));
   payment.to = to;
   payment.amount = amount;
   payment.reference = paymentReference;
   payment.contractAddress = "requestnetwork.near";
 
   payment.from = receipt.signerId;
-  payment.block = BigInt.fromI64(receiptWithOutcome.block.header.height - 1);
-  log.info("yma-block {}", [payment.block.toString()]);
+  payment.block = BigInt.fromI64(
+    receiptWithOutcome.block.header.height - 1
+  ).toI32();
   const textTimestamp = receiptWithOutcome.block.header.timestampNanosec.toString();
   const trimmedTimestamp = textTimestamp.substr(0, textTimestamp.length - 6);
   payment.timestamp = BigInt.fromString(trimmedTimestamp);
-  payment.txHash = receiptWithOutcome.outcome.id;
-  // payment.gasUsed = BigInt.zero();
+  // receipt ID can be mapped to transaction hash 1-1
+  payment.receiptId = typeConversion.bytesToBase58(
+    receiptWithOutcome.receipt.id
+  );
+  payment.gasUsed = BigInt.fromU64(receiptWithOutcome.outcome.gasBurnt);
   payment.gasPrice = receipt.gasPrice;
 
   payment.feeAmount = BigDecimal.zero();

@@ -7,10 +7,9 @@
     "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
   },
   "scripts": {
-    "codegen": "graph codegen ./subgraph.rinkeby.yaml",
-    "codegen-near": "graph codegen ./subgraph.near.yaml",
+    "codegen": "graph codegen ./subgraph.rinkeby.yaml ; graph codegen ./subgraph.near.yaml -o ./generated/near/",
     "prepare": "ts-node scripts/prepare.ts && yarn codegen",
-    "build": "graph build",
+    "build": "graph build ./subgraph.$NETWORK.yaml",
     "deploy": "./scripts/deploy.sh $NETWORK",
     "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",

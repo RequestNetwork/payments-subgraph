@@ -1,23 +1,24 @@
-type Payment @entity {
+type NearPayment @entity {
   id: ID!
   contractAddress: String!
   tokenAddress: Bytes
   to: String!
   from: String!
   reference: String!
-  block: BigInt!
+  block: Int!
   timestamp: BigInt!
-  txHash: Bytes!
+  txHash: String
+  receiptId: String!
   gasUsed: BigInt!
   gasPrice: BigInt!
   amount: BigDecimal!
 
-  # fee values
+  # fee values (Unusued)
   feeAmount: BigDecimal
-  feeAddress: Bytes
+  feeAddress: String
 
-  # conversion values
-  currency: Bytes
+  # conversion values (Unusued)
+  currency: String
   amountInCrypto: BigDecimal
   feeAmountInCrypto: BigDecimal
   maxRateTimespan: Int
