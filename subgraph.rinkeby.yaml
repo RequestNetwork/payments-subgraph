@@ -159,6 +159,8 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - Payment
+        - Escrow
+        - EscrowEvent
       abis:
         - name: ERC20EscrowToPay
           file: ./abis/ERC20EscrowToPay.json
@@ -172,3 +174,4 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/erc20EscrowToPay.ts
+  
