@@ -14,16 +14,7 @@ import {
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
 
-const networks = [
-  "mainnet",
-  "rinkeby",
-  "matic",
-  "celo",
-  "bsc",
-  "xdai",
-  "fantom",
-  "fuse",
-];
+const networks = ["rinkeby", "fuse"];
 
 const paymentNetworks = {
   ERC20Proxy: erc20ProxyArtifact,
@@ -46,6 +37,7 @@ type DataSource = {
     eventSignature: string;
     handlerName: string;
   }[];
+  graphEntities: string[];
 };
 
 const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
@@ -75,7 +67,16 @@ for (const [pn, artifact] of Object.entries(paymentNetworks)) {
 
 for (const network of networks) {
   const dataSources: DataSource[] = [];
+  console.log(`parsing network ${network}`);
+
   Object.entries(paymentNetworks).forEach(([pn, artifact]) => {
+    let graphEntities: string[];
+    if (pn === "ERC20EscrowToPay") {
+      graphEntities = ["Payment", "Escrow", "EscrowEvent"];
+    } else {
+      graphEntities = ["Payment"];
+    }
+
     const infoArray = getArtifactInfo(artifact, network);
     infoArray.forEach(({ address, creationBlockNumber, version }, i) => {
       const events = artifact
@@ -97,6 +98,7 @@ for (const network of networks) {
         address,
         creationBlockNumber,
         events,
+        graphEntities,
       });
     });
   });

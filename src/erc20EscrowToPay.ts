@@ -16,9 +16,7 @@ import { generateId, generateEscrowId } from "./shared";
 export function handleTransferWithReferenceAndFee(
   event: TransferWithReferenceAndFee
 ): void {
-  log.info("feeProxy (conversion) for tx {}", [
-    event.transaction.hash.toHexString(),
-  ]);
+  log.info("feeProxy for tx {}", [event.transaction.hash.toHexString()]);
   let payment = createPaymentForFeeProxy(event);
   payment.amountInCrypto = event.params.amount.toBigDecimal();
   payment.feeAmountInCrypto = event.params.feeAmount.toBigDecimal();
@@ -69,6 +67,7 @@ export function createEscrowEvent(
   escrowEvent.txHash = event.transaction.hash;
   escrowEvent.gasUsed = event.transaction.gasUsed;
   escrowEvent.gasPrice = event.transaction.gasPrice;
+  escrowEvent.escrow = generateEscrowId(paymentReference);
   return escrowEvent;
 }
 
