@@ -7,7 +7,7 @@ import {
 import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
 import { Escrow, EscrowEvent } from "../generated/schema";
 import { createPaymentForFeeProxy } from "./erc20FeeProxy";
-import { generateId, generateEscrowId } from "./shared";
+import { generateId, generateEscrowId, createEscrowEvent } from "./shared";
 
 /**
  * Handle the TransferWithReferenceAndFee event, emitted by the external call to the ERC20FeeProxy contract.
@@ -34,41 +34,16 @@ export function handleTransferWithReferenceAndFee(
     escrow.amount = event.params.amount.toBigDecimal();
     escrow.feeAmount = event.params.feeAmount.toBigDecimal();
     escrow.feeAddress = event.params.feeAddress;
-
     escrow.escrowState = "inEscrow";
     escrow.payer = event.transaction.from;
-  } else {
-    if (event.params.to !== escrow.payer) {
-      escrow.payee = event.params.to;
-    }
-    escrow.escrowState = "closed";
+    escrow.save();
   }
-  escrow.save();
 }
 
 function updateEscrow(paymentReference: Bytes, eventType: string): void {
   let escrow = Escrow.load(generateEscrowId(paymentReference));
   escrow.escrowState = eventType;
   escrow.save();
-}
-
-export function createEscrowEvent(
-  event: ethereum.Event,
-  paymentReference: Bytes
-): EscrowEvent {
-  let escrowEvent = new EscrowEvent(
-    generateId(event.transaction, paymentReference)
-  );
-  escrowEvent.reference = paymentReference;
-  escrowEvent.contractAddress = event.address;
-  escrowEvent.from = event.transaction.from;
-  escrowEvent.block = event.block.number.toI32();
-  escrowEvent.timestamp = event.block.timestamp.toI32();
-  escrowEvent.txHash = event.transaction.hash;
-  escrowEvent.gasUsed = event.transaction.gasUsed;
-  escrowEvent.gasPrice = event.transaction.gasPrice;
-  escrowEvent.escrow = generateEscrowId(paymentReference);
-  return escrowEvent;
 }
 
 export function handleInitiatedEmergencyClaim(

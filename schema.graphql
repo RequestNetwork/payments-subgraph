@@ -50,6 +50,7 @@ enum EventType {
   initializeEmergencyClaim
   revertEmergencyClaim
   freezeEscrow
+  closeEscrow
 }
 
 type EscrowEvent @entity {
