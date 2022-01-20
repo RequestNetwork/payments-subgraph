@@ -167,9 +167,5 @@ dataSources:
           handler: handleTransferWithConversionAndReference
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
-        - event: WhitelistAdminAdded(indexed address)
-          handler: handleWhitelistAdminAdded
-        - event: WhitelistAdminRemoved(indexed address)
-          handler: handleWhitelistAdminRemoved
       file: ./src/ethConversionProxy.ts
   

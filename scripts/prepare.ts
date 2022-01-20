@@ -71,6 +71,9 @@ for (const [pn, artifact] of Object.entries(paymentNetworks)) {
   );
 }
 
+// Ignore events that are not payment related
+const ignoredEvents = ["WhitelistAdminAdded", "WhitelistAdminRemoved"];
+
 for (const network of networks) {
   const dataSources: DataSource[] = [];
 
@@ -87,6 +90,7 @@ for (const network of networks) {
       const events = artifact
         .getContractAbi(version)
         .filter((x) => x.type === "event")
+        .filter((x) => x.name && !ignoredEvents.includes(x.name))
         .map((x) => ({
           handlerName: "handle" + x.name,
           eventSignature: EventFragment.fromObject(x)
