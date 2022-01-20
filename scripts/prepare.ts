@@ -8,7 +8,7 @@ import {
   erc20ConversionProxy,
   ethereumProxyArtifact,
   ethereumFeeProxyArtifact,
-  ethConversionArtifact
+  ethConversionArtifact,
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
@@ -21,7 +21,7 @@ const networks = [
   "bsc",
   "xdai",
   "fantom",
-  "fuse"
+  "fuse",
 ];
 
 const paymentNetworks = {
@@ -30,7 +30,7 @@ const paymentNetworks = {
   ERC20ConversionProxy: erc20ConversionProxy,
   EthProxy: ethereumProxyArtifact,
   EthFeeProxy: ethereumFeeProxyArtifact,
-  EthConversionProxy: ethConversionArtifact
+  EthConversionProxy: ethConversionArtifact,
 };
 
 type DataSource = {
@@ -49,14 +49,14 @@ type DataSource = {
 const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
   return artifact
     .getAllAddresses(network)
-    .filter(x => Boolean(x.address))
+    .filter((x) => Boolean(x.address))
     .map(({ version }) => ({
       ...artifact.getDeploymentInformation(network, version),
-      version
+      version,
     }))
     .filter(
       (artifact, index, self) =>
-        self.findIndex(x => x.address === artifact.address) === index
+        self.findIndex((x) => x.address === artifact.address) === index
     );
 };
 
@@ -76,26 +76,34 @@ for (const network of networks) {
 
   Object.entries(paymentNetworks).forEach(([pn, artifact]) => {
     const infoArray = getArtifactInfo(artifact, network);
+    infoArray.forEach(({ version }, i) => {
+      const abiName = i === 0 ? pn : `${pn}-${version}`;
+      fs.writeFileSync(
+        `abis/${abiName}.json`,
+        JSON.stringify(artifact.getContractAbi(version), null, 2)
+      );
+    });
     infoArray.forEach(({ address, creationBlockNumber, version }, i) => {
       const events = artifact
-        .getContractAbi()
-        .filter(x => x.type === "event")
-        .map(x => ({
+        .getContractAbi(version)
+        .filter((x) => x.type === "event")
+        .map((x) => ({
           handlerName: "handle" + x.name,
           eventSignature: EventFragment.fromObject(x)
             .format("minimal")
             .replace(/^event /, "")
-            .replace(/([\w]+) indexed/, "indexed $1")
+            .replace(/([\w]+) indexed/, "indexed $1"),
         }));
-
+      const abiName = i === 0 ? pn : `${pn}-${version}`;
+      console.log(abiName.replace(/[\-\.]/g, "_"));
       dataSources.push({
-        abiName: pn,
-        name: i === 0 ? pn : `${pn}-${version}`,
+        abiName,
+        name: abiName.replace(/[\-\.]/g, "_"),
         fileName: camelCase(pn),
         network,
         address,
         creationBlockNumber,
-        events
+        events,
       });
     });
   });
