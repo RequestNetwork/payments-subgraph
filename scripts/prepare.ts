@@ -95,7 +95,6 @@ for (const network of networks) {
             .replace(/([\w]+) indexed/, "indexed $1"),
         }));
       const abiName = i === 0 ? pn : `${pn}-${version}`;
-      console.log(abiName.replace(/[\-\.]/g, "_"));
       dataSources.push({
         abiName,
         name: abiName.replace(/[\-\.]/g, "_"),
