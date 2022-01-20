@@ -146,4 +146,30 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/ethConversionProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy_0_2_0
+    network: rinkeby
+    source:
+      address: "0x7Ebf48a26253810629C191b56C3212Fd0D211c26"
+      abi: EthConversionProxy_0_2_0
+      startBlock: 10023415
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy_0_2_0
+          file: ./abis/EthConversionProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+        - event: WhitelistAdminAdded(indexed address)
+          handler: handleWhitelistAdminAdded
+        - event: WhitelistAdminRemoved(indexed address)
+          handler: handleWhitelistAdminRemoved
+      file: ./src/ethConversionProxy.ts
   
