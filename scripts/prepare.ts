@@ -9,6 +9,7 @@ import {
   ethereumProxyArtifact,
   ethereumFeeProxyArtifact,
   ethConversionArtifact,
+  erc20EscrowToPayArtifact,
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
@@ -31,6 +32,7 @@ const paymentNetworks = {
   EthProxy: ethereumProxyArtifact,
   EthFeeProxy: ethereumFeeProxyArtifact,
   EthConversionProxy: ethConversionArtifact,
+  ERC20EscrowToPay: erc20EscrowToPayArtifact,
 };
 
 type DataSource = {
@@ -44,6 +46,7 @@ type DataSource = {
     eventSignature: string;
     handlerName: string;
   }[];
+  graphEntities: string[];
 };
 
 const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
@@ -76,8 +79,16 @@ const ignoredEvents = ["WhitelistAdminAdded", "WhitelistAdminRemoved"];
 
 for (const network of networks) {
   const dataSources: DataSource[] = [];
+  console.log(`parsing network ${network}`);
 
   Object.entries(paymentNetworks).forEach(([pn, artifact]) => {
+    let graphEntities: string[];
+    if (pn === "ERC20EscrowToPay") {
+      graphEntities = ["Payment", "Escrow", "EscrowEvent"];
+    } else {
+      graphEntities = ["Payment"];
+    }
+
     const infoArray = getArtifactInfo(artifact, network);
     infoArray.forEach(({ version }, i) => {
       const abiName = i === 0 ? pn : `${pn}-${version}`;
@@ -107,6 +118,7 @@ for (const network of networks) {
         address,
         creationBlockNumber,
         events,
+        graphEntities,
       });
     });
   });

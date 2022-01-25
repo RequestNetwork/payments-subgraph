@@ -22,3 +22,48 @@ type Payment @entity {
   feeAmountInCrypto: BigDecimal
   maxRateTimespan: Int
 }
+
+enum EscrowState {
+  paidEscrow
+  paidIssuer
+  emergency
+  frozen
+}
+
+type Escrow @entity {
+  id: ID!
+  contractAddress: Bytes!
+  reference: Bytes!
+  creationBlock: Int!
+  creationTimestamp: Int!
+  escrowState: EscrowState!
+  tokenAddress: Bytes!
+  amount: BigDecimal!
+  feeAmount: BigDecimal!
+  feeAddress: Bytes!
+  payer: Bytes!
+  payee: Bytes
+  events: [EscrowEvent!] @derivedFrom(field: "escrow")
+}
+
+enum EventName {
+  paidEscrow
+  paidIssuer
+  initializeEmergencyClaim
+  revertEmergencyClaim
+  freezeEscrow
+}
+
+type EscrowEvent @entity {
+  id: ID!
+  contractAddress: Bytes!
+  reference: Bytes!
+  escrow: Escrow!
+  block: Int!
+  timestamp: Int!
+  txHash: Bytes!
+  eventName: EventName!
+  from: Bytes!
+  gasUsed: BigInt!
+  gasPrice: BigInt!
+}

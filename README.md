@@ -43,7 +43,7 @@ One manifest can refer to many different versions of proxies dealing with the sa
 
 ## Deployment
 
-> Hint: You can get your token from your [Dashboard](https://thegraph.com/explorer/dashboard?account=requestnetwork), under RequestNetwork organization.
+> Hint: You can get your token from your [Dashboard](https://thegraph.com/hosted-service/dashboard), under RequestNetwork organization.
 
 ### Local
 

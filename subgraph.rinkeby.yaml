@@ -168,4 +168,31 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/ethConversionProxy.ts
-  
+  - kind: ethereum/contract
+    name: ERC20EscrowToPay
+    network: rinkeby
+    source:
+      address: "0x8230e703B1c4467A4543422b2cC3284133B9AB5e"
+      abi: ERC20EscrowToPay
+      startBlock: 9669613
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+        - Escrow
+        - EscrowEvent
+      abis:
+        - name: ERC20EscrowToPay
+          file: ./abis/ERC20EscrowToPay.json
+      eventHandlers:
+        - event: InitiatedEmergencyClaim(indexed bytes)
+          handler: handleInitiatedEmergencyClaim
+        - event: RequestFrozen(indexed bytes)
+          handler: handleRequestFrozen
+        - event: RevertedEmergencyClaim(indexed bytes)
+          handler: handleRevertedEmergencyClaim
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20EscrowToPay.ts

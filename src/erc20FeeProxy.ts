@@ -1,7 +1,7 @@
 import { log } from "@graphprotocol/graph-ts";
 import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
-import { Payment } from "../generated/schema";
-import { generateId } from "./shared";
+import { Escrow, Payment } from "../generated/schema";
+import { generateId, generateEscrowId, createEscrowEvent } from "./shared";
 
 export function createPaymentForFeeProxy(
   event: TransferWithReferenceAndFee
@@ -32,6 +32,14 @@ export function handleTransferWithReferenceAndFee(
 ): void {
   log.info("feeProxy for tx {}", [event.transaction.hash.toHexString()]);
   let payment = createPaymentForFeeProxy(event);
-
   payment.save();
+  const paymentReference = event.params.paymentReference;
+  const escrowId = generateEscrowId(paymentReference);
+  const escrow = Escrow.load(escrowId);
+  if (escrow) {
+    escrow.escrowState = "paidIssuer";
+    escrow.payee = payment.to;
+    escrow.save();
+    createEscrowEvent(event, paymentReference, "paidIssuer");
+  }
 }

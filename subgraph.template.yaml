@@ -15,7 +15,9 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Payment
+        {{#graphEntities}}
+        - {{.}}
+        {{/graphEntities}}
       abis:
         - name: {{name}}
           file: ./abis/{{abiName}}.json
