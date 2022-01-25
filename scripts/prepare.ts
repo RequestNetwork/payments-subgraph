@@ -74,6 +74,9 @@ for (const [pn, artifact] of Object.entries(paymentNetworks)) {
   );
 }
 
+// Ignore events that are not payment related
+const ignoredEvents = ["WhitelistAdminAdded", "WhitelistAdminRemoved"];
+
 for (const network of networks) {
   const dataSources: DataSource[] = [];
   console.log(`parsing network ${network}`);
@@ -87,10 +90,18 @@ for (const network of networks) {
     }
 
     const infoArray = getArtifactInfo(artifact, network);
+    infoArray.forEach(({ version }, i) => {
+      const abiName = i === 0 ? pn : `${pn}-${version}`;
+      fs.writeFileSync(
+        `abis/${abiName}.json`,
+        JSON.stringify(artifact.getContractAbi(version), null, 2)
+      );
+    });
     infoArray.forEach(({ address, creationBlockNumber, version }, i) => {
       const events = artifact
-        .getContractAbi()
+        .getContractAbi(version)
         .filter((x) => x.type === "event")
+        .filter((x) => x.name && !ignoredEvents.includes(x.name))
         .map((x) => ({
           handlerName: "handle" + x.name,
           eventSignature: EventFragment.fromObject(x)
@@ -98,10 +109,10 @@ for (const network of networks) {
             .replace(/^event /, "")
             .replace(/([\w]+) indexed/, "indexed $1"),
         }));
-
+      const abiName = i === 0 ? pn : `${pn}-${version}`;
       dataSources.push({
-        abiName: pn,
-        name: i === 0 ? pn : `${pn}-${version}`,
+        abiName,
+        name: abiName.replace(/[\-\.]/g, "_"),
         fileName: camelCase(pn),
         network,
         address,
