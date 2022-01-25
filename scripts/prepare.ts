@@ -22,6 +22,7 @@ const networks = [
   "xdai",
   "fantom",
   "fuse",
+  "arbitrum-testnet",
 ];
 
 const paymentNetworks = {
