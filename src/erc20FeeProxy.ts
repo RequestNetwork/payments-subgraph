@@ -37,11 +37,9 @@ export function handleTransferWithReferenceAndFee(
   const escrowId = generateEscrowId(paymentReference);
   const escrow = Escrow.load(escrowId);
   if (escrow) {
-    escrow.escrowState = "closed";
+    escrow.escrowState = "paidIssuer";
     escrow.payee = payment.to;
     escrow.save();
-    const escrowClosedEvent = createEscrowEvent(event, paymentReference);
-    escrowClosedEvent.eventType = "closeEscrow";
-    escrowClosedEvent.save();
+    createEscrowEvent(event, paymentReference, "paidIssuer");
   }
 }

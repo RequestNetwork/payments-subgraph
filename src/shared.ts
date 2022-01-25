@@ -15,8 +15,9 @@ export function generateEscrowId(paymentReference: Bytes): string {
 
 export function createEscrowEvent(
   event: ethereum.Event,
-  paymentReference: Bytes
-): EscrowEvent {
+  paymentReference: Bytes,
+  eventName: string
+): void {
   let escrowEvent = new EscrowEvent(
     generateId(event.transaction, paymentReference)
   );
@@ -29,5 +30,6 @@ export function createEscrowEvent(
   escrowEvent.gasUsed = event.transaction.gasUsed;
   escrowEvent.gasPrice = event.transaction.gasPrice;
   escrowEvent.escrow = generateEscrowId(paymentReference);
-  return escrowEvent;
+  escrowEvent.eventName = eventName;
+  escrowEvent.save()
 }

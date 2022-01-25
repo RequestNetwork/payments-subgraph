@@ -1,13 +1,13 @@
-import { Bytes, ethereum, log } from "@graphprotocol/graph-ts";
+import { Bytes, log } from "@graphprotocol/graph-ts";
 import {
   InitiatedEmergencyClaim,
   RequestFrozen,
   RevertedEmergencyClaim,
 } from "../generated/ERC20EscrowToPayProxy/ERC20EscrowToPayProxy";
 import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
-import { Escrow, EscrowEvent } from "../generated/schema";
+import { Escrow } from "../generated/schema";
 import { createPaymentForFeeProxy } from "./erc20FeeProxy";
-import { generateId, generateEscrowId, createEscrowEvent } from "./shared";
+import { generateEscrowId, createEscrowEvent } from "./shared";
 
 /**
  * Handle the TransferWithReferenceAndFee event, emitted by the external call to the ERC20FeeProxy contract.
@@ -16,7 +16,7 @@ import { generateId, generateEscrowId, createEscrowEvent } from "./shared";
 export function handleTransferWithReferenceAndFee(
   event: TransferWithReferenceAndFee
 ): void {
-  log.info("feeProxy for tx {}", [event.transaction.hash.toHexString()]);
+  log.info("Init escrow at tx {}", [event.transaction.hash.toHexString()]);
   let payment = createPaymentForFeeProxy(event);
   payment.amountInCrypto = event.params.amount.toBigDecimal();
   payment.feeAmountInCrypto = event.params.feeAmount.toBigDecimal();
@@ -34,13 +34,14 @@ export function handleTransferWithReferenceAndFee(
     escrow.amount = event.params.amount.toBigDecimal();
     escrow.feeAmount = event.params.feeAmount.toBigDecimal();
     escrow.feeAddress = event.params.feeAddress;
-    escrow.escrowState = "inEscrow";
+    escrow.escrowState = "paidEscrow";
     escrow.payer = event.transaction.from;
     escrow.save();
   }
+  createEscrowEvent(event, event.params.paymentReference, "paidEscrow");
 }
 
-function updateEscrow(paymentReference: Bytes, eventType: string): void {
+function updateEscrowState(paymentReference: Bytes, eventType: string): void {
   let escrow = Escrow.load(generateEscrowId(paymentReference));
   escrow.escrowState = eventType;
   escrow.save();
@@ -53,10 +54,8 @@ export function handleInitiatedEmergencyClaim(
     event.transaction.hash.toHexString(),
     event.params.paymentReference.toHexString(),
   ]);
-  let escrowEvent = createEscrowEvent(event, event.params.paymentReference);
-  escrowEvent.eventType = "initializeEmergencyClaim";
-  escrowEvent.save();
-  updateEscrow(event.params.paymentReference, "inEmergency");
+  createEscrowEvent(event, event.params.paymentReference, "initiateEmergencyClaim");
+  updateEscrowState(event.params.paymentReference, "emergency");
 }
 
 export function handleRevertedEmergencyClaim(
@@ -66,10 +65,8 @@ export function handleRevertedEmergencyClaim(
     event.transaction.hash.toHexString(),
     event.params.paymentReference.toHexString(),
   ]);
-  let escrowEvent = createEscrowEvent(event, event.params.paymentReference);
-  escrowEvent.eventType = "revertEmergencyClaim";
-  escrowEvent.save();
-  updateEscrow(event.params.paymentReference, "inEscrow");
+  createEscrowEvent(event, event.params.paymentReference, "revertEmergencyClaim");
+  updateEscrowState(event.params.paymentReference, "paidEscrow");
 }
 
 export function handleRequestFrozen(event: RequestFrozen): void {
@@ -77,8 +74,6 @@ export function handleRequestFrozen(event: RequestFrozen): void {
     event.transaction.hash.toHexString(),
     event.params.paymentReference.toHexString(),
   ]);
-  let escrowEvent = createEscrowEvent(event, event.params.paymentReference);
-  escrowEvent.eventType = "freezeEscrow";
-  escrowEvent.save();
-  updateEscrow(event.params.paymentReference, "inFrozen");
+  createEscrowEvent(event, event.params.paymentReference, "freezeEscrow");
+  updateEscrowState(event.params.paymentReference, "frozen");
 }
