@@ -13,7 +13,8 @@ const query = gql`
 
 const providers: Record<string, string> = {
   matic: "https://rpc-mainnet.matic.network",
-  celo: "https://forno.celo.org"
+  celo: "https://forno.celo.org",
+  fantom: "https://rpc.ftm.tools"
 };
 
 const getNetworkStatus = async (network: string) => {
@@ -38,7 +39,7 @@ const getNetworkStatus = async (network: string) => {
 
 const main = async () => {
   const statuses = await Promise.all(
-    ["rinkeby", "matic", "celo"].map(getNetworkStatus)
+    ["rinkeby", "matic", "celo", "fantom"].map(getNetworkStatus)
   );
   console.table(statuses);
 };
