@@ -2,7 +2,7 @@ import { Bytes, log } from "@graphprotocol/graph-ts";
 import {
   InitiatedEmergencyClaim,
   RequestFrozen,
-  RevertedEmergencyClaim,
+  RevertedEmergencyClaim
 } from "../generated/ERC20EscrowToPay/ERC20EscrowToPay";
 import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
 import { Escrow } from "../generated/schema";
@@ -52,7 +52,7 @@ export function handleInitiatedEmergencyClaim(
 ): void {
   log.info("initiatedEmergencyClaim at tx {} for {}", [
     event.transaction.hash.toHexString(),
-    event.params.paymentReference.toHexString(),
+    event.params.paymentReference.toHexString()
   ]);
   createEscrowEvent(
     event,
@@ -67,7 +67,7 @@ export function handleRevertedEmergencyClaim(
 ): void {
   log.info("RevertedEmergencyClaim at tx {} for {}", [
     event.transaction.hash.toHexString(),
-    event.params.paymentReference.toHexString(),
+    event.params.paymentReference.toHexString()
   ]);
   createEscrowEvent(
     event,
@@ -80,7 +80,7 @@ export function handleRevertedEmergencyClaim(
 export function handleRequestFrozen(event: RequestFrozen): void {
   log.info("RequestFrozen at tx {} for {}", [
     event.transaction.hash.toHexString(),
-    event.params.paymentReference.toHexString(),
+    event.params.paymentReference.toHexString()
   ]);
   createEscrowEvent(event, event.params.paymentReference, "freezeEscrow");
   updateEscrowState(event.params.paymentReference, "frozen");

@@ -89,6 +89,11 @@ yarn deploy
 
 ## Troubleshooting
 
+### Hosting service API
+
+URL: https://api.thegraph.com/index-node/graphql
+Schema: https://github.com/graphprotocol/graph-node/blob/master/server/index-node/src/schema.graphql
+
 ### Sync failed with no logs
 
 ```

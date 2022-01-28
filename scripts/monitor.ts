@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import { request, gql } from "graphql-request";
+import { providers } from "./networks";
 
 const query = gql`
   {
@@ -10,12 +11,6 @@ const query = gql`
     }
   }
 `;
-
-const providers: Record<string, string> = {
-  matic: "https://rpc-mainnet.matic.network",
-  celo: "https://forno.celo.org",
-  fantom: "https://rpc.ftm.tools"
-};
 
 const getNetworkStatus = async (network: string) => {
   const data = await request(
@@ -38,9 +33,7 @@ const getNetworkStatus = async (network: string) => {
 };
 
 const main = async () => {
-  const statuses = await Promise.all(
-    ["rinkeby", "matic", "celo", "fantom"].map(getNetworkStatus)
-  );
+  const statuses = await Promise.all(networks.map(getNetworkStatus));
   console.table(statuses);
 };
 
