@@ -3,7 +3,7 @@ import {
   InitiatedEmergencyClaim,
   RequestFrozen,
   RevertedEmergencyClaim,
-} from "../generated/ERC20EscrowToPayProxy/ERC20EscrowToPayProxy";
+} from "../generated/ERC20EscrowToPay/ERC20EscrowToPay";
 import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
 import { Escrow } from "../generated/schema";
 import { createPaymentForFeeProxy } from "./erc20FeeProxy";
@@ -54,7 +54,11 @@ export function handleInitiatedEmergencyClaim(
     event.transaction.hash.toHexString(),
     event.params.paymentReference.toHexString(),
   ]);
-  createEscrowEvent(event, event.params.paymentReference, "initiateEmergencyClaim");
+  createEscrowEvent(
+    event,
+    event.params.paymentReference,
+    "initiateEmergencyClaim"
+  );
   updateEscrowState(event.params.paymentReference, "emergency");
 }
 
@@ -65,7 +69,11 @@ export function handleRevertedEmergencyClaim(
     event.transaction.hash.toHexString(),
     event.params.paymentReference.toHexString(),
   ]);
-  createEscrowEvent(event, event.params.paymentReference, "revertEmergencyClaim");
+  createEscrowEvent(
+    event,
+    event.params.paymentReference,
+    "revertEmergencyClaim"
+  );
   updateEscrowState(event.params.paymentReference, "paidEscrow");
 }
 
