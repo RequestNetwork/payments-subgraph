@@ -1,0 +1,109 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ERC20FeeProxy
+    network: arbitrum-one
+    source:
+      address: "0x0DfbEe143b42B41eFC5A6F87bFD1fFC78c2f0aC9"
+      abi: ERC20FeeProxy
+      startBlock: 5309741
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy
+          file: ./abis/ERC20FeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20FeeProxy.ts
+  - kind: ethereum/contract
+    name: ERC20ConversionProxy
+    network: arbitrum-one
+    source:
+      address: "0xA5186dec7dC1ec85B42A3cd2Dc8289e248530B07"
+      abi: ERC20ConversionProxy
+      startBlock: 5321045
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20ConversionProxy
+          file: ./abis/ERC20ConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20ConversionProxy.ts
+  - kind: ethereum/contract
+    name: EthProxy
+    network: arbitrum-one
+    source:
+      address: "0x27c60BE17e853c47A9F1d280B05365f483c2dFAF"
+      abi: EthProxy
+      startBlock: 5309737
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthProxy
+          file: ./abis/EthProxy.json
+      eventHandlers:
+        - event: TransferWithReference(address,uint256,indexed bytes)
+          handler: handleTransferWithReference
+      file: ./src/ethProxy.ts
+  - kind: ethereum/contract
+    name: EthFeeProxy
+    network: arbitrum-one
+    source:
+      address: "0xC6E23a20C0a1933ACC8E30247B5D1e2215796C1F"
+      abi: EthFeeProxy
+      startBlock: 5317955
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthFeeProxy
+          file: ./abis/EthFeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy
+    network: arbitrum-one
+    source:
+      address: "0x7Ebf48a26253810629C191b56C3212Fd0D211c26"
+      abi: EthConversionProxy
+      startBlock: 5317986
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy
+          file: ./abis/EthConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethConversionProxy.ts
+  
