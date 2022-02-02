@@ -33,9 +33,9 @@ export function handleTransferWithReferenceAndFee(
   log.info("feeProxy for tx {}", [event.transaction.hash.toHexString()]);
   let payment = createPaymentForFeeProxy(event);
   payment.save();
-  const paymentReference = event.params.paymentReference;
-  const escrowId = generateEscrowId(paymentReference);
-  const escrow = Escrow.load(escrowId);
+  let paymentReference = event.params.paymentReference;
+  let escrowId = generateEscrowId(paymentReference);
+  let escrow = Escrow.load(escrowId);
   if (escrow) {
     escrow.escrowState = "paidIssuer";
     escrow.payee = payment.to;
