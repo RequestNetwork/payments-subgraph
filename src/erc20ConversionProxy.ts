@@ -16,10 +16,10 @@ import { generateId } from "./shared";
  * @param event
  */
 export function handleTransferWithReferenceAndFee(
-  event: TransferWithReferenceAndFee
+  event: TransferWithReferenceAndFee,
 ): void {
   log.info("feeProxy (conversion) for tx {}", [
-    event.transaction.hash.toHexString()
+    event.transaction.hash.toHexString(),
   ]);
   let payment = createPaymentForFeeProxy(event);
   payment.amountInCrypto = event.params.amount.toBigDecimal();
@@ -29,7 +29,7 @@ export function handleTransferWithReferenceAndFee(
 }
 
 export function handleTransferWithConversionAndReference(
-  event: TransferWithConversionAndReference
+  event: TransferWithConversionAndReference,
 ): void {
   log.info("conversionProxy for tx {}", [event.transaction.hash.toHexString()]);
   let id = generateId(event.transaction, event.params.paymentReference);
@@ -38,7 +38,7 @@ export function handleTransferWithConversionAndReference(
   if (!payment) {
     log.error("payment entity {} should already exist. (tx: {})", [
       id,
-      event.transaction.hash.toHexString()
+      event.transaction.hash.toHexString(),
     ]);
     return;
   }

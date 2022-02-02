@@ -3,7 +3,7 @@ import { EscrowEvent } from "../generated/schema";
 
 export function generateId(
   transaction: ethereum.Transaction,
-  paymentReference: Bytes
+  paymentReference: Bytes,
 ): string {
   var id = transaction.hash.toHex() + paymentReference.toHex().slice(2);
   return crypto.keccak256(ByteArray.fromHexString(id)).toHex();
@@ -16,10 +16,10 @@ export function generateEscrowId(paymentReference: Bytes): string {
 export function createEscrowEvent(
   event: ethereum.Event,
   paymentReference: Bytes,
-  eventName: string
+  eventName: string,
 ): void {
   let escrowEvent = new EscrowEvent(
-    generateId(event.transaction, paymentReference)
+    generateId(event.transaction, paymentReference),
   );
   escrowEvent.reference = paymentReference;
   escrowEvent.contractAddress = event.address;
@@ -31,5 +31,5 @@ export function createEscrowEvent(
   escrowEvent.gasPrice = event.transaction.gasPrice;
   escrowEvent.escrow = generateEscrowId(paymentReference);
   escrowEvent.eventName = eventName;
-  escrowEvent.save()
+  escrowEvent.save();
 }

@@ -4,11 +4,11 @@ import { Payment } from "../generated/schema";
 import { generateId } from "./shared";
 
 export function handleTransferWithReference(
-  event: TransferWithReferenceAndFee
+  event: TransferWithReferenceAndFee,
 ): void {
   log.info("erc20Proxy for tx {}", [event.transaction.hash.toHexString()]);
   let payment = new Payment(
-    generateId(event.transaction, event.params.paymentReference)
+    generateId(event.transaction, event.params.paymentReference),
   );
   payment.contractAddress = event.address;
   payment.reference = event.params.paymentReference;
