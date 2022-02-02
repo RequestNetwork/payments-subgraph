@@ -4,10 +4,10 @@ import { Escrow, Payment } from "../generated/schema";
 import { generateId, generateEscrowId, createEscrowEvent } from "./shared";
 
 export function createPaymentForFeeProxy(
-  event: TransferWithReferenceAndFee
+  event: TransferWithReferenceAndFee,
 ): Payment {
   let payment = new Payment(
-    generateId(event.transaction, event.params.paymentReference)
+    generateId(event.transaction, event.params.paymentReference),
   );
 
   payment.contractAddress = event.address;
@@ -28,7 +28,7 @@ export function createPaymentForFeeProxy(
 }
 
 export function handleTransferWithReferenceAndFee(
-  event: TransferWithReferenceAndFee
+  event: TransferWithReferenceAndFee,
 ): void {
   log.info("feeProxy for tx {}", [event.transaction.hash.toHexString()]);
   let payment = createPaymentForFeeProxy(event);
