@@ -10,7 +10,7 @@ import {
   BigDecimal,
   typeConversion,
 } from "@graphprotocol/graph-ts";
-import { NearPayment } from "../generated/near/schema";
+import { Payment } from "../generated/near/schema";
 
 export function handleReceipt(receipt: near.ReceiptWithOutcome): void {
   const actions = receipt.receipt.actions;
@@ -19,8 +19,8 @@ export function handleReceipt(receipt: near.ReceiptWithOutcome): void {
   }
 }
 
-function generateId(transactionHash: Bytes): string {
-  var id = transactionHash.toHex(); // + paymentReference.toHex().slice(2);
+function generateId(transactionHash: Bytes, paymentReference: string): string {
+  var id = transactionHash.toHex() + paymentReference;
   return crypto.keccak256(ByteArray.fromHexString(id)).toHex();
 }
 
@@ -84,8 +84,7 @@ function savePayment(
   to: string
 ): void {
   const receipt = receiptWithOutcome.receipt;
-  // TODO generateId not sufficient
-  let payment = new NearPayment(generateId(receipt.id));
+  let payment = new Payment(generateId(receipt.id, paymentReference));
   payment.to = to;
   payment.amount = amount;
   payment.reference = paymentReference;

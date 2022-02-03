@@ -1,4 +1,4 @@
-type NearPayment @entity {
+type Payment @entity {
   id: ID!
   contractAddress: String!
   tokenAddress: Bytes
