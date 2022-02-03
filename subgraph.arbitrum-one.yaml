@@ -3,11 +3,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: ERC20FeeProxy
+    name: ERC20FeeProxy_0_2_0
     network: arbitrum-one
     source:
       address: "0x0DfbEe143b42B41eFC5A6F87bFD1fFC78c2f0aC9"
-      abi: ERC20FeeProxy
+      abi: ERC20FeeProxy_0_2_0
       startBlock: 5309741
     mapping:
       kind: ethereum/events
@@ -16,8 +16,8 @@ dataSources:
       entities:
         - Payment
       abis:
-        - name: ERC20FeeProxy
-          file: ./abis/ERC20FeeProxy.json
+        - name: ERC20FeeProxy_0_2_0
+          file: ./abis/ERC20FeeProxy-0.2.0.json
       eventHandlers:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
@@ -85,11 +85,11 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
       file: ./src/ethFeeProxy.ts
   - kind: ethereum/contract
-    name: EthConversionProxy
+    name: EthConversionProxy_0_2_0
     network: arbitrum-one
     source:
       address: "0x7Ebf48a26253810629C191b56C3212Fd0D211c26"
-      abi: EthConversionProxy
+      abi: EthConversionProxy_0_2_0
       startBlock: 5317986
     mapping:
       kind: ethereum/events
@@ -98,8 +98,8 @@ dataSources:
       entities:
         - Payment
       abis:
-        - name: EthConversionProxy
-          file: ./abis/EthConversionProxy.json
+        - name: EthConversionProxy_0_2_0
+          file: ./abis/EthConversionProxy-0.2.0.json
       eventHandlers:
         - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
           handler: handleTransferWithConversionAndReference
