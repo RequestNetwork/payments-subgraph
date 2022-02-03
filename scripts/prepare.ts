@@ -69,13 +69,6 @@ const template = fs
   .readFileSync(path.join(__dirname, "../subgraph.template.yaml"))
   .toString();
 
-for (const [pn, artifact] of Object.entries(paymentNetworks)) {
-  fs.writeFileSync(
-    `abis/${pn}.json`,
-    JSON.stringify(artifact.getContractAbi(), null, 2)
-  );
-}
-
 // Ignore events that are not payment related
 const ignoredEvents = ["WhitelistAdminAdded", "WhitelistAdminRemoved"];
 
@@ -92,14 +85,14 @@ for (const network of networks) {
     }
 
     const infoArray = getArtifactInfo(artifact, network);
-    infoArray.forEach(({ version }, i) => {
-      const abiName = i === 0 ? pn : `${pn}-${version}`;
+    infoArray.forEach(({ version }) => {
+      const abiName = version === "0.1.0" ? pn : `${pn}-${version}`;
       fs.writeFileSync(
         `abis/${abiName}.json`,
         JSON.stringify(artifact.getContractAbi(version), null, 2)
       );
     });
-    infoArray.forEach(({ address, creationBlockNumber, version }, i) => {
+    infoArray.forEach(({ address, creationBlockNumber, version }) => {
       const events = artifact
         .getContractAbi(version)
         .filter((x) => x.type === "event")
@@ -111,7 +104,7 @@ for (const network of networks) {
             .replace(/^event /, "")
             .replace(/([\w]+) indexed/, "indexed $1"),
         }));
-      const abiName = i === 0 ? pn : `${pn}-${version}`;
+      const abiName = version === "0.1.0" ? pn : `${pn}-${version}`;
       dataSources.push({
         abiName,
         name: abiName.replace(/[\-\.]/g, "_"),
