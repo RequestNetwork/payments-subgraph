@@ -14,7 +14,7 @@ import { generateEscrowId, createEscrowEvent } from "./shared";
  * @param event
  */
 export function handleTransferWithReferenceAndFee(
-  event: TransferWithReferenceAndFee
+  event: TransferWithReferenceAndFee,
 ): void {
   log.info("Init escrow at tx {}", [event.transaction.hash.toHexString()]);
   let payment = createPaymentForFeeProxy(event);
@@ -48,7 +48,7 @@ function updateEscrowState(paymentReference: Bytes, eventType: string): void {
 }
 
 export function handleInitiatedEmergencyClaim(
-  event: InitiatedEmergencyClaim
+  event: InitiatedEmergencyClaim,
 ): void {
   log.info("initiatedEmergencyClaim at tx {} for {}", [
     event.transaction.hash.toHexString(),
@@ -57,13 +57,13 @@ export function handleInitiatedEmergencyClaim(
   createEscrowEvent(
     event,
     event.params.paymentReference,
-    "initiateEmergencyClaim"
+    "initiateEmergencyClaim",
   );
   updateEscrowState(event.params.paymentReference, "emergency");
 }
 
 export function handleRevertedEmergencyClaim(
-  event: RevertedEmergencyClaim
+  event: RevertedEmergencyClaim,
 ): void {
   log.info("RevertedEmergencyClaim at tx {} for {}", [
     event.transaction.hash.toHexString(),
@@ -72,7 +72,7 @@ export function handleRevertedEmergencyClaim(
   createEscrowEvent(
     event,
     event.params.paymentReference,
-    "revertEmergencyClaim"
+    "revertEmergencyClaim",
   );
   updateEscrowState(event.params.paymentReference, "paidEscrow");
 }
