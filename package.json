@@ -19,7 +19,7 @@
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
     "@graphprotocol/graph-ts": "0.20.0",
-    "@requestnetwork/smart-contracts": "0.28.1-next.1636"
+    "@requestnetwork/smart-contracts": "0.28.1-next.1640"
   },
   "devDependencies": {
     "@types/mustache": "^4.1.1",
