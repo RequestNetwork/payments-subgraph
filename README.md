@@ -61,6 +61,9 @@ export NETWORK=rinkeby
 yarn deploy
 ```
 
+### Check the deployed version
+You can compare the code to the deployed version using `yarn compare` or `yarn compare NETWORK_NAME`
+
 ## Example query
 
 ```graphql
@@ -88,6 +91,9 @@ yarn deploy
 ```
 
 ## Troubleshooting
+
+### Delays
+Run `yarn monitor` or `yarn monitor NETWORK_NAME` to check for indexing delays. 
 
 ### Hosting service API
 

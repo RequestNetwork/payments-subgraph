@@ -2,6 +2,10 @@ import { request, gql } from "graphql-request";
 import path from "path";
 import { networks } from "./networks";
 
+// reduce thegraph logs
+const spinner = require("@graphprotocol/graph-cli/src/command-helpers/spinner");
+spinner.step = () => {};
+
 const Hash = require("ipfs-only-hash");
 const Compiler = require("@graphprotocol/graph-cli/src/compiler");
 
@@ -43,15 +47,15 @@ const getStatus = async (network: string) => {
   const response = await request<QueryResponse>(
     "https://api.thegraph.com/index-node/graphql",
     query,
-    { subgraph: `requestnetwork/request-payments-${network}` }
+    { subgraph: `requestnetwork/request-payments-${network}` },
   );
 
   const getValues = (
-    body: BodyResponse
+    body: BodyResponse,
   ): Record<keyof BodyResponse, string | number | boolean | undefined> => ({
     ...body,
     fatalError: body.fatalError?.message,
-    nonFatalErrors: body.nonFatalErrors.length
+    nonFatalErrors: body.nonFatalErrors.length,
   });
 
   const current = getValues(response.current);
@@ -65,8 +69,8 @@ const fakeIpfsClient = () => {
       return Promise.resolve([{ hash: Hash.of(arg[0].content) }]);
     },
     pin: {
-      add: () => {}
-    }
+      add: () => {},
+    },
   };
 };
 
@@ -86,7 +90,7 @@ const build = async (subgraphManifest: string): Promise<string> => {
     outputDir: "./build",
     outputFormat: "wasm",
     skipMigrations: true,
-    blockIpfsMethods: true
+    blockIpfsMethods: true,
     // protocol
   });
   return await compiler.compile();
@@ -97,7 +101,15 @@ const main = async () => {
     string,
     { hash: string; current: boolean; pending?: boolean }
   > = {};
-  for (const network of networks) {
+
+  const input = process.argv[2];
+  if (input && !networks.includes(input)) {
+    console.error(`unknown network ${input}`);
+    return;
+  }
+  const networkList = input ? [input] : networks;
+
+  for (const network of networkList) {
     const { current, pending } = await getStatus(network);
     const manifest = path.join(__dirname, "..", `subgraph.${network}.yaml`);
     const hash = await build(manifest);
@@ -108,21 +120,6 @@ const main = async () => {
     }
   }
   console.table(results);
-
-  // console.log(network);
-  // console.table(
-  //   Object.keys(current).reduce(
-  //     (acc, key: string) => ({
-  //       ...acc,
-  //       [key]: {
-  //         current: current[key as keyof BodyResponse],
-  //         pending: pending ? pending[key as keyof BodyResponse] : null
-  //       }
-  //     }),
-  //     {} as Record<keyof BodyResponse, { current: any; pending: any }>
-  //   ),
-  //   []
-  // );
 };
 
 main();
