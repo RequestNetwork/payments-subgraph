@@ -6,6 +6,7 @@ import {
 } from "../generated/ERC20EscrowToPay/ERC20EscrowToPay";
 import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
 import { Escrow } from "../generated/schema";
+import { ERC20EscrowToPay } from "../generated/ERC20EscrowToPay/ERC20EscrowToPay";
 import { createPaymentForFeeProxy } from "./erc20FeeProxy";
 import { generateEscrowId, createEscrowEvent } from "./shared";
 
@@ -25,8 +26,10 @@ export function handleTransferWithReferenceAndFee(
   let escrowId = generateEscrowId(paymentReference);
   let escrow = Escrow.load(escrowId);
   if (escrow == null) {
+    let escrowContract = ERC20EscrowToPay.bind(event.address);
     escrow = new Escrow(escrowId);
     escrow.contractAddress = event.address;
+    escrow.paymentProxyAddress = escrowContract.paymentProxy();
     escrow.reference = paymentReference;
     escrow.creationBlock = event.block.number.toI32();
     escrow.creationTimestamp = event.block.timestamp.toI32();

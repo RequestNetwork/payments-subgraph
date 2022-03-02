@@ -33,6 +33,7 @@ enum EscrowState {
 type Escrow @entity {
   id: ID!
   contractAddress: Bytes!
+  paymentProxyAddress: Bytes!
   reference: Bytes!
   creationBlock: Int!
   creationTimestamp: Int!
