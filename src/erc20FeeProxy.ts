@@ -38,7 +38,7 @@ export function handleTransferWithReferenceAndFee(
   let escrow = Escrow.load(escrowId);
   if (escrow) {
     escrow.escrowState = "paidIssuer";
-    escrow.payee = payment.to;
+    escrow.to = payment.to;
     escrow.save();
     createEscrowEvent(event, paymentReference, "paidIssuer");
   }
