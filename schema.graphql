@@ -33,6 +33,7 @@ enum EscrowState {
 type Escrow @entity {
   id: ID!
   contractAddress: Bytes!
+  paymentProxyAddress: Bytes!
   reference: Bytes!
   creationBlock: Int!
   creationTimestamp: Int!
@@ -41,8 +42,8 @@ type Escrow @entity {
   amount: BigDecimal!
   feeAmount: BigDecimal!
   feeAddress: Bytes!
-  payer: Bytes!
-  payee: Bytes
+  from: Bytes!
+  to: Bytes
   events: [EscrowEvent!] @derivedFrom(field: "escrow")
 }
 

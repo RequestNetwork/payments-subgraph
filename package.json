@@ -13,12 +13,17 @@
     "deploy": "./scripts/deploy.sh $NETWORK",
     "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-$NETWORK ./subgraph.$NETWORK.yaml"
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-$NETWORK ./subgraph.$NETWORK.yaml",
+    "format": "yarn prettier --write \"./src/**/*.ts\"",
+    "compare": "ts-node scripts/compare",
+    "monitor": "ts-node scripts/monitor"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
     "@graphprotocol/graph-ts": "0.20.0",
-    "@requestnetwork/smart-contracts": "0.28.1-next.1669"
+    "@requestnetwork/smart-contracts": "0.28.1-next.1669",
+    "graphql-request": "^3.5.0",
+    "ipfs-only-hash": "^4.0.0"
   },
   "devDependencies": {
     "@types/mustache": "^4.1.1",

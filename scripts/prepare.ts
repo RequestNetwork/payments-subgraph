@@ -55,14 +55,14 @@ type DataSource = {
 const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
   return artifact
     .getAllAddresses(network)
-    .filter((x) => Boolean(x.address))
+    .filter(x => Boolean(x.address))
     .map(({ version }) => ({
       ...artifact.getDeploymentInformation(network, version),
       version,
     }))
     .filter(
       (artifact, index, self) =>
-        self.findIndex((x) => x.address === artifact.address) === index
+        self.findIndex(x => x.address === artifact.address) === index,
     );
 };
 
@@ -90,15 +90,15 @@ for (const network of networks) {
       const abiName = version === "0.1.0" ? pn : `${pn}-${version}`;
       fs.writeFileSync(
         `abis/${abiName}.json`,
-        JSON.stringify(artifact.getContractAbi(version), null, 2)
+        JSON.stringify(artifact.getContractAbi(version), null, 2),
       );
     });
     infoArray.forEach(({ address, creationBlockNumber, version }) => {
       const events = artifact
         .getContractAbi(version)
-        .filter((x) => x.type === "event")
-        .filter((x) => x.name && !ignoredEvents.includes(x.name))
-        .map((x) => ({
+        .filter(x => x.type === "event")
+        .filter(x => x.name && !ignoredEvents.includes(x.name))
+        .map(x => ({
           handlerName: "handle" + x.name,
           eventSignature: EventFragment.fromObject(x)
             .format("minimal")
