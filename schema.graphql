@@ -42,15 +42,15 @@ type Escrow @entity {
   amount: BigDecimal!
   feeAmount: BigDecimal!
   feeAddress: Bytes!
-  from: Bytes!
-  to: Bytes
+  payer: Bytes!
+  payee: Bytes
   events: [EscrowEvent!] @derivedFrom(field: "escrow")
 }
 
 enum EventName {
   paidEscrow
   paidIssuer
-  initializeEmergencyClaim
+  initiateEmergencyClaim
   revertEmergencyClaim
   freezeEscrow
 }

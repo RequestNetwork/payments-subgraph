@@ -38,7 +38,7 @@ export function handleTransferWithReferenceAndFee(
     escrow.feeAmount = event.params.feeAmount.toBigDecimal();
     escrow.feeAddress = event.params.feeAddress;
     escrow.escrowState = "paidEscrow";
-    escrow.from = event.transaction.from;
+    escrow.payer = event.transaction.from;
     escrow.save();
   }
   createEscrowEvent(event, event.params.paymentReference, "paidEscrow");
