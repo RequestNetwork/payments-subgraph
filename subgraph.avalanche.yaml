@@ -3,12 +3,12 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: ERC20FeeProxy
-    network: xdai
+    name: ERC20FeeProxy_0_2_0
+    network: avalanche
     source:
       address: "0x0DfbEe143b42B41eFC5A6F87bFD1fFC78c2f0aC9"
-      abi: ERC20FeeProxy
-      startBlock: 18326896
+      abi: ERC20FeeProxy_0_2_0
+      startBlock: 11671431
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -16,19 +16,19 @@ dataSources:
       entities:
         - Payment
       abis:
-        - name: ERC20FeeProxy
-          file: ./abis/ERC20FeeProxy.json
+        - name: ERC20FeeProxy_0_2_0
+          file: ./abis/ERC20FeeProxy-0.2.0.json
       eventHandlers:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/erc20FeeProxy.ts
   - kind: ethereum/contract
     name: ERC20ConversionProxy
-    network: xdai
+    network: avalanche
     source:
-      address: "0xf0f49873C50765239F6f9534Ba13c4fe16eD5f2E"
+      address: "0xA5186dec7dC1ec85B42A3cd2Dc8289e248530B07"
       abi: ERC20ConversionProxy
-      startBlock: 18326898
+      startBlock: 11671967
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -46,11 +46,11 @@ dataSources:
       file: ./src/erc20ConversionProxy.ts
   - kind: ethereum/contract
     name: EthProxy
-    network: xdai
+    network: avalanche
     source:
       address: "0x27c60BE17e853c47A9F1d280B05365f483c2dFAF"
       abi: EthProxy
-      startBlock: 18326895
+      startBlock: 11671421
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -66,11 +66,11 @@ dataSources:
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
     name: EthProxy_0_3_0
-    network: xdai
+    network: avalanche
     source:
       address: "0x322F0037d272E980984F89E94Aae43BD0FC065E6"
       abi: EthProxy_0_3_0
-      startBlock: 21123983
+      startBlock: 12144013
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -85,12 +85,32 @@ dataSources:
           handler: handleTransferWithReference
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
+    name: EthFeeProxy
+    network: avalanche
+    source:
+      address: "0xC6E23a20C0a1933ACC8E30247B5D1e2215796C1F"
+      abi: EthFeeProxy
+      startBlock: 11671666
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthFeeProxy
+          file: ./abis/EthFeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
     name: EthFeeProxy_0_2_0
-    network: xdai
+    network: avalanche
     source:
       address: "0xfCFBcfc4f5A421089e3Df45455F7f4985FE2D6a8"
       abi: EthFeeProxy_0_2_0
-      startBlock: 21123997
+      startBlock: 12144016
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -104,4 +124,26 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy_0_2_0
+    network: avalanche
+    source:
+      address: "0x7Ebf48a26253810629C191b56C3212Fd0D211c26"
+      abi: EthConversionProxy_0_2_0
+      startBlock: 11671704
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy_0_2_0
+          file: ./abis/EthConversionProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethConversionProxy.ts
   

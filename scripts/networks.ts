@@ -9,5 +9,6 @@ export const providers: Record<string, string> = {
   bsc: "https://bsc-dataseed.binance.org/",
   "arbitrum-rinkeby": "https://rinkeby.arbitrum.io/rpc",
   "arbitrum-one": "https://arb1.arbitrum.io/rpc",
+  avalanche: "https://api.avax.network/ext/bc/C/rpc",
 };
 export const networks = Object.keys(providers);
