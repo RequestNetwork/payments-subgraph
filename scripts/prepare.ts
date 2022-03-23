@@ -25,6 +25,7 @@ const networks = [
   "fuse",
   "arbitrum-rinkeby",
   "arbitrum-one",
+  "avalanche",
 ];
 
 const paymentNetworks = {
