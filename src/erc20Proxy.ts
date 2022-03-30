@@ -18,7 +18,6 @@ export function handleTransferWithReference(
   payment.block = event.block.number.toI32();
   payment.timestamp = event.block.timestamp.toI32();
   payment.txHash = event.transaction.hash;
-  payment.gasUsed = event.transaction.gasLimit;
   payment.gasPrice = event.transaction.gasPrice;
   payment.amount = event.params.amount.toBigDecimal();
 

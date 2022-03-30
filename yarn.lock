@@ -396,6 +396,13 @@
     which "2.0.2"
     yaml "^1.5.1"
 
+"@graphprotocol/graph-ts@0.26.0":
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/@graphprotocol/graph-ts/-/graph-ts-0.26.0.tgz#576f995531eebaca4374901aeaff499219e382e8"
+  integrity sha512-GW/emOJl+35MXgmIxTnUK7dJtPCaB9u5aAwoLVqJ8swogC794O92UrXMVrAJsherUriu+yI9bLMGmNPOIi60jw==
+  dependencies:
+    assemblyscript "0.19.10"
+
 "@multiformats/base-x@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@multiformats/base-x/-/base-x-4.0.1.tgz#95ff0fa58711789d53aefb2590a8b7a4e715d121"

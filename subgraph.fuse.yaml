@@ -31,7 +31,7 @@ dataSources:
       startBlock: 15306857
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -51,7 +51,7 @@ dataSources:
       startBlock: 15992724
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -71,7 +71,7 @@ dataSources:
       startBlock: 15992819
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Payment

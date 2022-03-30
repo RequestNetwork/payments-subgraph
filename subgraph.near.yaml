@@ -12,7 +12,7 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Near
+        - Payment
       receiptHandlers:
         - handler: handleReceipt # the function name in the mapping file
       file: ./src/near-nativePayment.ts # link to the file with the Assemblyscript mappings
