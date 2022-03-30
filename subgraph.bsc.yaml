@@ -11,7 +11,7 @@ dataSources:
       startBlock: 11540173
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -31,7 +31,7 @@ dataSources:
       startBlock: 16361281
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -53,7 +53,7 @@ dataSources:
       startBlock: 11540170
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -73,7 +73,7 @@ dataSources:
       startBlock: 16084630
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -93,7 +93,7 @@ dataSources:
       startBlock: 16165026
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -113,7 +113,7 @@ dataSources:
       startBlock: 16084639
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -133,7 +133,7 @@ dataSources:
       startBlock: 16170265
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
