@@ -71,7 +71,11 @@ const template = fs
   .toString();
 
 // Ignore events that are not payment related
-const ignoredEvents = ["WhitelistAdminAdded", "WhitelistAdminRemoved"];
+const ignoredEvents = [
+  "WhitelistAdminAdded",
+  "WhitelistAdminRemoved",
+  "OwnershipTransferred",
+];
 
 for (const network of networks) {
   const dataSources: DataSource[] = [];

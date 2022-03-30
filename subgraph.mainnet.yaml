@@ -65,6 +65,28 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
       file: ./src/erc20ConversionProxy.ts
   - kind: ethereum/contract
+    name: ERC20ConversionProxy_0_1_1
+    network: mainnet
+    source:
+      address: "0x1550A8C4F4E5afC67Ea07e8ac590fdcAdB4bBfb1"
+      abi: ERC20ConversionProxy_0_1_1
+      startBlock: 14448345
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20ConversionProxy_0_1_1
+          file: ./abis/ERC20ConversionProxy-0.1.1.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20ConversionProxy.ts
+  - kind: ethereum/contract
     name: EthProxy
     network: mainnet
     source:
@@ -180,6 +202,28 @@ dataSources:
       abis:
         - name: EthConversionProxy
           file: ./abis/EthConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/ethConversionProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy_0_2_0
+    network: mainnet
+    source:
+      address: "0x7Ebf48a26253810629C191b56C3212Fd0D211c26"
+      abi: EthConversionProxy_0_2_0
+      startBlock: 14448211
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy_0_2_0
+          file: ./abis/EthConversionProxy-0.2.0.json
       eventHandlers:
         - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
           handler: handleTransferWithConversionAndReference
