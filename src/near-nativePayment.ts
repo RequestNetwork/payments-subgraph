@@ -100,6 +100,7 @@ function savePayment(
   payment.contractAddress = receiptWithOutcome.receipt.receiverId;
 
   payment.from = receipt.signerId;
+  // Taking the block height instead of hash for compatibility with EVM graphes
   payment.block = BigInt.fromI64(
     receiptWithOutcome.block.header.height - 1,
   ).toI32();
