@@ -1,24 +1,25 @@
+# The entity is a close as possible to schema.graphql. Differences are highlighted:
 type Payment @entity {
   id: ID!
-  contractAddress: String!
+  contractAddress: String!  # vs Bytes!
   tokenAddress: Bytes
-  to: String!
-  from: String!
-  reference: String!
+  to: String!               # vs Bytes!
+  from: String!             # vs Bytes!
+  reference: String!        # vs Bytes!
   block: Int!
   timestamp: BigInt!
-  txHash: String
-  receiptId: String!
+  txHash: String            # (missing) instead of Bytes!
+  receiptId: String!        # vs (non-existant on EVM)
   gasUsed: BigInt!
   gasPrice: BigInt!
   amount: BigDecimal!
 
   # fee values (Unusued)
   feeAmount: BigDecimal
-  feeAddress: String
+  feeAddress: String        # vs Bytes
 
   # conversion values (Unusued)
-  currency: String
+  currency: String          # vs Bytes
   amountInCrypto: BigDecimal
   feeAmountInCrypto: BigDecimal
   maxRateTimespan: Int
