@@ -1,24 +1,25 @@
+# The entity is a close as possible to schema.graphql. Differences are highlighted:
 type Payment @entity {
   id: ID!
-  contractAddress: Bytes!
+  contractAddress: String!  # vs Bytes!
   tokenAddress: Bytes
-  to: Bytes!
-  from: Bytes!
-  reference: Bytes!
+  to: String!               # vs Bytes!
+  from: String!             # vs Bytes!
+  reference: String!        # vs Bytes!
   block: Int!
-  timestamp: Int!
-  txHash: Bytes!
-  # FIXME: gasUsed set to 0 (receipt not available)
+  timestamp: BigInt!
+  txHash: String            # (missing) instead of Bytes!
+  receiptId: String!        # vs (non-existant on EVM)
   gasUsed: BigInt!
   gasPrice: BigInt!
   amount: BigDecimal!
 
-  # fee values
+  # fee values (Unusued)
   feeAmount: BigDecimal
-  feeAddress: Bytes
+  feeAddress: String        # vs Bytes
 
-  # conversion values
-  currency: Bytes
+  # conversion values (Unusued)
+  currency: String          # vs Bytes
   amountInCrypto: BigDecimal
   feeAmountInCrypto: BigDecimal
   maxRateTimespan: Int
@@ -66,7 +67,6 @@ type EscrowEvent @entity {
   txHash: Bytes!
   eventName: EventName!
   from: Bytes!
-  # FIXME: gasUsed set to 0 (receipt not available)
   gasUsed: BigInt!
   gasPrice: BigInt!
 }
