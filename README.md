@@ -75,6 +75,7 @@ yarn deploy
 ```
 
 ### Check the deployed version
+
 You can compare the code to the deployed version using `yarn compare` or `yarn compare NETWORK_NAME`
 
 ## Example query
@@ -83,7 +84,6 @@ You can compare the code to the deployed version using `yarn compare` or `yarn c
 {
   payments {
     txHash
-    gasUsed
     gasPrice
     contractAddress
     block
@@ -106,7 +106,8 @@ You can compare the code to the deployed version using `yarn compare` or `yarn c
 ## Troubleshooting
 
 ### Delays
-Run `yarn monitor` or `yarn monitor NETWORK_NAME` to check for indexing delays. 
+
+Run `yarn monitor` or `yarn monitor NETWORK_NAME` to check for indexing delays.
 
 ### Hosting service API
 
