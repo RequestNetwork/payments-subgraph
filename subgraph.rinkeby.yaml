@@ -212,9 +212,9 @@ dataSources:
     name: ERC20EscrowToPay
     network: rinkeby
     source:
-      address: "0x8230e703B1c4467A4543422b2cC3284133B9AB5e"
+      address: "0xff1CAe28E5a5B199CCBaae5257B118372095Aa26"
       abi: ERC20EscrowToPay
-      startBlock: 9669613
+      startBlock: 10417067
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -236,4 +236,3 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/erc20EscrowToPay.ts
-  
