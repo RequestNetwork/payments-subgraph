@@ -21,7 +21,7 @@
   "dependencies": {
     "@graphprotocol/graph-cli": "0.20.0",
     "@graphprotocol/graph-ts": "0.20.0",
-    "@requestnetwork/smart-contracts": "0.28.1-next.1692",
+    "@requestnetwork/smart-contracts": "0.28.1-next.1701",
     "graphql-request": "^3.5.0",
     "ipfs-only-hash": "^4.0.0"
   },

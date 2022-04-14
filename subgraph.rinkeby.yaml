@@ -43,6 +43,26 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
       file: ./src/erc20FeeProxy.ts
   - kind: ethereum/contract
+    name: ERC20FeeProxy_1
+    network: rinkeby
+    source:
+      address: "0x305164cC3846E6e631A77D4FD632219643A8767E"
+      abi: ERC20FeeProxy_1
+      startBlock: 10492237
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy_1
+          file: ./abis/ERC20FeeProxy.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20FeeProxy.ts
+  - kind: ethereum/contract
     name: ERC20ConversionProxy
     network: rinkeby
     source:
@@ -212,9 +232,9 @@ dataSources:
     name: ERC20EscrowToPay
     network: rinkeby
     source:
-      address: "0x8230e703B1c4467A4543422b2cC3284133B9AB5e"
+      address: "0xEbe28A2B7336670Ba752bfEad4a121D2c4FF2464"
       abi: ERC20EscrowToPay
-      startBlock: 9669613
+      startBlock: 10461945
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
