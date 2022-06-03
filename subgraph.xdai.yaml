@@ -104,4 +104,32 @@ dataSources:
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
       file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: ERC20EscrowToPay
+    network: xdai
+    source:
+      address: "0xa015c141C02996EcE6410646DA3D07d70091c577"
+      abi: ERC20EscrowToPay
+      startBlock: 22438806
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+        - Escrow
+        - EscrowEvent
+      abis:
+        - name: ERC20EscrowToPay
+          file: ./abis/ERC20EscrowToPay.json
+      eventHandlers:
+        - event: InitiatedEmergencyClaim(indexed bytes)
+          handler: handleInitiatedEmergencyClaim
+        - event: RequestFrozen(indexed bytes)
+          handler: handleRequestFrozen
+        - event: RevertedEmergencyClaim(indexed bytes)
+          handler: handleRevertedEmergencyClaim
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+      file: ./src/erc20EscrowToPay.ts
   
