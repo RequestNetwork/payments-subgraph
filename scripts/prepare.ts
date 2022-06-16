@@ -110,7 +110,7 @@ for (const network of networks) {
             .replace(/^event /, "")
             .replace(/([\w]+) indexed/, "indexed $1"),
           receiptNeeded:
-            x.name === "TransferWithConversionAndReference" ? false : true,
+            x.name !== "TransferWithConversionAndReference"
         }));
       const abiName = version === "0.1.0" ? pn : `${pn}-${version}`;
       dataSources.push({
