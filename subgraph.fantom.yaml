@@ -42,7 +42,6 @@ dataSources:
       eventHandlers:
         - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
           handler: handleTransferWithConversionAndReference
-          receipt: true
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
           receipt: true
@@ -150,7 +149,6 @@ dataSources:
       eventHandlers:
         - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
           handler: handleTransferWithConversionAndReference
-          receipt: true
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
           receipt: true
@@ -174,7 +172,6 @@ dataSources:
       eventHandlers:
         - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
           handler: handleTransferWithConversionAndReference
-          receipt: true
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
           receipt: true
