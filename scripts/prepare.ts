@@ -48,6 +48,7 @@ type DataSource = {
   events: {
     eventSignature: string;
     handlerName: string;
+    receiptNeeded: boolean;
   }[];
   graphEntities: string[];
 };
@@ -108,6 +109,8 @@ for (const network of networks) {
             .format("minimal")
             .replace(/^event /, "")
             .replace(/([\w]+) indexed/, "indexed $1"),
+          receiptNeeded:
+            x.name !== "TransferWithConversionAndReference"
         }));
       const abiName = version === "0.1.0" ? pn : `${pn}-${version}`;
       dataSources.push({

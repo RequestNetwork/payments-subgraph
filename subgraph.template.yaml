@@ -25,7 +25,9 @@ dataSources:
         {{#events}}
         - event: {{eventSignature}}
           handler: {{handlerName}}
+          {{#receiptNeeded}}
           receipt: true
+          {{/receiptNeeded}}
         {{/events}}
       file: ./src/{{fileName}}.ts
   {{/dataSources}}
