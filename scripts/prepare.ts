@@ -13,20 +13,7 @@ import {
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
-
-const networks = [
-  "mainnet",
-  "rinkeby",
-  "matic",
-  "celo",
-  "bsc",
-  "xdai",
-  "fantom",
-  "fuse",
-  "arbitrum-rinkeby",
-  "arbitrum-one",
-  "avalanche",
-];
+import { networks } from "./networks";
 
 const paymentNetworks = {
   ERC20Proxy: erc20ProxyArtifact,
@@ -109,8 +96,7 @@ for (const network of networks) {
             .format("minimal")
             .replace(/^event /, "")
             .replace(/([\w]+) indexed/, "indexed $1"),
-          receiptNeeded:
-            x.name !== "TransferWithConversionAndReference"
+          receiptNeeded: x.name !== "TransferWithConversionAndReference",
         }));
       const abiName = version === "0.1.0" ? pn : `${pn}-${version}`;
       dataSources.push({

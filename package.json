@@ -11,6 +11,7 @@
     "prepare": "ts-node scripts/prepare.ts && yarn codegen",
     "build": "graph build",
     "deploy": "./scripts/deploy.sh $NETWORK",
+    "deploy:all": "ts-node scripts/deploy-all",
     "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-$NETWORK ./subgraph.$NETWORK.yaml",
@@ -21,12 +22,13 @@
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.30.2",
     "@graphprotocol/graph-ts": "^0.27.0",
-    "@requestnetwork/smart-contracts": "0.28.1-next.1728",
+    "@requestnetwork/smart-contracts": "0.28.1-next.1737",
     "graphql-request": "^3.5.0",
     "ipfs-only-hash": "^4.0.0"
   },
   "devDependencies": {
     "@types/mustache": "^4.1.1",
+    "@types/node": "^18.0.0",
     "ethers": "^5.2.0",
     "mustache": "^4.2.0",
     "ts-node": "^10.0.0",

@@ -76,13 +76,13 @@ const fakeIpfsClient = () => {
 
 const build = async (subgraphManifest: string): Promise<string> => {
   // in next version of @graphprotocol
-  // const {
-  //   fromFilePath
-  // } = require("@graphprotocol/graph-cli/src/command-helpers/data-sources");
-  // const { fromDataSources } = require("@graphprotocol/graph-cli/src/protocols");
+  const {
+    fromFilePath,
+  } = require("@graphprotocol/graph-cli/src/command-helpers/data-sources");
+  const { fromDataSources } = require("@graphprotocol/graph-cli/src/protocols");
 
-  // const dataSourcesAndTemplates = await fromFilePath(subgraphManifest);
-  // const protocol = fromDataSources(dataSourcesAndTemplates);
+  const dataSourcesAndTemplates = await fromFilePath(subgraphManifest);
+  const protocol = fromDataSources(dataSourcesAndTemplates);
 
   const compiler = new Compiler({
     ipfs: fakeIpfsClient(),
@@ -91,7 +91,7 @@ const build = async (subgraphManifest: string): Promise<string> => {
     outputFormat: "wasm",
     skipMigrations: true,
     blockIpfsMethods: true,
-    // protocol
+    protocol,
   });
   return await compiler.compile();
 };
