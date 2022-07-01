@@ -57,12 +57,24 @@ yarn deploy-local
 
 ```
 export TOKEN=xxx
-export NETWORK=rinkeby
-yarn deploy
+# deploy on one network
+yarn subgraph deploy rinkeby
+# deploy on multiple networks
+yarn subgraph deploy matic xdai
+# or, to deploy all networks
+yarn subgraph deploy --all
 ```
 
 ### Check the deployed version
-You can compare the code to the deployed version using `yarn compare` or `yarn compare NETWORK_NAME`
+You can compare the code to the deployed version using one of these commands
+```
+# all
+yarn subgraph compare
+# one network
+yarn subgraph compare NETWORK_NAME
+# several networks
+yarn subgraph compare NETWORK_NAME_1 NETWORK_NAME_2
+```
 
 ## Example query
 
@@ -93,7 +105,15 @@ You can compare the code to the deployed version using `yarn compare` or `yarn c
 ## Troubleshooting
 
 ### Delays
-Run `yarn monitor` or `yarn monitor NETWORK_NAME` to check for indexing delays. 
+Run of these commands to check for indexing delays. 
+```
+# all 
+yarn subgraph monitor
+# one network 
+yarn subgraph monitor NETWORK_NAME
+# several networks
+yarn subgraph monitor NETWORK_NAME_1 NETWORK_NAME_2
+```
 
 ### Hosting service API
 

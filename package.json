@@ -8,16 +8,13 @@
   },
   "scripts": {
     "codegen": "graph codegen ./subgraph.rinkeby.yaml",
-    "prepare": "ts-node scripts/prepare.ts && yarn codegen",
+    "prepare": "yarn subgraph prepare &&  yarn codegen",
     "build": "graph build",
-    "deploy": "./scripts/deploy.sh $NETWORK",
-    "deploy:all": "ts-node scripts/deploy-all",
     "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-$NETWORK ./subgraph.$NETWORK.yaml",
     "format": "yarn prettier --write \"./src/**/*.ts\"",
-    "compare": "ts-node scripts/compare",
-    "monitor": "ts-node scripts/monitor"
+    "subgraph": "ts-node -r dotenv/config ./cli"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "^0.30.2",
@@ -29,9 +26,13 @@
   "devDependencies": {
     "@types/mustache": "^4.1.1",
     "@types/node": "^18.0.0",
+    "@types/yargs": "^17.0.10",
+    "axios-cache-adapter": "^2.7.3",
+    "dotenv": "^16.0.1",
     "ethers": "^5.2.0",
     "mustache": "^4.2.0",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.2.4"
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4",
+    "yargs": "^17.5.1"
   }
 }
