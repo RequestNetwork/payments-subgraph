@@ -1,0 +1,86 @@
+import { ethers } from "ethers";
+import { request, gql } from "graphql-request";
+import { setup } from "axios-cache-adapter";
+
+const client = setup({
+  cache: {
+    maxAge: 15 * 60 * 1000,
+  },
+});
+
+const query = gql`
+  {
+    _meta {
+      block {
+        number
+      }
+    }
+  }
+`;
+
+const timeout = <T>(promise: Promise<T>, ms: number) => {
+  let t: NodeJS.Timeout;
+  return Promise.race([
+    promise.then(v => {
+      clearTimeout(t);
+      return v;
+    }),
+    new Promise(resolve => (t = setTimeout(resolve, ms))).then(() => {
+      throw new Error("Timeout after " + ms + " ms");
+    }),
+  ]);
+};
+
+const getLastBlockRpc = async (network: string) => {
+  const providerUrl = await getProviderUrl(network);
+  const provider = providerUrl
+    ? new ethers.providers.StaticJsonRpcProvider(providerUrl)
+    : ethers.getDefaultProvider(network);
+
+  return await timeout(provider.getBlockNumber(), 3000);
+};
+
+const getLastBlockTheGraph = async (network: string) => {
+  const data = await request(
+    `https://api.thegraph.com/subgraphs/name/requestnetwork/request-payments-${network}`,
+    query,
+  );
+  return data._meta.block.number;
+};
+
+const getProviderUrl = async (network: string) => {
+  const { data } = await client.get<{ name: string; rpcUrls: string[] }[]>(
+    "https://api.request.network/currency/chains",
+  );
+
+  return (
+    data
+      ?.find(x => x.name === network)
+      ?.rpcUrls?.[0]?.replace(
+        "{INFURA_API_KEY}",
+        process.env.INFURA_API_KEY || "",
+      ) || null
+  );
+};
+
+export const getDelay = async (network: string) => {
+  try {
+    const [lastBlock, lastIndexedBlock] = await Promise.all([
+      getLastBlockRpc(network),
+      getLastBlockTheGraph(network),
+    ]);
+
+    return {
+      network,
+      lastBlock,
+      lastIndexedBlock,
+      delay: lastBlock - lastIndexedBlock,
+    };
+  } catch (e) {
+    console.warn(
+      `Failed to fetch status for ${network}:`,
+      (e as Error).message,
+    );
+    return { network };
+  }
+};

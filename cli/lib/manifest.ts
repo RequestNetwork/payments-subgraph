@@ -13,7 +13,6 @@ import {
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
-import { networks } from "./networks";
 
 const paymentNetworks = {
   ERC20Proxy: erc20ProxyArtifact,
@@ -54,10 +53,6 @@ const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
     );
 };
 
-const template = fs
-  .readFileSync(path.join(__dirname, "../subgraph.template.yaml"))
-  .toString();
-
 // Ignore events that are not payment related
 const ignoredEvents = [
   "WhitelistAdminAdded",
@@ -65,9 +60,8 @@ const ignoredEvents = [
   "OwnershipTransferred",
 ];
 
-for (const network of networks) {
+export const getManifest = (network: string) => {
   const dataSources: DataSource[] = [];
-  console.log(`parsing network ${network}`);
 
   Object.entries(paymentNetworks).forEach(([pn, artifact]) => {
     let graphEntities: string[];
@@ -113,10 +107,12 @@ for (const network of networks) {
   });
 
   if (dataSources.length === 0) {
-    console.warn(`No contract found for ${network}`);
-    continue;
+    return null;
   }
 
-  const result = mustache.render(template, { dataSources });
-  fs.writeFileSync(`subgraph.${network}.yaml`, result);
-}
+  const template = fs
+    .readFileSync(path.join(process.cwd(), "subgraph.template.yaml"))
+    .toString();
+
+  return mustache.render(template, { dataSources });
+};
