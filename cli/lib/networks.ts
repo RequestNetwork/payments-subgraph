@@ -10,4 +10,5 @@ export const networks = [
   "avalanche",
   "arbitrum-one",
   "arbitrum-rinkeby",
+  "goerli",
 ];
