@@ -61,8 +61,6 @@ One manifest can refer to many different versions of proxies dealing with the sa
 
 ## Deployment
 
-> Hint: You can get your token from your [Dashboard](https://thegraph.com/hosted-service/dashboard), under RequestNetwork organization.
-
 ### Local
 
 ```
@@ -73,15 +71,10 @@ yarn deploy-local
 
 ### Networks
 
-```
-export TOKEN=xxx
-# deploy on one network
-yarn subgraph deploy rinkeby
-# deploy on multiple networks
-yarn subgraph deploy matic xdai
-# or, to deploy all networks
-yarn subgraph deploy --all
-```
+The live deployment is automated. 
+For test chains (rinkeby, goerli), it will be automatically deployed when pushed to `main`
+
+For production chains (all others), it is semi automatic, and requires a manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
 
 ### Check the deployed version
 You can compare the code to the deployed version using one of these commands
