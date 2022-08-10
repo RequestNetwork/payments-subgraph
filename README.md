@@ -33,6 +33,24 @@ docker-compose up -d
 # Run
 ```
 
+### Adding a new chain
+> This requires the `@requestnetwork/smart-contracts` package to be deployed. 
+```
+export NETWORK=my-network
+
+# update to latest version
+yarn add --exact @requestnetwork/smart-contracts@next
+
+# add new network
+cat <<< $(jq '. + [env.NETWORK] | unique' cli/networks.json) > cli/networks.json
+
+# update CI (update deployment targets with cli/networks.json)
+NETWORKS=$(cat ./cli/networks.json) yq e -i '.jobs.deploy.strategy.matrix.chain |= env(NETWORKS)' .github/workflows/deploy.yaml
+
+# create Github Environment (for CI) based on mainnet
+yarn subgraph configure-ci $NETWORK
+```
+
 ## Manifests
 
 The subgraphs manifests are automatically generated using the [prepare script](./scripts/prepare.ts), which uses `@requestnetwork/smart-contracts` NPM package to get the smart-contracts addresses.

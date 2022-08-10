@@ -1,14 +1,14 @@
 [
-  "mainnet",
-  "rinkeby",
-  "goerli",
-  "xdai",
-  "fuse",
-  "matic",
+  "arbitrum-one",
+  "arbitrum-rinkeby",
+  "avalanche",
+  "bsc",
   "celo",
   "fantom",
-  "bsc",
-  "avalanche",
-  "arbitrum-one",
-  "arbitrum-rinkeby"
+  "fuse",
+  "goerli",
+  "mainnet",
+  "matic",
+  "rinkeby",
+  "xdai"
 ]

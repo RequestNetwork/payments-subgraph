@@ -7,8 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chain: ["rinkeby", "goerli"]
+        chain: ["arbitrum-one", "arbitrum-rinkeby", "avalanche", "bsc", "celo", "fantom", "fuse", "goerli", "mainnet", "matic", "rinkeby", "xdai"]
     environment: ${{ matrix.chain }}
     steps:
       - run: echo "hello"
-      
