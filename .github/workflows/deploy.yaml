@@ -10,6 +10,7 @@ jobs:
         chain: ["arbitrum-one", "arbitrum-rinkeby", "avalanche", "bsc", "celo", "fantom", "fuse", "goerli", "mainnet", "matic", "rinkeby", "xdai"]
     environment: ${{ matrix.chain }}
     steps:
+      - uses: actions/checkout@v3
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
