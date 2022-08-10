@@ -143,4 +143,3 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
           receipt: true
       file: ./src/erc20EscrowToPay.ts
-  
