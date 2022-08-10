@@ -17,9 +17,9 @@
     "subgraph": "ts-node -r dotenv/config ./cli"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "^0.30.2",
+    "@graphprotocol/graph-cli": "^0.33.0",
     "@graphprotocol/graph-ts": "^0.27.0",
-    "@requestnetwork/smart-contracts": "0.28.1-next.1737",
+    "@requestnetwork/smart-contracts": "0.28.1-next.1751",
     "graphql-request": "^3.5.0",
     "ipfs-only-hash": "^4.0.0"
   },
