@@ -1,7 +1,7 @@
 name: Deploy subgraph
 on:
   push:
-    branches: ["ci"]
+    branches: ["main"]
 jobs:
   deploy:
     runs-on: ubuntu-latest
