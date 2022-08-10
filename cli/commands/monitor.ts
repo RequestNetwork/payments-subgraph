@@ -1,5 +1,5 @@
 import yargs from "yargs";
-import { networks } from "../lib/networks";
+import networks from "../networks.json";
 import { getDelay } from "../lib/delay";
 
 export const command = "monitor";

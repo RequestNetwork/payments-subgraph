@@ -1,4 +1,4 @@
-export const networks = [
+[
   "mainnet",
   "rinkeby",
   "goerli",
@@ -10,5 +10,5 @@ export const networks = [
   "bsc",
   "avalanche",
   "arbitrum-one",
-  "arbitrum-rinkeby",
-];
+  "arbitrum-rinkeby"
+]

@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import { deploySubgraph } from "../lib/deploy";
-import { networks } from "../lib/networks";
+import networks from "../networks.json";
 
 export const command = "deploy [network..]";
 export const desc = "Deploys one subgraph";

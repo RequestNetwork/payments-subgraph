@@ -1,0 +1,14 @@
+name: Deploy subgraph
+on:
+  push:
+    branches: ["ci"]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chain: ["rinkeby", "goerli"]
+    environment: ${{ matrix.chain }}
+    steps:
+      - run: echo "hello"
+      

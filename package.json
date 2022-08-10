@@ -8,7 +8,8 @@
   },
   "scripts": {
     "codegen": "graph codegen ./subgraph.rinkeby.yaml",
-    "prepare": "yarn subgraph prepare &&  yarn codegen",
+    "update-ci": "NETWORKS=$(cat ./cli/networks.json) yq e -i '.jobs.deploy.strategy.matrix.chain |= env(NETWORKS)' .github/workflows/deploy.yaml",
+    "prepare": "yarn subgraph prepare && yarn codegen && yarn update-ci",
     "build": "graph build",
     "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
