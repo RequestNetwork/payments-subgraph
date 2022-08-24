@@ -33,6 +33,24 @@ docker-compose up -d
 # Run
 ```
 
+### Adding a new chain
+> This requires the `@requestnetwork/smart-contracts` package to be deployed. 
+```
+export NETWORK=my-network
+
+# update to latest version
+yarn add --exact @requestnetwork/smart-contracts@next
+
+# add new network
+cat <<< $(jq '. + [env.NETWORK] | unique' cli/networks.json) > cli/networks.json
+
+# update CI (update deployment targets with cli/networks.json)
+NETWORKS=$(cat ./cli/networks.json) yq e -i '.jobs.deploy.strategy.matrix.chain |= env(NETWORKS)' .github/workflows/deploy.yaml
+
+# create Github Environment (for CI) based on mainnet
+yarn subgraph configure-ci $NETWORK
+```
+
 ## Manifests
 
 The subgraphs manifests are automatically generated using the [prepare script](./scripts/prepare.ts), which uses `@requestnetwork/smart-contracts` NPM package to get the smart-contracts addresses.
@@ -42,8 +60,6 @@ One manifest can refer to many different versions of proxies dealing with the sa
 > Note: The `TransferWithReferenceAndFee` event is configured twice. That is because the Conversion proxy makes an internal call to the ERC20 Fee proxy. Both `TransferWithReferenceAndFee` and `TransferWithConversionAndReference` need to be parsed for the Conversion smart-contract.
 
 ## Deployment
-
-> Hint: You can get your token from your [Dashboard](https://thegraph.com/hosted-service/dashboard), under RequestNetwork organization.
 
 ### Local
 
@@ -55,15 +71,10 @@ yarn deploy-local
 
 ### Networks
 
-```
-export TOKEN=xxx
-# deploy on one network
-yarn subgraph deploy rinkeby
-# deploy on multiple networks
-yarn subgraph deploy matic xdai
-# or, to deploy all networks
-yarn subgraph deploy --all
-```
+The live deployment is automated. 
+For test chains (rinkeby, goerli), it will be automatically deployed when pushed to `main`
+
+For production chains (all others), it is semi automatic, and requires a manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
 
 ### Check the deployed version
 You can compare the code to the deployed version using one of these commands
