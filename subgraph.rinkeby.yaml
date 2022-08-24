@@ -222,9 +222,9 @@ dataSources:
     name: ERC20EscrowToPay
     network: rinkeby
     source:
-      address: "0xEbe28A2B7336670Ba752bfEad4a121D2c4FF2464"
+      address: "0x2b487A3251aCC34ae95E4f5aA7fdcD2C7447B42e"
       abi: ERC20EscrowToPay
-      startBlock: 10461945
+      startBlock: 11028247
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

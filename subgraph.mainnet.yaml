@@ -245,9 +245,9 @@ dataSources:
     name: ERC20EscrowToPay
     network: mainnet
     source:
-      address: "0xa015c141C02996EcE6410646DA3D07d70091c577"
+      address: "0x7DfD5955a1Ed6Bf74ccF8e24FF53E0a9A7e9F477"
       abi: ERC20EscrowToPay
-      startBlock: 14884007
+      startBlock: 15146972
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

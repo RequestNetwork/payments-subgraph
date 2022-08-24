@@ -671,10 +671,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@requestnetwork/smart-contracts@0.28.1-next.1751":
-  version "0.28.1-next.1751"
-  resolved "https://registry.yarnpkg.com/@requestnetwork/smart-contracts/-/smart-contracts-0.28.1-next.1751.tgz#93589699ef34d4d2d7ee9f7e73def04ce82cfcfc"
-  integrity sha512-+q66JXoTezQgtrmlAIx3j4hzLtWDt5kuDEOLgRiRvl54dMZ3f/a97pAiWlRrIRKJ62U9Aj8VD+5X9U9DJCxFfA==
+"@requestnetwork/smart-contracts@0.28.1-next.1759":
+  version "0.28.1-next.1759"
+  resolved "https://registry.yarnpkg.com/@requestnetwork/smart-contracts/-/smart-contracts-0.28.1-next.1759.tgz#7fb62a6539074df8dca724bcdf4a408bbad77f73"
+  integrity sha512-puUkub6f9Y4L9RFBJzTQOQf4feGqGT2m95rWMi/5sRfM6s2iS9/YZfPpCaLRLi5M2aPU3mTH4Xk1jk1xaHlofA==
   dependencies:
     tslib "2.3.1"
 
