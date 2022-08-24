@@ -2,7 +2,7 @@ import { existsSync } from "fs";
 import { writeFile, readFile } from "fs/promises";
 import path from "path";
 import yargs, { array } from "yargs";
-import { networks } from "../lib/networks";
+import networks from "../networks.json";
 import { compile } from "../lib/compile";
 import { getStatus } from "../lib/status";
 

@@ -1,4 +1,4 @@
-import { networks } from "../lib/networks";
+import networks from "../networks.json";
 import { getManifest } from "../lib/manifest";
 import { writeFile } from "fs/promises";
 
