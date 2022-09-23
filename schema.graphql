@@ -8,7 +8,6 @@ type Payment @entity {
   block: Int!
   timestamp: Int!
   txHash: Bytes!
-  # FIXME: gasUsed set to 0 (receipt not available)
   gasUsed: BigInt!
   gasPrice: BigInt!
   amount: BigDecimal!
@@ -66,7 +65,6 @@ type EscrowEvent @entity {
   txHash: Bytes!
   eventName: EventName!
   from: Bytes!
-  # FIXME: gasUsed set to 0 (receipt not available)
   gasUsed: BigInt!
   gasPrice: BigInt!
 }
