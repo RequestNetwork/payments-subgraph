@@ -46,6 +46,7 @@ export function handleTransferWithReferenceAndFee(
 
 function updateEscrowState(paymentReference: Bytes, eventType: string): void {
   let escrow = Escrow.load(generateEscrowId(paymentReference));
+  if (!escrow) return;
   escrow.escrowState = eventType;
   escrow.save();
 }

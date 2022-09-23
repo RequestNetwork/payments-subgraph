@@ -7,29 +7,32 @@
     "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
   },
   "scripts": {
-    "codegen": "graph codegen ./subgraph.rinkeby.yaml ; graph codegen ./subgraph.near.yaml -o ./generated/near/",
-    "prepare": "ts-node scripts/prepare.ts && yarn codegen",
-    "build": "graph build ./subgraph.$NETWORK.yaml",
-    "deploy": "./scripts/deploy.sh $NETWORK",
+    "codegen": "graph codegen ./subgraph.rinkeby.yaml; graph codegen ./subgraph.near.yaml -o ./generated/near/",
+    "prepare": "yarn subgraph prepare && yarn codegen",
+    "build": "graph build",
     "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-$NETWORK ./subgraph.$NETWORK.yaml",
     "format": "yarn prettier --write \"./src/**/*.ts\"",
-    "compare": "ts-node scripts/compare",
-    "monitor": "ts-node scripts/monitor"
+    "subgraph": "ts-node -r dotenv/config ./cli"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.24.1",
-    "@graphprotocol/graph-ts": "0.26.0",
-    "@requestnetwork/smart-contracts": "0.28.1-next.1692",
+    "@graphprotocol/graph-cli": "^0.33.0",
+    "@graphprotocol/graph-ts": "^0.27.0",
+    "@requestnetwork/smart-contracts": "0.28.1-next.1759",
     "graphql-request": "^3.5.0",
     "ipfs-only-hash": "^4.0.0"
   },
   "devDependencies": {
     "@types/mustache": "^4.1.1",
+    "@types/node": "^18.0.0",
+    "@types/yargs": "^17.0.10",
+    "axios-cache-adapter": "^2.7.3",
+    "dotenv": "^16.0.1",
     "ethers": "^5.2.0",
     "mustache": "^4.2.0",
-    "ts-node": "^10.0.0",
-    "typescript": "^4.2.4"
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.4",
+    "yargs": "^17.5.1"
   }
 }

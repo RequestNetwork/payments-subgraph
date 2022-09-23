@@ -39,6 +39,26 @@ docker-compose up -d
 # Run
 ```
 
+### Adding a new chain
+
+> This requires the `@requestnetwork/smart-contracts` package to be deployed.
+
+```
+export NETWORK=my-network
+
+# update to latest version
+yarn add --exact @requestnetwork/smart-contracts@next
+
+# add new network
+cat <<< $(jq '. + [env.NETWORK] | unique' cli/networks.json) > cli/networks.json
+
+# update CI (update deployment targets with cli/networks.json)
+NETWORKS=$(cat ./cli/networks.json) yq e -i '.jobs.deploy.strategy.matrix.chain |= env(NETWORKS)' .github/workflows/deploy.yaml
+
+# create Github Environment (for CI) based on mainnet
+yarn subgraph configure-ci $NETWORK
+```
+
 ## Manifests
 
 The subgraphs manifests are automatically generated using the [prepare script](./scripts/prepare.ts), which uses `@requestnetwork/smart-contracts` NPM package to get the smart-contracts addresses.
@@ -56,8 +76,6 @@ yarn build
 
 ## Deployment
 
-> Hint: You can get your token from your [Dashboard](https://thegraph.com/hosted-service/dashboard), under RequestNetwork organization.
-
 ### Local
 
 ```
@@ -68,15 +86,23 @@ yarn deploy-local
 
 ### Networks
 
-```
-export TOKEN=xxx
-export NETWORK=rinkeby
-yarn deploy
-```
+The live deployment is automated.
+For test chains (rinkeby, goerli), it will be automatically deployed when pushed to `main`
+
+For production chains (all others), it is semi automatic, and requires a manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
 
 ### Check the deployed version
 
-You can compare the code to the deployed version using `yarn compare` or `yarn compare NETWORK_NAME`
+You can compare the code to the deployed version using one of these commands
+
+```
+# all
+yarn subgraph compare
+# one network
+yarn subgraph compare NETWORK_NAME
+# several networks
+yarn subgraph compare NETWORK_NAME_1 NETWORK_NAME_2
+```
 
 ## Example query
 
@@ -107,7 +133,16 @@ You can compare the code to the deployed version using `yarn compare` or `yarn c
 
 ### Delays
 
-Run `yarn monitor` or `yarn monitor NETWORK_NAME` to check for indexing delays.
+Run of these commands to check for indexing delays.
+
+```
+# all
+yarn subgraph monitor
+# one network
+yarn subgraph monitor NETWORK_NAME
+# several networks
+yarn subgraph monitor NETWORK_NAME_1 NETWORK_NAME_2
+```
 
 ### Hosting service API
 

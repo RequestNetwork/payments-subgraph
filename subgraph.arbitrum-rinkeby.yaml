@@ -1,4 +1,4 @@
-specVersion: 0.0.2
+specVersion: 0.0.5
 schema:
   file: ./schema.graphql
 dataSources:
@@ -11,7 +11,7 @@ dataSources:
       startBlock: 8403921
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -21,6 +21,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/erc20FeeProxy.ts
   - kind: ethereum/contract
     name: ERC20ConversionProxy
@@ -31,7 +32,7 @@ dataSources:
       startBlock: 8403930
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -43,6 +44,7 @@ dataSources:
           handler: handleTransferWithConversionAndReference
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/erc20ConversionProxy.ts
   - kind: ethereum/contract
     name: EthProxy
@@ -53,7 +55,7 @@ dataSources:
       startBlock: 8403917
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -63,6 +65,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReference(address,uint256,indexed bytes)
           handler: handleTransferWithReference
+          receipt: true
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
     name: EthFeeProxy
@@ -73,7 +76,7 @@ dataSources:
       startBlock: 8403946
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -83,5 +86,6 @@ dataSources:
       eventHandlers:
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/ethFeeProxy.ts
   

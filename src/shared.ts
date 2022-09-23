@@ -27,6 +27,7 @@ export function createEscrowEvent(
   escrowEvent.block = event.block.number.toI32();
   escrowEvent.timestamp = event.block.timestamp.toI32();
   escrowEvent.txHash = event.transaction.hash;
+  escrowEvent.gasUsed = (event.receipt as ethereum.TransactionReceipt).gasUsed;
   escrowEvent.gasPrice = event.transaction.gasPrice;
   escrowEvent.escrow = generateEscrowId(paymentReference);
   escrowEvent.eventName = eventName;

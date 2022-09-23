@@ -14,20 +14,6 @@ import {
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
 
-const networks = [
-  "mainnet",
-  "rinkeby",
-  "matic",
-  "celo",
-  "bsc",
-  "xdai",
-  "fantom",
-  "fuse",
-  "arbitrum-rinkeby",
-  "arbitrum-one",
-  "avalanche",
-];
-
 const paymentNetworks = {
   ERC20Proxy: erc20ProxyArtifact,
   ERC20FeeProxy: erc20FeeProxyArtifact,
@@ -48,6 +34,7 @@ type DataSource = {
   events: {
     eventSignature: string;
     handlerName: string;
+    receiptNeeded: boolean;
   }[];
   graphEntities: string[];
 };
@@ -66,10 +53,6 @@ const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
     );
 };
 
-const template = fs
-  .readFileSync(path.join(__dirname, "../subgraph.template.yaml"))
-  .toString();
-
 // Ignore events that are not payment related
 const ignoredEvents = [
   "WhitelistAdminAdded",
@@ -77,9 +60,8 @@ const ignoredEvents = [
   "OwnershipTransferred",
 ];
 
-for (const network of networks) {
+export const getManifest = (network: string) => {
   const dataSources: DataSource[] = [];
-  console.log(`parsing network ${network}`);
 
   Object.entries(paymentNetworks).forEach(([pn, artifact]) => {
     let graphEntities: string[];
@@ -108,6 +90,7 @@ for (const network of networks) {
             .format("minimal")
             .replace(/^event /, "")
             .replace(/([\w]+) indexed/, "indexed $1"),
+          receiptNeeded: x.name !== "TransferWithConversionAndReference",
         }));
       const abiName = version === "0.1.0" ? pn : `${pn}-${version}`;
       dataSources.push({
@@ -124,10 +107,12 @@ for (const network of networks) {
   });
 
   if (dataSources.length === 0) {
-    console.warn(`No contract found for ${network}`);
-    continue;
+    return null;
   }
 
-  const result = mustache.render(template, { dataSources });
-  fs.writeFileSync(`subgraph.${network}.yaml`, result);
-}
+  const template = fs
+    .readFileSync(path.join(process.cwd(), "subgraph.template.yaml"))
+    .toString();
+
+  return mustache.render(template, { dataSources });
+};

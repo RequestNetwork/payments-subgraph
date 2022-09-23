@@ -3,3 +3,4 @@ build
 data
 generated
 .env
+cache.json

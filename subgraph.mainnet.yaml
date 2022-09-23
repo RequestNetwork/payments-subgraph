@@ -1,4 +1,4 @@
-specVersion: 0.0.2
+specVersion: 0.0.5
 schema:
   file: ./schema.graphql
 dataSources:
@@ -11,7 +11,7 @@ dataSources:
       startBlock: 9119380
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -21,6 +21,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReference(address,address,uint256,indexed bytes)
           handler: handleTransferWithReference
+          receipt: true
       file: ./src/erc20Proxy.ts
   - kind: ethereum/contract
     name: ERC20FeeProxy
@@ -31,7 +32,7 @@ dataSources:
       startBlock: 10774767
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -41,6 +42,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/erc20FeeProxy.ts
   - kind: ethereum/contract
     name: ERC20ConversionProxy
@@ -51,7 +53,7 @@ dataSources:
       startBlock: 12225751
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -63,6 +65,7 @@ dataSources:
           handler: handleTransferWithConversionAndReference
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/erc20ConversionProxy.ts
   - kind: ethereum/contract
     name: ERC20ConversionProxy_0_1_1
@@ -73,7 +76,7 @@ dataSources:
       startBlock: 14448345
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -85,6 +88,7 @@ dataSources:
           handler: handleTransferWithConversionAndReference
         - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/erc20ConversionProxy.ts
   - kind: ethereum/contract
     name: EthProxy
@@ -95,7 +99,7 @@ dataSources:
       startBlock: 9466832
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -105,6 +109,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReference(address,uint256,indexed bytes)
           handler: handleTransferWithReference
+          receipt: true
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
     name: EthProxy_0_2_0
@@ -115,7 +120,7 @@ dataSources:
       startBlock: 13764023
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -125,6 +130,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReference(address,uint256,indexed bytes)
           handler: handleTransferWithReference
+          receipt: true
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
     name: EthProxy_0_3_0
@@ -135,7 +141,7 @@ dataSources:
       startBlock: 14392194
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -145,6 +151,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReference(address,uint256,indexed bytes)
           handler: handleTransferWithReference
+          receipt: true
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
     name: EthFeeProxy
@@ -155,7 +162,7 @@ dataSources:
       startBlock: 13764157
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -165,6 +172,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/ethFeeProxy.ts
   - kind: ethereum/contract
     name: EthFeeProxy_0_2_0
@@ -175,7 +183,7 @@ dataSources:
       startBlock: 14392218
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -185,6 +193,7 @@ dataSources:
       eventHandlers:
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/ethFeeProxy.ts
   - kind: ethereum/contract
     name: EthConversionProxy
@@ -195,7 +204,7 @@ dataSources:
       startBlock: 13765042
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -207,6 +216,7 @@ dataSources:
           handler: handleTransferWithConversionAndReference
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/ethConversionProxy.ts
   - kind: ethereum/contract
     name: EthConversionProxy_0_2_0
@@ -217,7 +227,7 @@ dataSources:
       startBlock: 14448211
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.6
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - Payment
@@ -229,5 +239,38 @@ dataSources:
           handler: handleTransferWithConversionAndReference
         - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
           handler: handleTransferWithReferenceAndFee
+          receipt: true
       file: ./src/ethConversionProxy.ts
+  - kind: ethereum/contract
+    name: ERC20EscrowToPay
+    network: mainnet
+    source:
+      address: "0x7DfD5955a1Ed6Bf74ccF8e24FF53E0a9A7e9F477"
+      abi: ERC20EscrowToPay
+      startBlock: 15146972
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+        - Escrow
+        - EscrowEvent
+      abis:
+        - name: ERC20EscrowToPay
+          file: ./abis/ERC20EscrowToPay.json
+      eventHandlers:
+        - event: InitiatedEmergencyClaim(indexed bytes)
+          handler: handleInitiatedEmergencyClaim
+          receipt: true
+        - event: RequestFrozen(indexed bytes)
+          handler: handleRequestFrozen
+          receipt: true
+        - event: RevertedEmergencyClaim(indexed bytes)
+          handler: handleRevertedEmergencyClaim
+          receipt: true
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/erc20EscrowToPay.ts
   
