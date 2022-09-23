@@ -4,7 +4,7 @@ This repo contains the code and configuration for Request Payment subgraphs:
 
 - [Mainnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mainnet)
 - [Rinkeby](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-rinkeby)
-- [Matic](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
+- [Polygon (Matic)](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
 - [Celo](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-celo)
 - [BSC](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-bsc)
 - [Gnosis Chain (xDai)](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-xdai)
