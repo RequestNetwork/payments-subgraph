@@ -7,7 +7,7 @@
     "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
   },
   "scripts": {
-    "codegen": "graph codegen ./subgraph.rinkeby.yaml",
+    "codegen": "graph codegen ./subgraph.rinkeby.yaml; graph codegen ./subgraph.near.yaml -o ./generated/near/",
     "prepare": "yarn subgraph prepare && yarn codegen",
     "build": "graph build",
     "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",

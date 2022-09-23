@@ -2,10 +2,15 @@
 
 This repo contains the code and configuration for Request Payment subgraphs:
 
-- Mainnet (coming soon)
+- [Mainnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mainnet)
 - [Rinkeby](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-rinkeby)
-- [Matic](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
+- [Polygon (Matic)](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
 - [Celo](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-celo)
+- [BSC](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-bsc)
+- [Gnosis Chain (xDai)](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-xdai)
+- [Fuse](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fuse)
+- [Fantom](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fantom)
+- [Near](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near)
 
 It indexes Request's proxy smart-contracts for easy querying of payment data.
 
@@ -14,6 +19,7 @@ Smart-contract addresses can be found here:
 - [ERC20 Proxy](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/smart-contracts/src/lib/artifacts/ERC20Proxy/index.ts)
 - [ERC20 Fee Proxy](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/smart-contracts/src/lib/artifacts/ERC20FeeProxy/index.ts)
 - [ERC20 Conversion Proxy](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/smart-contracts/src/lib/artifacts/Erc20ConversionProxy/index.ts)
+- [requestnetwork.near](https://github.com/RequestNetwork/requestNetwork/blob/master/packages/payment-detection/src/near-detector.ts)
 
 [Learn more about TheGraph](https://thegraph.com/)
 
@@ -34,7 +40,9 @@ docker-compose up -d
 ```
 
 ### Adding a new chain
-> This requires the `@requestnetwork/smart-contracts` package to be deployed. 
+
+> This requires the `@requestnetwork/smart-contracts` package to be deployed.
+
 ```
 export NETWORK=my-network
 
@@ -59,6 +67,13 @@ One manifest can refer to many different versions of proxies dealing with the sa
 
 > Note: The `TransferWithReferenceAndFee` event is configured twice. That is because the Conversion proxy makes an internal call to the ERC20 Fee proxy. Both `TransferWithReferenceAndFee` and `TransferWithConversionAndReference` need to be parsed for the Conversion smart-contract.
 
+### Build
+
+```
+export NETWORK=rinkeby
+yarn build
+```
+
 ## Deployment
 
 ### Local
@@ -71,13 +86,15 @@ yarn deploy-local
 
 ### Networks
 
-The live deployment is automated. 
+The live deployment is automated.
 For test chains (rinkeby, goerli), it will be automatically deployed when pushed to `main`
 
 For production chains (all others), it is semi automatic, and requires a manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
 
 ### Check the deployed version
+
 You can compare the code to the deployed version using one of these commands
+
 ```
 # all
 yarn subgraph compare
@@ -93,7 +110,6 @@ yarn subgraph compare NETWORK_NAME_1 NETWORK_NAME_2
 {
   payments {
     txHash
-    gasUsed
     gasPrice
     contractAddress
     block
@@ -116,11 +132,13 @@ yarn subgraph compare NETWORK_NAME_1 NETWORK_NAME_2
 ## Troubleshooting
 
 ### Delays
-Run of these commands to check for indexing delays. 
+
+Run of these commands to check for indexing delays.
+
 ```
-# all 
+# all
 yarn subgraph monitor
-# one network 
+# one network
 yarn subgraph monitor NETWORK_NAME
 # several networks
 yarn subgraph monitor NETWORK_NAME_1 NETWORK_NAME_2

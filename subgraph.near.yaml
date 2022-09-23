@@ -1,0 +1,18 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.near.graphql # link to the schema file
+dataSources:
+  - kind: near
+    name: nativePayment
+    network: near-mainnet
+    source:
+      account: "requestnetwork.near" # This data source will monitor this account
+      startBlock: 47887795 # Required for NEAR
+    mapping:
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      receiptHandlers:
+        - handler: handleReceipt # the function name in the mapping file
+      file: ./src/near-nativePayment.ts # link to the file with the Assemblyscript mappings
