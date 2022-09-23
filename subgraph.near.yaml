@@ -1,4 +1,4 @@
-specVersion: 0.0.2
+specVersion: 0.0.4
 schema:
   file: ./schema.near.graphql # link to the schema file
 dataSources:
@@ -9,7 +9,7 @@ dataSources:
       account: "requestnetwork.near" # This data source will monitor this account
       startBlock: 47887795 # Required for NEAR
     mapping:
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
