@@ -7,7 +7,7 @@ This repo contains the code and configuration for Request Payment subgraphs:
 - [Matic](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
 - [Celo](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-celo)
 - [BSC](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-bsc)
-- [xDai (Gnosis Chain)](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-xdai)
+- [Gnosis Chain (xDai)](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-xdai)
 - [Fuse](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fuse)
 - [Fantom](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fantom)
 - [Near](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near)
