@@ -1,4 +1,4 @@
-specVersion: 0.0.2
+specVersion: 0.0.4
 schema:
   file: ./schema.near.graphql # link to the schema file
 dataSources:
@@ -9,10 +9,24 @@ dataSources:
       account: "dev-1631521265288-35171138540673" # This data source will monitor this account
       startBlock: 63278257 # Required for NEAR
     mapping:
-      apiVersion: 0.0.5
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
         - Payment
       receiptHandlers:
         - handler: handleReceipt # the function name in the mapping file
-      file: ./src/near-nativePayment.ts # link to the file with the Assemblyscript mappings
+      file: ./src/near/native.ts # link to the file with the Assemblyscript mappings
+  - kind: near
+    name: nativeConversionPayment
+    network: near-testnet
+    source:
+      account: "native.conversion.reqnetwork.testnet" # This data source will monitor this account
+      startBlock: 101340356
+    mapping:
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      receiptHandlers:
+        - handler: handleReceipt # the function name in the mapping file
+      file: ./src/near/native.conversion.ts # link to the file with the Assemblyscript mappings

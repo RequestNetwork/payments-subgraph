@@ -15,4 +15,18 @@ dataSources:
         - Payment
       receiptHandlers:
         - handler: handleReceipt # the function name in the mapping file
-      file: ./src/near-nativePayment.ts # link to the file with the Assemblyscript mappings
+      file: ./src/near/near-nativePayment.ts # link to the file with the Assemblyscript mappings
+  - kind: near
+    name: nativeConversionPayment
+    network: near-mainnet
+    source:
+      account: "native.conversion.reqnetwork.near" # This data source will monitor this account
+      startBlock: 75085378 # Required for NEAR
+    mapping:
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      receiptHandlers:
+        - handler: handleReceipt # the function name in the mapping file
+      file: ./src/near/native.conversion.ts # link to the file with the Assemblyscript mappings
