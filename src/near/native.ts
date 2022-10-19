@@ -98,7 +98,7 @@ function savePayment(
     receiptWithOutcome.block.header.height - 1,
   ).toI32();
   const textTimestamp = receiptWithOutcome.block.header.timestampNanosec.toString();
-  const trimmedTimestamp = textTimestamp.substr(0, textTimestamp.length - 6);
+  const trimmedTimestamp = textTimestamp.substr(0, textTimestamp.length - 9); // Nanoseconds to seconds
   payment.timestamp = BigInt.fromString(trimmedTimestamp);
   // receipt ID can be mapped to transaction hash 1-1
   payment.receiptId = typeConversion.bytesToBase58(
