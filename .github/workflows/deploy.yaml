@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chain: ["arbitrum-one", "arbitrum-rinkeby", "avalanche", "bsc", "celo", "fantom", "fuse", "goerli", "mainnet", "matic", "rinkeby", "xdai"]
+        chain: ["arbitrum-one", "arbitrum-rinkeby", "avalanche", "bsc", "celo", "fantom", "fuse", "goerli", "mainnet", "matic", "xdai"]
     environment: 
       name: ${{ matrix.chain }}
       url: https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-${{ matrix.chain }}
