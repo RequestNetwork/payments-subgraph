@@ -3,7 +3,6 @@
 This repo contains the code and configuration for Request Payment subgraphs:
 
 - [Mainnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mainnet)
-- [Rinkeby](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-rinkeby)
 - [Polygon (Matic)](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
 - [Celo](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-celo)
 - [BSC](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-bsc)
@@ -70,7 +69,7 @@ One manifest can refer to many different versions of proxies dealing with the sa
 ### Build
 
 ```
-export NETWORK=rinkeby
+export NETWORK=goerli
 yarn build
 ```
 
@@ -79,7 +78,7 @@ yarn build
 ### Local
 
 ```
-export NETWORK=rinkeby
+export NETWORK=goerli
 yarn create-local
 yarn deploy-local
 ```
@@ -87,7 +86,7 @@ yarn deploy-local
 ### Networks
 
 The live deployment is automated for EVM chains.
-For test chains (rinkeby, goerli), it will be automatically deployed when pushed to `main`
+For test chains (goerli), it will be automatically deployed when pushed to `main`
 
 For production chains (all others), it is semi automatic, and requires a manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
 
@@ -158,7 +157,7 @@ Schema: https://github.com/graphprotocol/graph-node/blob/master/server/index-nod
 ### Sync failed with no logs
 
 ```
-http POST 'https://api.thegraph.com/index-node/graphql'  query="{ indexingStatusForPendingVersion(subgraphName: \"requestnetwork/request-payments-rinkeby\") { subgraph fatalError { message } nonFatalErrors {message } } }" | jq .data
+http POST 'https://api.thegraph.com/index-node/graphql'  query="{ indexingStatusForPendingVersion(subgraphName: \"requestnetwork/request-payments-goerli\") { subgraph fatalError { message } nonFatalErrors {message } } }" | jq .data
 ```
 
 ### Build issue `TS6054: File '~lib/allocator/arena.ts' not found.`
