@@ -8,5 +8,6 @@
   "goerli",
   "mainnet",
   "matic",
-  "xdai"
+  "xdai",
+  "optimism"
 ]
