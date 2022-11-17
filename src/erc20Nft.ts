@@ -4,14 +4,18 @@ import { Payment } from "../generated/schema";
 import { generateId } from "./shared";
 
 export function handlePayment(event: PaymentEvent): void {
-  log.info("erc20Nft for tx {}", [event.transaction.hash.toHexString()]);
+  log.info("erc20Nft for tx {} reference {} hex {}", [
+    event.transaction.hash.toHexString(),
+    event.params.paymentReference.toString(),
+    event.params.paymentReference.toHexString(),
+  ]);
   let payment = new Payment(
     generateId(event.transaction, event.params.paymentReference),
   );
   payment.contractAddress = event.address;
   payment.reference = event.params.paymentReference;
   payment.tokenAddress = event.params.assetAddress;
-  payment.to = event.params.recipient;
+  payment.to = event.address;
   payment.from = event.transaction.from;
   payment.block = event.block.number.toI32();
   payment.timestamp = event.block.timestamp.toI32();
