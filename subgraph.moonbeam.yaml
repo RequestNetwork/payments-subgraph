@@ -1,0 +1,146 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ERC20FeeProxy_0_2_0
+    network: moonbeam
+    source:
+      address: "0x399F5EE127ce7432E4921a61b8CF52b0af52cbfE"
+      abi: ERC20FeeProxy_0_2_0
+      startBlock: 2415492
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy_0_2_0
+          file: ./abis/ERC20FeeProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/erc20FeeProxy.ts
+  - kind: ethereum/contract
+    name: ERC20ConversionProxy
+    network: moonbeam
+    source:
+      address: "0x1550A8C4F4E5afC67Ea07e8ac590fdcAdB4bBfb1"
+      abi: ERC20ConversionProxy
+      startBlock: 2415439
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20ConversionProxy
+          file: ./abis/ERC20ConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/erc20ConversionProxy.ts
+  - kind: ethereum/contract
+    name: EthProxy_0_3_0
+    network: moonbeam
+    source:
+      address: "0x171Ee0881407d4c0C11eA1a2FB7D5b4cdED71e6e"
+      abi: EthProxy_0_3_0
+      startBlock: 2415488
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthProxy_0_3_0
+          file: ./abis/EthProxy-0.3.0.json
+      eventHandlers:
+        - event: TransferWithReference(address,uint256,indexed bytes)
+          handler: handleTransferWithReference
+          receipt: true
+      file: ./src/ethProxy.ts
+  - kind: ethereum/contract
+    name: EthFeeProxy_0_2_0
+    network: moonbeam
+    source:
+      address: "0xe11BF2fDA23bF0A98365e1A4c04A87C9339e8687"
+      abi: EthFeeProxy_0_2_0
+      startBlock: 2415490
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthFeeProxy_0_2_0
+          file: ./abis/EthFeeProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy_0_2_0
+    network: moonbeam
+    source:
+      address: "0x7Ebf48a26253810629C191b56C3212Fd0D211c26"
+      abi: EthConversionProxy_0_2_0
+      startBlock: 2415431
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy_0_2_0
+          file: ./abis/EthConversionProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/ethConversionProxy.ts
+  - kind: ethereum/contract
+    name: ERC20EscrowToPay
+    network: moonbeam
+    source:
+      address: "0x26d4912fA5aC84F185843E19eeEdcc47f4Cc9F1a"
+      abi: ERC20EscrowToPay
+      startBlock: 2415523
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+        - Escrow
+        - EscrowEvent
+      abis:
+        - name: ERC20EscrowToPay
+          file: ./abis/ERC20EscrowToPay.json
+      eventHandlers:
+        - event: InitiatedEmergencyClaim(indexed bytes)
+          handler: handleInitiatedEmergencyClaim
+          receipt: true
+        - event: RequestFrozen(indexed bytes)
+          handler: handleRequestFrozen
+          receipt: true
+        - event: RevertedEmergencyClaim(indexed bytes)
+          handler: handleRevertedEmergencyClaim
+          receipt: true
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/erc20EscrowToPay.ts
+  
