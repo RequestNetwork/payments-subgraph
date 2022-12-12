@@ -1,25 +1,43 @@
 type Payment @entity {
+  "hash transaction of the payment"
   id: ID!
+  "network contract address"
   contractAddress: Bytes!
+  "contract of token used for payment"
   tokenAddress: Bytes
+  "address payment was made from"
   to: Bytes!
+  "address payment was made to"
   from: Bytes!
+  "is the reference data used to track the transfer"
   reference: Bytes!
+  "block payment took place"
   block: Int!
+  "time stamp of payment"
   timestamp: Int!
+  "transaction hash of payment"
   txHash: Bytes!
+  "gas used for payment"
   gasUsed: BigInt!
+  "gas fee at time of payment"
   gasPrice: BigInt!
+  "amount of payment"
   amount: BigDecimal!
 
   # fee values
+  "fee charged for payment"
   feeAmount: BigDecimal
+  "address of person paying fee"
   feeAddress: Bytes
 
   # conversion values
+  "fiat currency payment is based on"
   currency: Bytes
+  "amount of payment in crypto"
   amountInCrypto: BigDecimal
+  "fee amoount in crypto"
   feeAmountInCrypto: BigDecimal
+  "maximum time span payment will reoccur"
   maxRateTimespan: Int
 }
 
@@ -31,19 +49,33 @@ enum EscrowState {
 }
 
 type Escrow @entity {
+  "hash transaction of the escrow"
   id: ID!
+  "network contract address"
   contractAddress: Bytes!
+  "identifies a recipient and their payment account"
   paymentProxyAddress: Bytes!
+  "is the reference data used to track the escrow"
   reference: Bytes!
+  "block escrow was created"
   creationBlock: Int!
+  "time stamp escrow was created"
   creationTimestamp: Int!
+  "state of the escrow"
   escrowState: EscrowState!
+  "contract of token used for payment"
   tokenAddress: Bytes!
+  "amount of escrow set up"
   amount: BigDecimal!
+  "fee charged for escrow"
   feeAmount: BigDecimal!
+  "address of person paying escrow"
   feeAddress: Bytes!
+  "address escrow is set up from"
   from: Bytes!
+  "address escrow is paid to"
   to: Bytes
+  "refer to Escrow Event"
   events: [EscrowEvent!] @derivedFrom(field: "escrow")
 }
 
@@ -56,15 +88,26 @@ enum EventName {
 }
 
 type EscrowEvent @entity {
+  "date payment set up"
   id: ID!
+  "network contract address"
   contractAddress: Bytes!
+  "is the reference data used to track the escrow event"
   reference: Bytes!
+  "smart contract that triggers when a payment is dispursed"
   escrow: Escrow!
+  "block event took place"
   block: Int!
+  "timestamp of event"
   timestamp: Int!
+  "transaction hash of escrow event"
   txHash: Bytes!
+  "name of the escrow event"
   eventName: EventName!
+  "address escrow is set up from"
   from: Bytes!
+  "gas used for event"
   gasUsed: BigInt!
+  "price of gas at time of event"
   gasPrice: BigInt!
 }
