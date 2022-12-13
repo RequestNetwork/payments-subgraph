@@ -27,7 +27,6 @@ dataSources:
     name: InvoiceNFT
     network: goerli
     source:
-      address: "0x9aEBB4B8abf7afC96dC00f707F766499C5EbeDF1"
       abi: InvoiceNFT
       startBlock: 7950000
     mapping:
