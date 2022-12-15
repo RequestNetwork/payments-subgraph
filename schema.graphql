@@ -1,17 +1,17 @@
 type Payment @entity {
   "hash transaction of the payment"
   id: ID!
-  "network contract address"
+  "payment network contract address"
   contractAddress: Bytes!
   "contract of token used for payment"
   tokenAddress: Bytes
-  "address payment was made from"
-  to: Bytes!
   "address payment was made to"
+  to: Bytes!
+  "address payment was made from"
   from: Bytes!
   "is the reference data used to track the transfer"
   reference: Bytes!
-  "block payment took place"
+  "block in which payment took place"
   block: Int!
   "time stamp of payment"
   timestamp: Int!
@@ -27,7 +27,7 @@ type Payment @entity {
   # fee values
   "fee charged for payment"
   feeAmount: BigDecimal
-  "address of person paying fee"
+  "address where the fee is sent"
   feeAddress: Bytes
 
   # conversion values
@@ -69,7 +69,7 @@ type Escrow @entity {
   amount: BigDecimal!
   "fee charged for escrow"
   feeAmount: BigDecimal!
-  "address of person paying escrow"
+  "address where fees are sent"
   feeAddress: Bytes!
   "address escrow is set up from"
   from: Bytes!
@@ -94,7 +94,7 @@ type EscrowEvent @entity {
   contractAddress: Bytes!
   "is the reference data used to track the escrow event"
   reference: Bytes!
-  "smart contract that triggers when a payment is dispursed"
+  "smart contract that triggers when a payment is disbursed"
   escrow: Escrow!
   "block in which event took place"
   block: Int!
