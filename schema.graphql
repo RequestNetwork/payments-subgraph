@@ -51,7 +51,7 @@ enum EscrowState {
 type Escrow @entity {
   "hash transaction of the escrow"
   id: ID!
-  "network contract address"
+  "escrow contract address"
   contractAddress: Bytes!
   "identifies a recipient and their payment account"
   paymentProxyAddress: Bytes!
@@ -88,15 +88,15 @@ enum EventName {
 }
 
 type EscrowEvent @entity {
-  "date payment set up"
+  "hash transaction of the escrow"
   id: ID!
-  "network contract address"
+  "escrow contract address"
   contractAddress: Bytes!
   "is the reference data used to track the escrow event"
   reference: Bytes!
   "smart contract that triggers when a payment is dispursed"
   escrow: Escrow!
-  "block event took place"
+  "block in which event took place"
   block: Int!
   "timestamp of event"
   timestamp: Int!
