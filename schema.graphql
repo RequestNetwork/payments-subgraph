@@ -53,7 +53,7 @@ type Escrow @entity {
   id: ID!
   "escrow contract address"
   contractAddress: Bytes!
-  "identifies a recipient and their payment account"
+  "payment proxy contract address"
   paymentProxyAddress: Bytes!
   "is the reference data used to track the escrow"
   reference: Bytes!
