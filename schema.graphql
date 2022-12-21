@@ -1,7 +1,7 @@
 type Payment @entity {
   "hash transaction of the payment"
   id: ID!
-  "payment proxy contract address""
+  "payment proxy contract address"
   contractAddress: Bytes!
   "contract of token used for payment"
   tokenAddress: Bytes
@@ -94,7 +94,7 @@ type EscrowEvent @entity {
   contractAddress: Bytes!
   "is the reference data used to track the escrow event"
   reference: Bytes!
-  "smart contract that triggers when a payment is disbursed"
+  "the Escrow where this event occurred"
   escrow: Escrow!
   "block in which event took place"
   block: Int!
