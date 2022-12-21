@@ -1,7 +1,7 @@
 type Payment @entity {
   "hash transaction of the payment"
   id: ID!
-  "payment network contract address"
+  "payment proxy contract address""
   contractAddress: Bytes!
   "contract of token used for payment"
   tokenAddress: Bytes
