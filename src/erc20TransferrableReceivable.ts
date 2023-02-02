@@ -15,6 +15,7 @@ export function createReceivablePaymentForTransferrableReceivable(
   receivablePayment.tokenAddress = event.params.assetAddress;
   receivablePayment.paymentProxy = event.params.paymentProxy;
   receivablePayment.from = event.transaction.from;
+  receivablePayment.to = event.params.recipient;
   receivablePayment.block = event.block.number.toI32();
   receivablePayment.timestamp = event.block.timestamp.toI32();
   receivablePayment.txHash = event.transaction.hash;
