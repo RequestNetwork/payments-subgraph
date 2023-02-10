@@ -159,7 +159,7 @@ dataSources:
         - name: ERC20TransferrableReceivable
           file: ./abis/ERC20TransferrableReceivable.json
       eventHandlers:
-        - event: Payment(address,address,address,uint256,address,uint256,indexed bytes)
-          handler: handleReceivablePayment
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
           receipt: true
       file: ./src/erc20TransferrableReceivable.ts
