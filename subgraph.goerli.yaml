@@ -147,8 +147,9 @@ dataSources:
     name: ERC20TransferrableReceivable
     network: goerli
     source:
+      address: "0xC2AC172a293d68f548ea343414584aA37eb29Dcd"
       abi: ERC20TransferrableReceivable
-      startBlock: 8444057
+      startBlock: 8502503
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
