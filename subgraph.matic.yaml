@@ -229,4 +229,24 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
           receipt: true
       file: ./src/erc20EscrowToPay.ts
-  
+  - kind: ethereum/contract
+    name: ERC20TransferrableReceivable
+    network: matic
+    source:
+      address: "0xA9930c8e4638D9a96a3B73e7ABe73a636F986323"
+      abi: ERC20TransferrableReceivable
+      startBlock: 39364680
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20TransferrableReceivable
+          file: ./abis/ERC20TransferrableReceivable.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/erc20TransferrableReceivable.ts
