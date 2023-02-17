@@ -1,0 +1,47 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ERC20FeeProxy_0_2_0
+    network: tombchain
+    source:
+      address: "0x399F5EE127ce7432E4921a61b8CF52b0af52cbfE"
+      abi: ERC20FeeProxy_0_2_0
+      startBlock: 2951048
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy_0_2_0
+          file: ./abis/ERC20FeeProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/erc20FeeProxy.ts
+  - kind: ethereum/contract
+    name: EthFeeProxy_0_2_0
+    network: tombchain
+    source:
+      address: "0xe11BF2fDA23bF0A98365e1A4c04A87C9339e8687"
+      abi: EthFeeProxy_0_2_0
+      startBlock: 2951047
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthFeeProxy_0_2_0
+          file: ./abis/EthFeeProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/ethFeeProxy.ts
+  
