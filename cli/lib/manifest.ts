@@ -10,6 +10,7 @@ import {
   ethereumFeeProxyArtifact,
   ethConversionArtifact,
   erc20EscrowToPayArtifact,
+  erc20TransferableReceivableArtifact,
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import camelCase from "lodash/camelCase";
@@ -22,6 +23,7 @@ const paymentNetworks = {
   EthFeeProxy: ethereumFeeProxyArtifact,
   EthConversionProxy: ethConversionArtifact,
   ERC20EscrowToPay: erc20EscrowToPayArtifact,
+  ERC20TransferrableReceivable: erc20TransferableReceivableArtifact,
 };
 
 type DataSource = {
@@ -58,6 +60,10 @@ const ignoredEvents = [
   "WhitelistAdminAdded",
   "WhitelistAdminRemoved",
   "OwnershipTransferred",
+  "Approval",
+  "ApprovalForAll",
+  "Transfer",
+  "TransferableReceivablePayment",
 ];
 
 export const getManifest = (network: string) => {
