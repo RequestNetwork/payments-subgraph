@@ -85,7 +85,7 @@ yarn deploy-local
 
 ### Networks
 
-The live deployment is automated for EVM chains.
+The live deployment is automated for EVM chains on the hosted service.
 For test chains (goerli), it will be automatically deployed when pushed to `main`
 
 For production chains (all others), it is semi automatic, and requires a manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
@@ -94,6 +94,11 @@ For non-EVM deployments, use:
 
 ```
 yarn graph deploy --product hosted-service --deploy-key <GRAPH_KEY> requestnetwork/request-payments-<network> ./subgraph.<network>.yaml
+```
+
+For decentralized network, use:
+```
+yarn graph deploy --studio request-payments-<network> ./subgraph.<network>.yaml --version-label v1.<bumped-version>
 ```
 
 ### Check the deployed version
