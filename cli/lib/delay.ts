@@ -57,9 +57,10 @@ const getProviderUrl = async (network: string) => {
     data
       ?.find(x => x.name === network)
       ?.rpcUrls?.[0]?.replace(
-        "{INFURA_API_KEY}",
-        process.env.INFURA_API_KEY || "",
-      ) || null
+        "{ALCHEMY_API_KEY}",
+        process.env.ALCHEMY_API_KEY || "",
+      )
+      .replace("{INFURA_API_KEY}", process.env.INFURA_API_KEY || "") || null
   );
 };
 
