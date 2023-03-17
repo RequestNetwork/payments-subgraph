@@ -2,7 +2,7 @@
 type Payment @entity {
   id: ID!
   contractAddress: String!        # vs Bytes!
-  tokenAddress: Bytes
+  tokenAddress: String            # vs Bytes
   to: String!                     # vs Bytes!
   from: String!                   # vs Bytes!
   reference: String!              # vs Bytes!
@@ -13,13 +13,13 @@ type Payment @entity {
   gasUsed: BigInt!
   gasPrice: BigInt!
   amount: BigDecimal!
+  currency: String!                # vs Bytes
 
   # fee values
   feeAmount: BigDecimal
   feeAddress: String              # vs Bytes
 
   # conversion values
-  currency: String                # vs Bytes
   amountInCrypto: BigDecimal      # FIXME - not set
   feeAmountInCrypto: BigDecimal   # FIXME - not set
   maxRateTimespan: Int

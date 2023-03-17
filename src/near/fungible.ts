@@ -36,10 +36,13 @@ function handleAction(
   const outcome = receiptWithOutcome.outcome;
 
   const functionCall = action.toFunctionCall();
-  if (functionCall.methodName != "transfer_with_reference") {
+  if (
+    // Only this last callback method is of interest
+    functionCall.methodName != "on_transfer_with_reference"
+  ) {
     return;
   }
-  log.debug("transfer_with_reference found, parsing {} logs sent by {}", [
+  log.debug("on_transfer_with_reference found, parsing {} logs sent by {}", [
     outcome.logs.length.toString(),
     receiptWithOutcome.receipt.receiverId,
   ]);
@@ -53,43 +56,69 @@ function handleAction(
     ) {
       const parsedOutcome = parsedOutcomeTry.value.toObject();
       if (
-        parsedOutcome &&
-        parsedOutcome.isSet("receiver") &&
-        parsedOutcome.isSet("reference") &&
-        parsedOutcome.isSet("amount")
+        !parsedOutcome ||
+        !parsedOutcome.isSet("to") ||
+        !parsedOutcome.isSet("amount") ||
+        !parsedOutcome.isSet("token_address") ||
+        !parsedOutcome.isSet("payment_reference") ||
+        !parsedOutcome.isSet("fee_amount") ||
+        !parsedOutcome.isSet("fee_address")
       ) {
-        const receiver = parsedOutcome.get("receiver");
-        const reference = parsedOutcome.get("reference");
-        const amount = parsedOutcome.get("amount");
-        if (receiver !== null && reference !== null && amount !== null) {
-          log.info("Payment found: {} sent to {} with ref {}", [
-            amount.toString(),
-            receiver.toString(),
-            reference.toString(),
-          ]);
-          savePayment(
-            receiptWithOutcome,
-            BigDecimal.fromString(amount.toString()),
-            reference.toString(),
-            receiver.toString(),
-          );
-        }
+        log.debug("ignoring outcome with parsing errors", []);
+        continue;
       }
+      const to = parsedOutcome.get("to");
+      const amount = parsedOutcome.get("amount");
+      const currency = parsedOutcome.get("token_address");
+      const paymentReference = parsedOutcome.get("payment_reference");
+      const feeAmount = parsedOutcome.get("fee_amount");
+      const feeAddress = parsedOutcome.get("fee_address");
+      if (
+        to === null ||
+        paymentReference === null ||
+        amount === null ||
+        currency === null ||
+        feeAmount === null ||
+        feeAddress === null
+      ) {
+        log.debug("ignoring outcome with missing mandatory info", []);
+        continue;
+      }
+      log.info("Payment found: {} {} sent to {} with ref {}", [
+        amount.toString(),
+        currency.toString(),
+        to.toString(),
+        paymentReference.toString(),
+      ]);
+      savePayment(
+        receiptWithOutcome,
+        to.toString(),
+        paymentReference.toString(),
+        BigDecimal.fromString(amount.toString()),
+        currency.toString(),
+        BigDecimal.fromString(feeAmount.toString()),
+        feeAddress.toString(),
+      );
     }
   }
 }
 
 function savePayment(
   receiptWithOutcome: near.ReceiptWithOutcome,
-  amount: BigDecimal,
-  paymentReference: string,
   to: string,
+  paymentReference: string,
+  amount: BigDecimal,
+  currency: string,
+  feeAmount: BigDecimal,
+  feeAddress: string,
 ): void {
   const receipt = receiptWithOutcome.receipt;
   let payment = new Payment(generateId(receipt.id, paymentReference));
   payment.to = to;
   payment.amount = amount;
-  payment.currency = "NEAR";
+  // Same denomination and payment currency
+  payment.currency = currency;
+  payment.tokenAddress = currency;
   payment.reference = paymentReference;
   payment.contractAddress = receiptWithOutcome.receipt.receiverId;
 
@@ -108,6 +137,7 @@ function savePayment(
   payment.gasUsed = BigInt.fromU64(receiptWithOutcome.outcome.gasBurnt);
   payment.gasPrice = receipt.gasPrice;
 
-  payment.feeAmount = BigDecimal.zero();
+  payment.feeAmount = feeAmount;
+  payment.feeAddress = feeAddress;
   payment.save();
 }
