@@ -116,7 +116,9 @@ function savePayment(
   let payment = new Payment(generateId(receipt.id, paymentReference));
   payment.to = to;
   payment.amount = amount;
+  // Same denomination and payment currency
   payment.currency = currency;
+  payment.tokenAddress = currency;
   payment.reference = paymentReference;
   payment.contractAddress = receiptWithOutcome.receipt.receiverId;
 

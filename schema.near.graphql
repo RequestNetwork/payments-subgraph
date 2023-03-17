@@ -2,7 +2,7 @@
 type Payment @entity {
   id: ID!
   contractAddress: String!        # vs Bytes!
-  tokenAddress: Bytes
+  tokenAddress: String            # vs Bytes
   to: String!                     # vs Bytes!
   from: String!                   # vs Bytes!
   reference: String!              # vs Bytes!
