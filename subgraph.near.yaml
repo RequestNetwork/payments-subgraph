@@ -30,3 +30,17 @@ dataSources:
       receiptHandlers:
         - handler: handleReceipt # the function name in the mapping file
       file: ./src/near/native.conversion.ts # link to the file with the Assemblyscript mappings
+  - kind: near
+    name: fungiblePayment
+    network: near-mainnet
+    source:
+      account: "pay.reqnetwork.near"
+      startBlock: 89421541
+    mapping:
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - FungiblePayment
+      receiptHandlers:
+        - handler: handleReceipt
+      file: ./src/near/fungible.ts
