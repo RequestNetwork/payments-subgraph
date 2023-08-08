@@ -11,7 +11,10 @@ export const builder = () => {};
 export const handler = () => {
   for (const network of networks) {
     console.log(`parsing network ${network}`);
-    const manifest = getManifest(network);
+    const manifest = getManifest(
+      network,
+      network === "gnosis" ? "xdai" : network,
+    );
     if (!manifest) {
       console.warn(`No contract found for ${network}`);
     } else {
