@@ -7,6 +7,8 @@
   "fuse",
   "goerli",
   "mainnet",
+  "mantle-testnet",
+  "mantle",
   "matic",
   "xdai",
   "optimism",
