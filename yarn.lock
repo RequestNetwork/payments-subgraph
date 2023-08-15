@@ -513,10 +513,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==
 
-"@requestnetwork/smart-contracts@0.29.1-next.1869":
-  version "0.29.1-next.1869"
-  resolved "https://registry.yarnpkg.com/@requestnetwork/smart-contracts/-/smart-contracts-0.29.1-next.1869.tgz#18c2adb7442474d5b3bd46c6da92345668e9ebd0"
-  integrity sha512-Uh3KQJuOLoqtU5obmK+/RioVXudsZWsYXpG5lr+NdTod3ZBBFFM9Lo1Gc1byl8bZI5bRXEELR+pDcm3PqTYhuQ==
+"@requestnetwork/smart-contracts@0.29.1-next.1917":
+  version "0.29.1-next.1917"
+  resolved "https://registry.yarnpkg.com/@requestnetwork/smart-contracts/-/smart-contracts-0.29.1-next.1917.tgz#96bcf3a4ed63e785166acb90427a3887d4fe0b9f"
+  integrity sha512-IyNPD1xCmH5y5sqsPhL8x4tBKjh1dmWo8XD3BFd4dUEkApAuySN+DVf3MQ1lw9iNoDMxI7YnGl6gZ9kmmy4xNw==
   dependencies:
     tslib "2.5.0"
 
