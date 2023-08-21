@@ -66,7 +66,10 @@ const ignoredEvents = [
   "TransferableReceivablePayment",
 ];
 
-export const getManifest = (network: string) => {
+export const getManifest = (
+  TheGraphChainName: string,
+  RequestNetworkChainName: string,
+) => {
   const dataSources: DataSource[] = [];
 
   Object.entries(paymentNetworks).forEach(([pn, artifact]) => {
@@ -77,7 +80,7 @@ export const getManifest = (network: string) => {
       graphEntities = ["Payment"];
     }
 
-    const infoArray = getArtifactInfo(artifact, network);
+    const infoArray = getArtifactInfo(artifact, RequestNetworkChainName);
     infoArray.forEach(({ version }) => {
       const abiName = version === "0.1.0" ? pn : `${pn}-${version}`;
       fs.writeFileSync(
@@ -103,7 +106,7 @@ export const getManifest = (network: string) => {
         abiName,
         name: abiName.replace(/[\-\.]/g, "_"),
         fileName: camelCase(pn),
-        network,
+        network: TheGraphChainName,
         address,
         creationBlockNumber,
         events,
