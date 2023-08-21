@@ -13,7 +13,7 @@ import {
   erc20TransferableReceivableArtifact,
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
-import camelCase from "lodash/camelCase";
+import { camelCase } from "lodash";
 
 const paymentNetworks = {
   ERC20Proxy: erc20ProxyArtifact,

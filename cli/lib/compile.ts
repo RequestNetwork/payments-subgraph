@@ -1,16 +1,20 @@
-import path from "path";
-
-// reduce thegraph logs
-const spinner = require("@graphprotocol/graph-cli/src/command-helpers/spinner");
-spinner.step = () => {};
+import Compiler from "@graphprotocol/graph-cli/dist/compiler";
+import { fromFilePath } from "@graphprotocol/graph-cli/dist/command-helpers/data-sources";
+import Protocol from "@graphprotocol/graph-cli/dist/protocols";
 
 const Hash = require("ipfs-only-hash");
-const Compiler = require("@graphprotocol/graph-cli/src/compiler");
-
 const fakeIpfsClient = () => {
   return {
-    add: async (arg: { content: any }[]) => {
-      return Promise.resolve([{ hash: Hash.of(arg[0].content) }]);
+    addAll: (arg: { content: any }[]) => {
+      return {
+        [Symbol.asyncIterator]() {
+          return this;
+        },
+        async next() {
+          const cid = await Hash.of(arg[0].content);
+          return { value: { cid } };
+        },
+      };
     },
     pin: {
       add: () => {},
@@ -19,14 +23,8 @@ const fakeIpfsClient = () => {
 };
 
 export const compile = async (subgraphManifest: string): Promise<string> => {
-  // in next version of @graphprotocol
-  const {
-    fromFilePath,
-  } = require("@graphprotocol/graph-cli/src/command-helpers/data-sources");
-  const { fromDataSources } = require("@graphprotocol/graph-cli/src/protocols");
-
   const dataSourcesAndTemplates = await fromFilePath(subgraphManifest);
-  const protocol = fromDataSources(dataSourcesAndTemplates);
+  const protocol = Protocol.fromDataSources(dataSourcesAndTemplates);
 
   const compiler = new Compiler({
     ipfs: fakeIpfsClient(),
@@ -34,8 +32,8 @@ export const compile = async (subgraphManifest: string): Promise<string> => {
     outputDir: "./build",
     outputFormat: "wasm",
     skipMigrations: true,
-    blockIpfsMethods: true,
+    blockIpfsMethods: ["."],
     protocol,
   });
-  return await compiler.compile();
+  return await compiler.compile({ validate: true });
 };
