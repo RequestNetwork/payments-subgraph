@@ -10,6 +10,15 @@ This repo contains the code and configuration for Request Payment subgraphs:
 - [Fuse](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fuse)
 - [Fantom](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fantom)
 - [Near](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near)
+- [Avalanche](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-avalanche)
+- [Optimism](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-optimism)
+- [Moonbeam](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-moonbeam)
+- [Arbitrum One](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-one)
+- [Mantle](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mantle)
+- [Goerli](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-goerli)
+- [Near Testnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near-testnet)
+- [Arbitrum Rinkeby](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-rinkeby)
+- [Mantle Testnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mantle-testnet)
 
 It indexes Request's proxy smart-contracts for easy querying of payment data.
 
