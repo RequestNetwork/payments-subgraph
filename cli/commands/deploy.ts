@@ -39,14 +39,36 @@ export const handler = ({
   const networkList = all ? networks : network || [];
   for (const net of networkList) {
     console.log(`Deploy on ${net}`);
+    if (net === "mantle-testnet") {
+      deploySubgraph(
+        `requestnetwork/request-payments-${net}`,
+        `./subgraph.${net}.yaml`,
+        {
+          ipfs: "https://ipfs.testnet.mantle.xyz/",
+          node: "https://graph.testnet.mantle.xyz/deploy/",
+        },
+      )
+    } else if (net === "mantle") {
+      deploySubgraph(
+        `requestnetwork/request-payments-${net}`,
+        `./subgraph.${net}.yaml`,
+        {
+          ipfs: "https://api.thegraph.com/ipfs/",
+          node: "https://deploy.graph.fusionx.finance/",
+        },
+      )
+    } else {
     deploySubgraph(
       `requestnetwork/request-payments-${net}`,
       `./subgraph.${net}.yaml`,
       {
         ipfs: "https://api.thegraph.com/ipfs/",
         node: "https://api.thegraph.com/deploy/",
+      },
+      {
         "access-token": token,
       },
     );
   }
+}
 };
