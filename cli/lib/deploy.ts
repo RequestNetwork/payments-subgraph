@@ -11,7 +11,7 @@ export const deploySubgraph = (
     "access-token": string;
   }
 ) => {
-  let argsString = Object.entries({...args, ...options})
+  const argsString = Object.entries({...args, ...options})
     .map(([name, value]) => `--${name} ${value}`)
     .join(" ");
 
