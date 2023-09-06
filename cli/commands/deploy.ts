@@ -44,6 +44,7 @@ export const handler = ({
         `requestnetwork/request-payments-${net}`,
         `./subgraph.${net}.yaml`,
         {
+          // Graph Node maintained by Mantle Foundation: https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints
           ipfs: "https://ipfs.testnet.mantle.xyz/",
           node: "https://graph.testnet.mantle.xyz/deploy/",
         },
@@ -53,6 +54,7 @@ export const handler = ({
         `requestnetwork/request-payments-${net}`,
         `./subgraph.${net}.yaml`,
         {
+          // Graph Node maintained by FusionX: https://fusionx.finance/
           ipfs: "https://api.thegraph.com/ipfs/",
           node: "https://deploy.graph.fusionx.finance/",
         },
