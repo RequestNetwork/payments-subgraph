@@ -2,6 +2,7 @@
 
 This repo contains the code and configuration for Request Payment subgraphs:
 
+Mainnets:
 - [Mainnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mainnet)
 - [Polygon (Matic)](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
 - [Celo](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-celo)
@@ -14,11 +15,13 @@ This repo contains the code and configuration for Request Payment subgraphs:
 - [Optimism](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-optimism)
 - [Moonbeam](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-moonbeam)
 - [Arbitrum One](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-one)
-- [Mantle](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mantle)
+- [Mantle](https://graph.fusionx.finance/subgraphs/name/request-payments-mantle/graphql)
+
+Testnets:
 - [Goerli](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-goerli)
 - [Near Testnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near-testnet)
 - [Arbitrum Rinkeby](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-rinkeby)
-- [Mantle Testnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mantle-testnet)
+- [Mantle Testnet](https://graph.testnet.mantle.xyz/subgraphs/name/request-payments-mantle-testnet/graphql)
 
 It indexes Request's proxy smart-contracts for easy querying of payment data.
 
