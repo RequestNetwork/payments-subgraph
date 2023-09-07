@@ -28,7 +28,7 @@ export const builder = (y: yargs.Argv) =>
       if (all && network)
         throw new Error("Cannot specify both -all and positional `network`");
       if (all || network) return true;
-      throw new Error("One of --all of positional `network` must be specified");
+        throw new Error("One of --all or positional `network` must be specified");
     });
 
 export const handler = ({
@@ -60,17 +60,17 @@ export const handler = ({
         },
       )
     } else {
-    deploySubgraph(
-      `requestnetwork/request-payments-${net}`,
-      `./subgraph.${net}.yaml`,
-      {
-        ipfs: "https://api.thegraph.com/ipfs/",
-        node: "https://api.thegraph.com/deploy/",
-      },
-      {
-        "access-token": token,
-      },
-    );
+      deploySubgraph(
+        `requestnetwork/request-payments-${net}`,
+        `./subgraph.${net}.yaml`,
+        {
+          ipfs: "https://api.thegraph.com/ipfs/",
+          node: "https://api.thegraph.com/deploy/",
+        },
+        {
+          "access-token": token,
+        },
+      );
+    }
   }
-}
 };
