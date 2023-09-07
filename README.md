@@ -3,11 +3,13 @@
 This repo contains the code and configuration for Request Payment subgraphs:
 
 Mainnets:
-- [Mainnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mainnet)
+- [Mainnet on the Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-mainnet)
+- [Mainnet on the Decentralized Network](https://thegraph.com/explorer/subgraphs/4cuRFnNSqAme2pVuBckSVQogQPXR8Wqw72AEC6TShLkc?view=Overview&chain=mainnet)
 - [Polygon (Matic)](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-matic)
 - [Celo](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-celo)
 - [BSC](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-bsc)
-- [Gnosis Chain (xDai)](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-xdai)
+- [Gnosis Chain (xDai) on the Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-xdai)
+- [Gnosis Chain (xDai) on the Decentralized Network](https://thegraph.com/explorer/subgraphs/KYY6Q6KTcqVpTXMgTyEQJEyYk7wex8BM6twbLzhCXjT?view=Overview&chain=mainnet)
 - [Fuse](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fuse)
 - [Fantom](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-fantom)
 - [Near](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near)
@@ -15,13 +17,13 @@ Mainnets:
 - [Optimism](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-optimism)
 - [Moonbeam](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-moonbeam)
 - [Arbitrum One](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-one)
-- [Mantle](https://graph.fusionx.finance/subgraphs/name/request-payments-mantle/graphql)
+- [Mantle](https://graph.fusionx.finance/subgraphs/name/request-payments-mantle)
 
 Testnets:
 - [Goerli](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-goerli)
 - [Near Testnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near-testnet)
 - [Arbitrum Rinkeby](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-rinkeby)
-- [Mantle Testnet](https://graph.testnet.mantle.xyz/subgraphs/name/request-payments-mantle-testnet/graphql)
+- [Mantle Testnet](https://graph.testnet.mantle.xyz/subgraphs/name/request-payments-mantle-testnet)
 
 It indexes Request's proxy smart-contracts for easy querying of payment data.
 
@@ -97,12 +99,21 @@ yarn deploy-local
 
 ### Networks
 
-The live deployment is automated for EVM chains on the hosted service.
-For test chains (goerli), it will be automatically deployed when pushed to `main`
+Some of the deployments are automated, others are manual
+#### Automated Deployment
+Deployment on EVM chains is semi-automated, when a Github release is published
 
-For production chains (all others), it is semi automatic, and requires a manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
+* mantle-testnet uses the [graph node hosted by Mantle](https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints).
+* mantle uses the [graph node hosted by FusionX](https://graph.fusionx.finance)
+* all other EVM chains use the hosted service.
 
-For non-EVM deployments, use:
+Test chains like Goerli and Mantle Testnet will be deployed immediately when a release is published.
+
+Mainnets (all others) require manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
+
+#### Manual Deployment
+
+For non-EVM deployments like NEAR, use:
 
 ```
 yarn graph deploy --product hosted-service --deploy-key <GRAPH_KEY> requestnetwork/request-payments-<network> ./subgraph.<network>.yaml
