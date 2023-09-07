@@ -8,7 +8,8 @@ export const deploySubgraph = (
     ipfs: string;
   },
   options?: {
-    "access-token": string;
+    "access-token"?: string;
+    "version-label"?: string;
   }
 ) => {
   const argsString = Object.entries({...args, ...options})
@@ -16,7 +17,7 @@ export const deploySubgraph = (
     .join(" ");
 
   return execSync(
-    `npx graph deploy ${subgraphName} ${argsString}  ${manifestPath}`,
+    `npx graph deploy ${subgraphName} ${argsString} ${manifestPath}`,
     {
       stdio: "inherit",
     },
