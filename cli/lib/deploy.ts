@@ -1,5 +1,4 @@
 import { execSync } from "child_process";
-import util from "util";
 
 export const deploySubgraph = (
   subgraphName: string,
@@ -7,10 +6,12 @@ export const deploySubgraph = (
   args: {
     node: string;
     ipfs: string;
-    "access-token": string;
   },
+  options?: {
+    "access-token": string;
+  }
 ) => {
-  const argsString = Object.entries(args)
+  const argsString = Object.entries({...args, ...options})
     .map(([name, value]) => `--${name} ${value}`)
     .join(" ");
 
