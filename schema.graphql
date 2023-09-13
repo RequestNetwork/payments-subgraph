@@ -1,25 +1,43 @@
 type Payment @entity {
+  "hash transaction of the payment"
   id: ID!
+  "payment proxy contract address"
   contractAddress: Bytes!
+  "contract of token used for payment"
   tokenAddress: Bytes
+  "address payment was made to"
   to: Bytes!
+  "address payment was made from"
   from: Bytes!
+  "is the reference data used to track the transfer"
   reference: Bytes!
+  "block in which payment took place"
   block: Int!
+  "time stamp of payment"
   timestamp: Int!
+  "transaction hash of payment"
   txHash: Bytes!
+  "gas used for payment"
   gasUsed: BigInt!
+  "gas fee at time of payment"
   gasPrice: BigInt!
+  "amount of payment"
   amount: BigDecimal!
 
   # fee values
+  "fee charged for payment"
   feeAmount: BigDecimal
+  "address where the fee is sent"
   feeAddress: Bytes
 
   # conversion values
+  "fiat currency payment is based on"
   currency: Bytes
+  "amount of payment in crypto"
   amountInCrypto: BigDecimal
+  "fee amoount in crypto"
   feeAmountInCrypto: BigDecimal
+  "maximum time span payment will reoccur"
   maxRateTimespan: Int
 }
 
@@ -31,19 +49,33 @@ enum EscrowState {
 }
 
 type Escrow @entity {
+  "hash transaction of the escrow"
   id: ID!
+  "escrow contract address"
   contractAddress: Bytes!
+  "payment proxy contract address"
   paymentProxyAddress: Bytes!
+  "is the reference data used to track the escrow"
   reference: Bytes!
+  "block escrow was created"
   creationBlock: Int!
+  "time stamp escrow was created"
   creationTimestamp: Int!
+  "state of the escrow"
   escrowState: EscrowState!
+  "contract of token used for payment"
   tokenAddress: Bytes!
+  "amount of escrow set up"
   amount: BigDecimal!
+  "fee charged for escrow"
   feeAmount: BigDecimal!
+  "address where fees are sent"
   feeAddress: Bytes!
+  "address escrow is set up from"
   from: Bytes!
+  "address escrow is paid to"
   to: Bytes
+  "refer to Escrow Event"
   events: [EscrowEvent!] @derivedFrom(field: "escrow")
 }
 
@@ -56,15 +88,26 @@ enum EventName {
 }
 
 type EscrowEvent @entity {
+  "hash transaction of the escrow"
   id: ID!
+  "escrow contract address"
   contractAddress: Bytes!
+  "is the reference data used to track the escrow event"
   reference: Bytes!
+  "the Escrow where this event occurred"
   escrow: Escrow!
+  "block in which event took place"
   block: Int!
+  "timestamp of event"
   timestamp: Int!
+  "transaction hash of escrow event"
   txHash: Bytes!
+  "name of the escrow event"
   eventName: EventName!
+  "address escrow is set up from"
   from: Bytes!
+  "gas used for event"
   gasUsed: BigInt!
+  "price of gas at time of event"
   gasPrice: BigInt!
 }
