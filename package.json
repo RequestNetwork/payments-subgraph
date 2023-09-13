@@ -10,6 +10,8 @@
     "codegen": "graph codegen ./subgraph.goerli.yaml; graph codegen ./subgraph.near.yaml -o ./generated/near/",
     "prepare": "yarn subgraph prepare && yarn codegen",
     "build": "graph build",
+    "create-mantle-testnet": "graph create --node https://graph.testnet.mantle.xyz/deploy/ requestnetwork/request-payments-mantle-testnet",
+    "create-mantle": "graph create --node https://deploy.graph.fusionx.finance requestnetwork/request-payments-mantle",
     "create-local": "graph create --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "remove-local": "graph remove --node http://localhost:8020/ --access-token \"\" requestnetwork/request-payments-$NETWORK",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 requestnetwork/request-payments-$NETWORK ./subgraph.$NETWORK.yaml",

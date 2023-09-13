@@ -113,6 +113,14 @@ Mainnets (all others) require manual approval in [github actions](https://github
 
 #### Manual Deployment
 
+The first time a subgraph is deployed to a non-hosted-service graph node, it needs to be created.
+
+For example:
+
+```bash
+yarn graph create --node https://deploy.graph.fusionx.finance requestnetwork/request-payments-mantle
+```
+
 For non-EVM deployments like NEAR, use:
 
 ```
