@@ -8,6 +8,7 @@ export const builder = (y: yargs.Argv) =>
   y
     .middleware(argv => {
       if (process.env.TOKEN) argv.token = process.env.TOKEN;
+      if (process.env.VERSION) argv.version = process.env.VERSION;
     }, true)
     .positional("network", {
       desc: "The network to deploy to",
@@ -24,6 +25,11 @@ export const builder = (y: yargs.Argv) =>
       type: "string",
       demandOption: true,
     })
+    .option("version", {
+      desc: "The subgraph version label, used by non-hosted service graph nodes",
+      type: "string",
+      demandOption: true,
+    })
     .check(({ all, network }) => {
       if (all && network)
         throw new Error("Cannot specify both -all and positional `network`");
@@ -35,6 +41,7 @@ export const handler = ({
   network,
   token,
   all,
+  version,
 }: Awaited<ReturnType<typeof builder>["argv"]>) => {
   const networkList = all ? networks : network || [];
   for (const net of networkList) {
@@ -48,6 +55,9 @@ export const handler = ({
           ipfs: "https://ipfs.testnet.mantle.xyz/",
           node: "https://graph.testnet.mantle.xyz/deploy/",
         },
+        {
+          "version-label": version,
+        },
       )
     } else if (net === "mantle") {
       deploySubgraph(
@@ -58,6 +68,9 @@ export const handler = ({
           ipfs: "https://api.thegraph.com/ipfs/",
           node: "https://deploy.graph.fusionx.finance/",
         },
+        {
+          "version-label": version,
+        }
       )
     } else {
       deploySubgraph(
