@@ -13,7 +13,7 @@ jobs:
       # Use Mantle Foundation graph node for Mantle Testnet
       # Use FuxionX graph node for Mantle
       # Use TheGraph Hosted Service for all other networks
-      url: ${{ matrix.chain == 'mantle-testnet' && 'https://graph.testnet.mantle.xyz/subgraphs/name/request-payments-mantle-testnet' || matrix.chain == 'mantle' && 'https://index.graph.fusionx.finance/subgraphs/name/request-payments-mantle' || format('https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-{0}', matrix.chain) }}
+      url: ${{ matrix.chain == 'mantle-testnet' && 'https://graph.testnet.mantle.xyz/subgraphs/name/requestnetwork/request-payments-mantle-testnet' || matrix.chain == 'mantle' && 'https://index.graph.fusionx.finance/subgraphs/name/requestnetwork/request-payments-mantle' || format('https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-{0}', matrix.chain) }}
     steps:
       - uses: actions/checkout@v3
       - name: Get yarn cache directory path
