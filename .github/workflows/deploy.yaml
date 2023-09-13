@@ -26,7 +26,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - run: yarn
+      - name: short-sha
+        description: Compute release version
+        runs:
+          using: composite
+          steps:
+            - id: short-sha
+              shell: sh
+              run: echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c 1-7`" >> $GITHUB_OUTPUT
+        outputs:
+          hash:
+            description: The short Git HEAD hash
+            value: ${{ steps.short-sha.outputs.SHORT_SHA }}
       - run: yarn subgraph deploy ${{ matrix.chain }}
         env:
           TOKEN: ${{ secrets.THEGRAPH_TOKEN }}
-          VERSION: ${{ github.sha }}
+          VERSION: ${{ steps.short-sha.outputs.hash }}
