@@ -12,8 +12,8 @@ export const handler = () => {
   for (const network of networks) {
     console.log(`parsing network ${network}`);
     const manifest = getManifest(
-      network,
-      network === "gnosis" ? "xdai" : network,
+      getTheGraphChainName(network),
+      getRequestNetworkChainName(network),
     );
     if (!manifest) {
       console.warn(`No contract found for ${network}`);
@@ -22,3 +22,23 @@ export const handler = () => {
     }
   }
 };
+
+const getTheGraphChainName = (chainName: string) => {
+  switch(chainName) {
+    case "mantle-testnet":
+      return "testnet";
+    case "mantle":
+      return "mainnet";
+    default:
+      return chainName;
+  }
+}
+
+const getRequestNetworkChainName = (chainName: string) => {
+  switch(chainName) {
+    case "gnosis":
+      return "xdai";
+    default:
+      return chainName;
+  }
+}
