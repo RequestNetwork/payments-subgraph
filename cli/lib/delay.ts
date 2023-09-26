@@ -50,7 +50,7 @@ const getLastBlockTheGraph = async (network: string) => {
 
 const getProviderUrl = async (network: string) => {
   const { data } = await client.get<{ name: string; rpcUrls: string[] }[]>(
-    "https://api.request.network/currency/chains",
+    "https://api.request.finance/currency/chains",
   );
 
   return (
