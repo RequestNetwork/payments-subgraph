@@ -41,27 +41,50 @@ const getLastBlockRpc = async (network: string) => {
 };
 
 const getLastBlockTheGraph = async (network: string) => {
-  const data = await request(
-    `https://api.thegraph.com/subgraphs/name/requestnetwork/request-payments-${network}`,
-    query,
-  );
+  let data;
+  if (network === "mantle-testnet") {
+    data = await request(
+      `https://graph.testnet.mantle.xyz/subgraphs/name/requestnetwork/request-payments-${network}`,
+      query,
+    );
+  }
+  else if (network === "mantle") {
+    data = await request(
+      `https://graph.fusionx.finance/subgraphs/name/requestnetwork/request-payments-${network}`,
+      query,
+    );
+  }
+  else {
+    data = await request(
+      `https://api.thegraph.com/subgraphs/name/requestnetwork/request-payments-${network}`,
+      query,
+    );
+  }
   return data._meta.block.number;
 };
 
 const getProviderUrl = async (network: string) => {
-  const { data } = await client.get<{ name: string; rpcUrls: string[] }[]>(
-    "https://api.request.finance/currency/chains",
-  );
+  if (network === "mantle-testnet") {
+    return 'https://rpc.testnet.mantle.xyz/';
+  }
+  else if (network === "mantle") {
+    return 'https://rpc.mantle.xyz';
+  }
+  else {
+    const { data } = await client.get<{ name: string; rpcUrls: string[] }[]>(
+      "https://api.request.finance/currency/chains",
+    );
 
-  return (
-    data
-      ?.find(x => x.name === network)
-      ?.rpcUrls?.[0]?.replace(
-        "{ALCHEMY_API_KEY}",
-        process.env.ALCHEMY_API_KEY || "",
-      )
-      .replace("{INFURA_API_KEY}", process.env.INFURA_API_KEY || "") || null
-  );
+    return (
+      data
+        ?.find(x => x.name === network)
+        ?.rpcUrls?.[0]?.replace(
+          "{ALCHEMY_API_KEY}",
+          process.env.ALCHEMY_API_KEY || "",
+        )
+        .replace("{INFURA_API_KEY}", process.env.INFURA_API_KEY || "") || null
+    );
+  }
 };
 
 export const getDelay = async (network: string) => {

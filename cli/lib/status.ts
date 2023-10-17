@@ -34,11 +34,28 @@ type QueryResponse = {
 };
 
 export const getStatus = async (network: string) => {
-  const response = await request<QueryResponse>(
-    "https://api.thegraph.com/index-node/graphql",
-    query,
-    { subgraph: `requestnetwork/request-payments-${network}` },
-  );
+  let response;
+  if (network === "mantle-testnet") {
+    response = await request<QueryResponse>(
+      "https://graph.testnet.mantle.xyz/graphql",
+      query,
+      { subgraph: `requestnetwork/request-payments-${network}` },
+    );
+  }
+  else if (network === "mantle") {
+    response = await request<QueryResponse>(
+      "https://graph.fusionx.finance/graphql",
+      query,
+      { subgraph: `requestnetwork/request-payments-${network}` },
+    );
+  }
+  else {
+    response = await request<QueryResponse>(
+      "https://api.thegraph.com/index-node/graphql",
+      query,
+      { subgraph: `requestnetwork/request-payments-${network}` },
+    );
+  }
 
   const getValues = (
     body: BodyResponse,

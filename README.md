@@ -174,15 +174,22 @@ yarn subgraph compare NETWORK_NAME_1 NETWORK_NAME_2
 
 ### Delays
 
+Some networks will require you to set env vars:
+
+```
+export ALCHEMY_API_KEY=...
+export INFURA_API_KEY=...
+```
+
 Run of these commands to check for indexing delays.
 
 ```
 # all
 yarn subgraph monitor
 # one network
-yarn subgraph monitor NETWORK_NAME
+yarn subgraph monitor --network NETWORK_NAME
 # several networks
-yarn subgraph monitor NETWORK_NAME_1 NETWORK_NAME_2
+yarn subgraph monitor --network NETWORK_NAME_1 NETWORK_NAME_2
 ```
 
 ### Hosting service API
