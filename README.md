@@ -181,7 +181,7 @@ export ALCHEMY_API_KEY=...
 export INFURA_API_KEY=...
 ```
 
-Run of these commands to check for indexing delays.
+Run one of these commands to check for indexing delays.
 
 ```
 # all
@@ -214,3 +214,7 @@ See next issue for resolution.
 This is related to the fact TheGraph uses a very old version of assemblyscript (see [This PR](https://github.com/graphprotocol/graph-ts/pull/185/files) for migration to the latest version).
 
 In the meantime, `yarn cache clean` should resolve it.
+
+### Failed to fetch status for mainnet: could not detect network (event="noNetwork", code=NETWORK_ERROR, version=providers/5.7.2)
+
+Need to set env var ALCHEMY_API_KEY or INFURA_API_KEY.
