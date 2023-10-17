@@ -10,20 +10,24 @@ export const builder = () => {};
 
 export const handler = () => {
   for (const network of networks) {
-    console.log(`parsing network ${network}`);
-    const manifest = getManifest(
-      getTheGraphChainName(network),
-      getRequestNetworkChainName(network),
-    );
-    if (!manifest) {
-      console.warn(`No contract found for ${network}`);
-    } else {
-      writeFile(`subgraph.${network}.yaml`, manifest);
-    }
+    writeManifest(network);
   }
 };
 
-const getTheGraphChainName = (chainName: string) => {
+export const writeManifest = (network: string) => {
+  console.log(`parsing network ${network}`);
+  const manifest = getManifest(
+    getTheGraphChainName(network),
+    getRequestNetworkChainName(network),
+  );
+  if (!manifest) {
+    console.warn(`No contract found for ${network}`);
+  } else {
+    writeFile(`subgraph.${network}.yaml`, manifest);
+  }
+}
+
+export const getTheGraphChainName = (chainName: string) => {
   switch(chainName) {
     case "mantle-testnet":
       return "testnet";
@@ -34,7 +38,7 @@ const getTheGraphChainName = (chainName: string) => {
   }
 }
 
-const getRequestNetworkChainName = (chainName: string) => {
+export const getRequestNetworkChainName = (chainName: string) => {
   switch(chainName) {
     case "gnosis":
       return "xdai";
