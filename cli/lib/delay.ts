@@ -43,9 +43,8 @@ const getLastBlockRpc = async (network: string) => {
 
 const getLastBlockTheGraph = async (network: string) => {
   const data = await request(
-    `${graphNodeInfoByNetwork[network].graph || defaultGraphNodeInfo.graph}/graphql`,
+    `${graphNodeInfoByNetwork[network]?.graph || defaultGraphNodeInfo.graph}/subgraphs/name/requestnetwork/request-payments-${network}`,
     query,
-    { subgraph: `requestnetwork/request-payments-${network}` },
   );
   return data._meta.block.number;
 };
