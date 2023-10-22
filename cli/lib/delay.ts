@@ -1,6 +1,7 @@
 import { ethers } from "ethers";
 import { request, gql } from "graphql-request";
 import { setup } from "axios-cache-adapter";
+import { defaultGraphNodeInfo, graphNodeInfoByNetwork } from "../graph-nodes";
 
 const client = setup({
   cache: {
@@ -41,25 +42,11 @@ const getLastBlockRpc = async (network: string) => {
 };
 
 const getLastBlockTheGraph = async (network: string) => {
-  let data;
-  if (network === "mantle-testnet") {
-    data = await request(
-      `https://graph.testnet.mantle.xyz/subgraphs/name/requestnetwork/request-payments-${network}`,
-      query,
-    );
-  }
-  else if (network === "mantle") {
-    data = await request(
-      `https://graph.fusionx.finance/subgraphs/name/requestnetwork/request-payments-${network}`,
-      query,
-    );
-  }
-  else {
-    data = await request(
-      `https://api.thegraph.com/subgraphs/name/requestnetwork/request-payments-${network}`,
-      query,
-    );
-  }
+  const data = await request(
+    `${graphNodeInfoByNetwork[network].graph || defaultGraphNodeInfo.graph}/graphql`,
+    query,
+    { subgraph: `requestnetwork/request-payments-${network}` },
+  );
   return data._meta.block.number;
 };
 

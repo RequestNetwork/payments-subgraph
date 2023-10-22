@@ -1,30 +1,25 @@
 type GraphNodeInfo = {
-    deploy: string
-    query: string
-    index: string
+    graph: string
     ipfs: string
 }
 
 type GraphNodeInfoByNetwork = Record<string, GraphNodeInfo>
 
-export const graphNodeInfo: GraphNodeInfoByNetwork = {
+export const graphNodeInfoByNetwork: GraphNodeInfoByNetwork = {
+    // Graph Node maintained by Mantle Foundation: https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints
     "mantle-testnet": {
-        deploy: "",
-        query: "",
-        index: "",
-        ipfs: "",
+        graph: "https://graph.testnet.mantle.xyz",
+        ipfs: "https://ipfs.testnet.mantle.xyz",
     },
+    // Graph Node maintained by FusionX: https://fusionx.finance/
     "mantle": {
-        deploy: "",
-        query: "",
-        index: "",
-        ipfs: "",
+        graph: "https://graph.fusionx.finance",
+        ipfs: "https://api.thegraph.com/ipfs",
     }
 }
 
+// TheGraph Hosted Service
 export const defaultGraphNodeInfo: GraphNodeInfo = {
-    ipfs: "",
-    deploy: "",
-    query: "",
-    index: "",
+    graph: "https://api.thegraph.com",
+    ipfs: "https://api.thegraph.com/ipfs",
 }

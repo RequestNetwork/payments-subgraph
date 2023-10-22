@@ -1,4 +1,5 @@
 import { request, gql } from "graphql-request";
+import { defaultGraphNodeInfo, graphNodeInfoByNetwork } from "../graph-nodes";
 const query = gql`
   fragment Body on SubgraphIndexingStatus {
     subgraph
@@ -34,28 +35,11 @@ type QueryResponse = {
 };
 
 export const getStatus = async (network: string) => {
-  let response;
-  if (network === "mantle-testnet") {
-    response = await request<QueryResponse>(
-      "https://graph.testnet.mantle.xyz/graphql",
-      query,
-      { subgraph: `requestnetwork/request-payments-${network}` },
-    );
-  }
-  else if (network === "mantle") {
-    response = await request<QueryResponse>(
-      "https://graph.fusionx.finance/graphql",
-      query,
-      { subgraph: `requestnetwork/request-payments-${network}` },
-    );
-  }
-  else {
-    response = await request<QueryResponse>(
-      "https://api.thegraph.com/index-node/graphql",
-      query,
-      { subgraph: `requestnetwork/request-payments-${network}` },
-    );
-  }
+  const response = await request<QueryResponse>(
+    `${graphNodeInfoByNetwork[network].graph || defaultGraphNodeInfo.graph}/graphql`,
+    query,
+    { subgraph: `requestnetwork/request-payments-${network}` },
+  );
 
   const getValues = (
     body: BodyResponse,
