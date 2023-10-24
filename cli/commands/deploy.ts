@@ -1,6 +1,7 @@
 import yargs from "yargs";
 import { deploySubgraph } from "../lib/deploy";
 import networks from "../networks.json";
+import { defaultGraphNodeInfo, graphNodeInfoByNetwork } from "../graph-nodes";
 
 export const command = "deploy [network..]";
 export const desc = "Deploys one subgraph";
@@ -46,44 +47,17 @@ export const handler = ({
   const networkList = all ? networks : network || [];
   for (const net of networkList) {
     console.log(`Deploy on ${net}`);
-    if (net === "mantle-testnet") {
-      deploySubgraph(
-        `requestnetwork/request-payments-${net}`,
-        `./subgraph.${net}.yaml`,
-        {
-          // Graph Node maintained by Mantle Foundation: https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints
-          ipfs: "https://ipfs.testnet.mantle.xyz/",
-          node: "https://graph.testnet.mantle.xyz/deploy/",
-        },
-        {
-          "version-label": version,
-        },
-      )
-    } else if (net === "mantle") {
-      deploySubgraph(
-        `requestnetwork/request-payments-${net}`,
-        `./subgraph.${net}.yaml`,
-        {
-          // Graph Node maintained by FusionX: https://fusionx.finance/
-          ipfs: "https://api.thegraph.com/ipfs/",
-          node: "https://deploy.graph.fusionx.finance/",
-        },
-        {
-          "version-label": version,
-        }
-      )
-    } else {
-      deploySubgraph(
-        `requestnetwork/request-payments-${net}`,
-        `./subgraph.${net}.yaml`,
-        {
-          ipfs: "https://api.thegraph.com/ipfs/",
-          node: "https://api.thegraph.com/deploy/",
-        },
-        {
-          "access-token": token,
-        },
-      );
-    }
+    deploySubgraph(
+      `requestnetwork/request-payments-${net}`,
+      `./subgraph.${net}.yaml`,
+      {
+        ipfs: graphNodeInfoByNetwork[net].ipfs || defaultGraphNodeInfo.ipfs,
+        node: `${graphNodeInfoByNetwork[net].deploy ||
+          defaultGraphNodeInfo.deploy}`,
+      },
+      {
+        "access-token": token,
+      },
+    );
   }
 };

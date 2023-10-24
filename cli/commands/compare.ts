@@ -5,6 +5,7 @@ import yargs, { array } from "yargs";
 import networks from "../networks.json";
 import { compile } from "../lib/compile";
 import { getStatus } from "../lib/status";
+import { writeManifest } from "./prepare";
 
 export const command = "compare [network..]";
 export const desc = "Compares local and deployed version of a subgraph";
@@ -30,6 +31,7 @@ export const handler = async ({
   if (build) {
     const hashes: Record<string, string> = {};
     for (const network of networkList) {
+      writeManifest(network);
       const manifest = path.join(process.cwd(), `subgraph.${network}.yaml`);
       const hash = await compile(manifest);
       hashes[network] = hash;

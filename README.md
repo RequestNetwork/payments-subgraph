@@ -174,15 +174,22 @@ yarn subgraph compare NETWORK_NAME_1 NETWORK_NAME_2
 
 ### Delays
 
-Run of these commands to check for indexing delays.
+Some networks will require you to set env vars:
+
+```
+export ALCHEMY_API_KEY=...
+export INFURA_API_KEY=...
+```
+
+Run one of these commands to check for indexing delays.
 
 ```
 # all
 yarn subgraph monitor
 # one network
-yarn subgraph monitor NETWORK_NAME
+yarn subgraph monitor --network NETWORK_NAME
 # several networks
-yarn subgraph monitor NETWORK_NAME_1 NETWORK_NAME_2
+yarn subgraph monitor --network NETWORK_NAME_1 NETWORK_NAME_2
 ```
 
 ### Hosting service API
@@ -207,3 +214,7 @@ See next issue for resolution.
 This is related to the fact TheGraph uses a very old version of assemblyscript (see [This PR](https://github.com/graphprotocol/graph-ts/pull/185/files) for migration to the latest version).
 
 In the meantime, `yarn cache clean` should resolve it.
+
+### Failed to fetch status for mainnet: could not detect network (event="noNetwork", code=NETWORK_ERROR, version=providers/5.7.2)
+
+Need to set env var ALCHEMY_API_KEY or INFURA_API_KEY.

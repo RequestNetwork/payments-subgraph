@@ -1,4 +1,5 @@
 import { request, gql } from "graphql-request";
+import { defaultGraphNodeInfo, graphNodeInfoByNetwork } from "../graph-nodes";
 const query = gql`
   fragment Body on SubgraphIndexingStatus {
     subgraph
@@ -35,7 +36,7 @@ type QueryResponse = {
 
 export const getStatus = async (network: string) => {
   const response = await request<QueryResponse>(
-    "https://api.thegraph.com/index-node/graphql",
+    `${graphNodeInfoByNetwork[network]?.index || defaultGraphNodeInfo.index}`,
     query,
     { subgraph: `requestnetwork/request-payments-${network}` },
   );
