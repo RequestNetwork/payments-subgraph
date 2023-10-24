@@ -51,8 +51,8 @@ export const handler = ({
       `requestnetwork/request-payments-${net}`,
       `./subgraph.${net}.yaml`,
       {
-        ipfs: graphNodeInfoByNetwork[net].ipfs || defaultGraphNodeInfo.ipfs,
-        node: `${graphNodeInfoByNetwork[net].deploy ||
+        ipfs: graphNodeInfoByNetwork[net]?.ipfs || defaultGraphNodeInfo.ipfs,
+        node: `${graphNodeInfoByNetwork[net]?.deploy ||
           defaultGraphNodeInfo.deploy}`,
       },
       {
