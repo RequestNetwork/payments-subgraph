@@ -36,7 +36,7 @@ type QueryResponse = {
 
 export const getStatus = async (network: string) => {
   const response = await request<QueryResponse>(
-    `${graphNodeInfoByNetwork[network]?.graph || defaultGraphNodeInfo.graph}/graphql`,
+    `${graphNodeInfoByNetwork[network]?.index || defaultGraphNodeInfo.index}`,
     query,
     { subgraph: `requestnetwork/request-payments-${network}` },
   );

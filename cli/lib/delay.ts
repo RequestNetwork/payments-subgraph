@@ -43,7 +43,8 @@ const getLastBlockRpc = async (network: string) => {
 
 const getLastBlockTheGraph = async (network: string) => {
   const data = await request(
-    `${graphNodeInfoByNetwork[network]?.graph || defaultGraphNodeInfo.graph}/subgraphs/name/requestnetwork/request-payments-${network}`,
+    `${graphNodeInfoByNetwork[network]?.queryBase ||
+      defaultGraphNodeInfo.queryBase}/subgraphs/name/requestnetwork/request-payments-${network}`,
     query,
   );
   return data._meta.block.number;
@@ -51,12 +52,10 @@ const getLastBlockTheGraph = async (network: string) => {
 
 const getProviderUrl = async (network: string) => {
   if (network === "mantle-testnet") {
-    return 'https://rpc.testnet.mantle.xyz/';
-  }
-  else if (network === "mantle") {
-    return 'https://rpc.mantle.xyz';
-  }
-  else {
+    return "https://rpc.testnet.mantle.xyz";
+  } else if (network === "mantle") {
+    return "https://rpc.mantle.xyz";
+  } else {
     const { data } = await client.get<{ name: string; rpcUrls: string[] }[]>(
       "https://api.request.finance/currency/chains",
     );

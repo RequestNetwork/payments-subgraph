@@ -52,7 +52,8 @@ export const handler = ({
       `./subgraph.${net}.yaml`,
       {
         ipfs: graphNodeInfoByNetwork[net].ipfs || defaultGraphNodeInfo.ipfs,
-        node: `${graphNodeInfoByNetwork[net].graph || defaultGraphNodeInfo.graph}/deploy/`,
+        node: `${graphNodeInfoByNetwork[net].deploy ||
+          defaultGraphNodeInfo.deploy}`,
       },
       {
         "access-token": token,
