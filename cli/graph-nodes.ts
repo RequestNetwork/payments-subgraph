@@ -8,15 +8,20 @@ type GraphNodeInfo = {
 type GraphNodeInfoByNetwork = Record<string, GraphNodeInfo>;
 
 export const graphNodeInfoByNetwork: GraphNodeInfoByNetwork = {
-  /* Graph Node maintained by Mantle Foundation:
-    https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints */
+  /**
+   * Graph Node maintained by Mantle Foundation:
+   * https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints
+   */
   "mantle-testnet": {
     queryBase: "https://graph.testnet.mantle.xyz",
     deploy: "https://graph.testnet.mantle.xyz/deploy",
     index: "https://graph.testnet.mantle.xyz/graphql",
     ipfs: "https://ipfs.testnet.mantle.xyz",
   },
-  // Graph Node maintained by FusionX: https://fusionx.finance/
+  /**
+   * Graph Node maintained by FusionX
+   * https://fusionx.finance/
+   */
   mantle: {
     queryBase: "https://graph.fusionx.finance",
     // FusionX Graph Node implements deploy endpoint as a subdomain
@@ -24,8 +29,10 @@ export const graphNodeInfoByNetwork: GraphNodeInfoByNetwork = {
     index: "https://graph.fusionx.finance/graphql",
     ipfs: "https://api.thegraph.com/ipfs",
   },
-  /* Graph Node maintained by CORE DAO:
-    https://docs.coredao.org/developer/develop-on-core/core-subgraph */
+  /**
+   * Graph Node maintained by CORE DAO:
+   * https://docs.coredao.org/developer/develop-on-core/core-subgraph
+   */
   core: {
     queryBase: "https://thegraph.coredao.org",
     // FusionX Graph Node implements deploy endpoint as a subdomain

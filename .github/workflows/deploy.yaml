@@ -10,31 +10,32 @@ jobs:
     strategy:
       matrix:
         chain:
-          [
-            "arbitrum-one",
-            "avalanche",
-            "bsc",
-            "celo",
-            "core",
-            "fantom",
-            "fuse",
-            "goerli",
-            "mainnet",
-            "mantle-testnet",
-            "mantle",
-            "matic",
-            "xdai",
-            "optimism",
-            "moonbeam",
-            "tombchain",
-          ]
+          - "arbitrum-one"
+          - "avalanche"
+          - "bsc"
+          - "celo"
+          - "core"
+          - "fantom"
+          - "fuse"
+          - "goerli"
+          - "mainnet"
+          - "mantle-testnet"
+          - "mantle"
+          - "matic"
+          - "xdai"
+          - "optimism"
+          - "moonbeam"
+          - "tombchain"
     environment:
       name: ${{ matrix.chain }}
       # Use Mantle Foundation graph node for Mantle Testnet
       # Use FuxionX graph node for Mantle
       # Use Core DAO Foundation graph node for Core
       # Use TheGraph Hosted Service for all other networks
-      url: ${{ matrix.chain == 'mantle-testnet' && 'https://graph.testnet.mantle.xyz/subgraphs/name/requestnetwork/request-payments-mantle-testnet' || matrix.chain == 'mantle' && 'https://graph.fusionx.finance/subgraphs/name/requestnetwork/request-payments-mantle' || matrix.chain === 'core' && 'https://thegraph.coredao.org/subgraphs/name/requestnetwork/request-payments-core' || format('https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-{0}', matrix.chain) }}
+      url: ${{ matrix.chain == 'mantle-testnet' && 'https://graph.testnet.mantle.xyz/subgraphs/name/requestnetwork/request-payments-mantle-testnet'
+               || matrix.chain == 'mantle' && 'https://graph.fusionx.finance/subgraphs/name/requestnetwork/request-payments-mantle'
+               || matrix.chain === 'core' && 'https://thegraph.coredao.org/subgraphs/name/requestnetwork/request-payments-core'
+               || format('https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-{0}', matrix.chain) }}
     steps:
       - uses: actions/checkout@v3
       - name: Get yarn cache directory path
@@ -51,5 +52,8 @@ jobs:
         id: short-sha
       - run: yarn subgraph deploy ${{ matrix.chain }}
         env:
-          TOKEN: ${{ matrix.chain == 'core' && secrets.THEGRAPH_CORE_TOKEN || secrets.THEGRAPH_TOKEN }}
+          TOKEN: ${{ matrix.chain == 'mantle-testnet' && "" 
+                     || matrix.chain == 'mantle' && ""
+                     || matrix.chain == 'core' && secrets.THEGRAPH_CORE_TOKEN
+                     || secrets.THEGRAPH_TOKEN }}
           VERSION: ${{ steps.short-sha.outputs.hash }}
