@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  deploy-hosted-service:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -19,8 +19,6 @@ jobs:
           - "fuse"
           - "goerli"
           - "mainnet"
-          - "mantle-testnet"
-          - "mantle"
           - "matic"
           - "xdai"
           - "optimism"
@@ -28,32 +26,38 @@ jobs:
           - "tombchain"
     environment:
       name: ${{ matrix.chain }}
+      # Use TheGraph Hosted Service for all networks
+      url: ${{ format('https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-{0}', matrix.chain) }}
+    steps:
+      - uses: ./.github/actions/deploy
+        with:
+          - chain: ${{ matrix.chain }}
+          - token: ${{ secrets.THEGRAPH_TOKEN }}
+  deploy-core:
+    runs-on: ubuntu-latest
+    environment:
+      name: core
+      # Use Core DAO Foundation graph node for Core
+      url: "https://thegraph.coredao.org/subgraphs/name/requestnetwork/request-payments-core"
+    steps:
+      - uses: ./.github/actions/deploy
+        with:
+          - chain: ${{ matrix.chain }}
+          - token: ${{ secrets.THEGRAPH_CORE_TOKEN }}
+  deploy-mantle:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chain:
+          - "mantle-testnet"
+          - "mantle"
+    environment:
+      name: ${{ matrix.chain }}
       # Use Mantle Foundation graph node for Mantle Testnet
       # Use FuxionX graph node for Mantle
-      # Use Core DAO Foundation graph node for Core
-      # Use TheGraph Hosted Service for all other networks
-      url: ${{ matrix.chain == 'mantle-testnet' && 'https://graph.testnet.mantle.xyz/subgraphs/name/requestnetwork/request-payments-mantle-testnet'
-               || matrix.chain == 'mantle' && 'https://graph.fusionx.finance/subgraphs/name/requestnetwork/request-payments-mantle'
-               || matrix.chain === 'core' && 'https://thegraph.coredao.org/subgraphs/name/requestnetwork/request-payments-core'
-               || format('https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-{0}', matrix.chain) }}
+      url: ${{ matrix.chain == 'mantle-testnet' && 'https://graph.testnet.mantle.xyz/subgraphs/name/requestnetwork/request-payments-mantle-testnet' || matrix.chain == 'mantle' && 'https://graph.fusionx.finance/subgraphs/name/requestnetwork/request-payments-mantle' }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
-      - uses: actions/cache@v3
+      - uses: ./.github/actions/deploy
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - run: yarn
-      - uses: ./.github/actions/short-sha
-        id: short-sha
-      - run: yarn subgraph deploy ${{ matrix.chain }}
-        env:
-          TOKEN: ${{ matrix.chain == 'mantle-testnet' && "" 
-                     || matrix.chain == 'mantle' && ""
-                     || matrix.chain == 'core' && secrets.THEGRAPH_CORE_TOKEN
-                     || secrets.THEGRAPH_TOKEN }}
-          VERSION: ${{ steps.short-sha.outputs.hash }}
+          - chain: ${{ matrix.chain }}
+          - token: ""

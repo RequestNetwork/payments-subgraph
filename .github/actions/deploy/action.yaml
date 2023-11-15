@@ -1,0 +1,30 @@
+name: deploy-base
+description: Subgraph base deployment actions
+inputs:
+  chain:
+    description: The chain to deploy the subgraph for
+    required: true
+  token:
+    description: Authentication token
+    required: false
+    default: ""
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
+    - uses: actions/cache@v3
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+    - run: yarn
+    - uses: ./.github/actions/short-sha
+      id: short-sha
+    - run: yarn subgraph deploy ${{ input.chain }}
+      env:
+        TOKEN: ${{ input.token }}
+        VERSION: ${{ steps.short-sha.outputs.hash }}
