@@ -45,6 +45,11 @@ export const handler = ({
   version,
 }: Awaited<ReturnType<typeof builder>["argv"]>) => {
   const networkList = all ? networks : network || [];
+  const options = token
+    ? {
+        "access-token": token,
+      }
+    : undefined;
   for (const net of networkList) {
     console.log(`Deploy on ${net}`);
     deploySubgraph(
@@ -55,9 +60,7 @@ export const handler = ({
         node: `${graphNodeInfoByNetwork[net]?.deploy ||
           defaultGraphNodeInfo.deploy}`,
       },
-      {
-        "access-token": token,
-      },
+      options,
     );
   }
 };
