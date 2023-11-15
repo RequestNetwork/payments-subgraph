@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: ./.github/actions/deploy
         with:
-          - chain: ${{ matrix.chain }}
+          - chain: "core"
           - token: ${{ secrets.THEGRAPH_CORE_TOKEN }}
   deploy-mantle:
     runs-on: ubuntu-latest
