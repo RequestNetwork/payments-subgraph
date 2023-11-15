@@ -13,6 +13,7 @@ runs:
   steps:
     - uses: actions/checkout@v3
     - name: Get yarn cache directory path
+      shell: sh
       id: yarn-cache-dir-path
       run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
     - uses: actions/cache@v3
@@ -21,10 +22,14 @@ runs:
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
-    - run: yarn
+    - name: install packages
+      shell: sh
+      run: yarn
     - uses: ./.github/actions/short-sha
       id: short-sha
-    - run: yarn subgraph deploy ${{ input.chain }}
+    - name: Deploy subgraph
+      shell: sh
+      run: yarn subgraph deploy ${{ inputs.chain }}
       env:
-        TOKEN: ${{ input.token }}
+        TOKEN: ${{ inputs.token }}
         VERSION: ${{ steps.short-sha.outputs.hash }}
