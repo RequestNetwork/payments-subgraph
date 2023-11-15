@@ -29,6 +29,7 @@ jobs:
       # Use TheGraph Hosted Service for all networks
       url: ${{ format('https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-{0}', matrix.chain) }}
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/deploy
         with:
           chain: ${{ matrix.chain }}
@@ -40,6 +41,7 @@ jobs:
       # Use Core DAO Foundation graph node for Core
       url: "https://thegraph.coredao.org/subgraphs/name/requestnetwork/request-payments-core"
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/deploy
         with:
           chain: "core"
@@ -57,6 +59,7 @@ jobs:
       # Use FuxionX graph node for Mantle
       url: ${{ matrix.chain == 'mantle-testnet' && 'https://graph.testnet.mantle.xyz/subgraphs/name/requestnetwork/request-payments-mantle-testnet' || matrix.chain == 'mantle' && 'https://graph.fusionx.finance/subgraphs/name/requestnetwork/request-payments-mantle' }}
     steps:
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/deploy
         with:
           chain: ${{ matrix.chain }}
