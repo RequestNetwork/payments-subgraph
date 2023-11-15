@@ -14,5 +14,6 @@
   "gnosis",
   "optimism",
   "moonbeam",
-  "tombchain"
+  "tombchain",
+  "core"
 ]
