@@ -24,10 +24,10 @@ export const builder = (y: yargs.Argv) =>
     .option("token", {
       desc: "TheGraph token",
       type: "string",
-      demandOption: true,
     })
     .option("version", {
-      desc: "The subgraph version label, used by non-hosted service graph nodes",
+      desc:
+        "The subgraph version label, used by non-hosted service graph nodes",
       type: "string",
       demandOption: true,
     })
@@ -35,7 +35,7 @@ export const builder = (y: yargs.Argv) =>
       if (all && network)
         throw new Error("Cannot specify both -all and positional `network`");
       if (all || network) return true;
-        throw new Error("One of --all or positional `network` must be specified");
+      throw new Error("One of --all or positional `network` must be specified");
     });
 
 export const handler = ({
@@ -45,6 +45,11 @@ export const handler = ({
   version,
 }: Awaited<ReturnType<typeof builder>["argv"]>) => {
   const networkList = all ? networks : network || [];
+  const options = token
+    ? {
+        "access-token": token,
+      }
+    : undefined;
   for (const net of networkList) {
     console.log(`Deploy on ${net}`);
     deploySubgraph(
@@ -55,9 +60,7 @@ export const handler = ({
         node: `${graphNodeInfoByNetwork[net]?.deploy ||
           defaultGraphNodeInfo.deploy}`,
       },
-      {
-        "access-token": token,
-      },
+      options,
     );
   }
 };
