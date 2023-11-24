@@ -49,7 +49,6 @@ export const graphNodeInfoByNetwork: GraphNodeInfoByNetwork = {
   }
 };
 
-// Check different queryBase for Subgraph studio graphs and 
 // TheGraph Hosted Service
 export const defaultGraphNodeInfo: GraphNodeInfo = {
   queryBase: "https://api.thegraph.com",
