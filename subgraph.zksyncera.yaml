@@ -4,7 +4,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ERC20FeeProxy_0_2_0
-    network: zksyncera
+    network: zksync-era
     source:
       address: "0x6e28Cc56C2E64c9250f39Cb134686C87dB196532"
       abi: ERC20FeeProxy_0_2_0
@@ -25,7 +25,7 @@ dataSources:
       file: ./src/erc20FeeProxy.ts
   - kind: ethereum/contract
     name: EthFeeProxy_0_2_0
-    network: zksyncera
+    network: zksync-era
     source:
       address: "0xE9A708db0D30409e39810C44cA240fd15cdA9b1a"
       abi: EthFeeProxy_0_2_0

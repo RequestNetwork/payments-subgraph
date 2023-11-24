@@ -40,8 +40,16 @@ export const graphNodeInfoByNetwork: GraphNodeInfoByNetwork = {
     index: "https://thegraph.coredao.org/graphql",
     ipfs: "https://thegraph.coredao.org/ipfs/",
   },
+  // Zksync era deployment was done via subgraph studio
+  zksyncera: {
+    queryBase: "https://api.studio.thegraph.com/query/35843/request-payment-zksyncera/version/latest",
+    deploy: "",
+    index: "",
+    ipfs: ""
+  }
 };
 
+// Check different queryBase for Subgraph studio graphs and 
 // TheGraph Hosted Service
 export const defaultGraphNodeInfo: GraphNodeInfo = {
   queryBase: "https://api.thegraph.com",
