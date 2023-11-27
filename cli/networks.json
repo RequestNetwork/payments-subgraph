@@ -15,5 +15,6 @@
   "optimism",
   "moonbeam",
   "tombchain",
-  "core"
+  "core",
+  "zksync-era"
 ]

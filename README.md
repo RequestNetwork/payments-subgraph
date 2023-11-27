@@ -137,6 +137,19 @@ For decentralized network, use:
 yarn graph deploy --studio request-payments-<network> ./subgraph.<network>.yaml --version-label v1.<bumped-version>
 ```
 
+#### Manual Deployment of zkSync Era
+
+The network zkSync Era is only supported by The Graph's Subgraph Studio so the deployment is different.
+
+Step 1: Authenticate the graph-cli with subgraph studio. Get the studio token (here)[https://thegraph.com/studio/subgraph/request-payment-zksyncera/]
+```
+graph auth --studio <studio token>
+```
+Step 2: Deploy to subgraph studio
+```
+graph deploy --studio request-payment-zksyncera subgraph.zksyncera.yaml
+```
+
 ### Check the deployed version
 
 You can compare the code to the deployed version using one of these commands
