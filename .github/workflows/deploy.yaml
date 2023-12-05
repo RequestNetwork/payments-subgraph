@@ -24,6 +24,7 @@ jobs:
           - "optimism"
           - "moonbeam"
           - "tombchain"
+          - "sepolia"
     environment:
       name: ${{ matrix.chain }}
       # Use TheGraph Hosted Service for all networks
