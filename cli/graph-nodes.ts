@@ -45,7 +45,7 @@ export const graphNodeInfoByNetwork: GraphNodeInfoByNetwork = {
 // TheGraph Hosted Service
 export const defaultGraphNodeInfo: GraphNodeInfo = {
   queryBase: "https://api.thegraph.com",
-  deploy: "https://api.thegraph.com/deploy",
+  deploy: "https://api.thegraph.com/deploy/",
   /* TheGraph Hosted Service has a different endpoint for checking subgraph health.
     https://thegraph.com/docs/en/deploying/deploying-a-subgraph-to-hosted/#checking-subgraph-health */
   index: "https://api.thegraph.com/index-node/graphql",
