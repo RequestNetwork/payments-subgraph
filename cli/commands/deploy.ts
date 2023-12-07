@@ -25,12 +25,6 @@ export const builder = (y: yargs.Argv) =>
       desc: "TheGraph token",
       type: "string",
     })
-    .option("version", {
-      desc:
-        "The subgraph version label, used by non-hosted service graph nodes",
-      type: "string",
-      demandOption: true,
-    })
     .check(({ all, network }) => {
       if (all && network)
         throw new Error("Cannot specify both -all and positional `network`");
@@ -42,7 +36,6 @@ export const handler = ({
   network,
   token,
   all,
-  version,
 }: Awaited<ReturnType<typeof builder>["argv"]>) => {
   const networkList = all ? networks : network || [];
   const options = token

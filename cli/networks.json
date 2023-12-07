@@ -17,5 +17,6 @@
   "moonbeam",
   "tombchain",
   "core",
-  "zksync-era"
+  "zksync-era",
+  "sepolia"
 ]
