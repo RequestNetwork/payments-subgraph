@@ -1,0 +1,134 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ERC20Proxy
+    network: base
+    source:
+      address: "0xc31323ea7513799e1e112Dc15a05d5b600Cc357e"
+      abi: ERC20Proxy
+      startBlock: 10827271
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20Proxy
+          file: ./abis/ERC20Proxy.json
+      eventHandlers:
+        - event: TransferWithReference(address,address,uint256,indexed bytes)
+          handler: handleTransferWithReference
+          receipt: true
+      file: ./src/erc20Proxy.ts
+  - kind: ethereum/contract
+    name: ERC20FeeProxy_0_2_0
+    network: base
+    source:
+      address: "0x1892196E80C4c17ea5100Da765Ab48c1fE2Fb814"
+      abi: ERC20FeeProxy_0_2_0
+      startBlock: 10827274
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20FeeProxy_0_2_0
+          file: ./abis/ERC20FeeProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/erc20FeeProxy.ts
+  - kind: ethereum/contract
+    name: ERC20ConversionProxy
+    network: base
+    source:
+      address: "0x8296D56321cf207925a7804E5A8E3F579838e6A"
+      abi: ERC20ConversionProxy
+      startBlock: 10827277
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: ERC20ConversionProxy
+          file: ./abis/ERC20ConversionProxy.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/erc20ConversionProxy.ts
+  - kind: ethereum/contract
+    name: EthProxy_0_3_0
+    network: base
+    source:
+      address: "0x090D3583e3f5953e2CC758b146f4Ae11f8224ad7"
+      abi: EthProxy_0_3_0
+      startBlock: 10827261
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthProxy_0_3_0
+          file: ./abis/EthProxy-0.3.0.json
+      eventHandlers:
+        - event: TransferWithReference(address,uint256,indexed bytes)
+          handler: handleTransferWithReference
+          receipt: true
+      file: ./src/ethProxy.ts
+  - kind: ethereum/contract
+    name: EthFeeProxy_0_2_0
+    network: base
+    source:
+      address: "0xd9C3889eB8DA6ce449bfFE3cd194d08A436e96f2"
+      abi: EthFeeProxy_0_2_0
+      startBlock: 10827264
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthFeeProxy_0_2_0
+          file: ./abis/EthFeeProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy_0_2_0
+    network: base
+    source:
+      address: "0xEdfD8386d5DE52072B4Ad8dC69BBD0bB89f9A1fb"
+      abi: EthConversionProxy_0_2_0
+      startBlock: 10827267
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy_0_2_0
+          file: ./abis/EthConversionProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/ethConversionProxy.ts
