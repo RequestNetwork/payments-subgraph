@@ -48,7 +48,7 @@ dataSources:
     name: ERC20ConversionProxy
     network: base
     source:
-      address: "0x8296D56321cf207925a7804E5A8E3F579838e6A"
+      address: "0x8296D56321cf207925a7804E5A8E3F579838e6Ad"
       abi: ERC20ConversionProxy
       startBlock: 10827277
     mapping:
