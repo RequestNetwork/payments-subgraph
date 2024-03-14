@@ -23,6 +23,8 @@ Mainnets:
 - [Arbitrum One - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-one)
 - [Arbitrum One - Decentralized Network](https://thegraph.com/explorer/subgraphs/3MtDdHbzvBVNBpzUTYXGuDDLgTd1b8bPYwoH1Hdssgp9?view=Overview&chain=arbitrum-one)
 - [Mantle - Hosted Service](https://graph.fusionx.finance/subgraphs/name/request-payments-mantle)
+- [zkSync Era - Subgraph Studio](https://api.studio.thegraph.com/query/35843/request-payment-zksyncera/version/latest)
+- [Base - Subgraph Studio](https://api.studio.thegraph.com/query/35843/request-payments-base/version/latest)
 
 Testnets:
 - [Goerli](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-goerli)
