@@ -23,6 +23,8 @@ Mainnets:
 - [Arbitrum One - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-one)
 - [Arbitrum One - Decentralized Network](https://thegraph.com/explorer/subgraphs/3MtDdHbzvBVNBpzUTYXGuDDLgTd1b8bPYwoH1Hdssgp9?view=Overview&chain=arbitrum-one)
 - [Mantle - Hosted Service](https://graph.fusionx.finance/subgraphs/name/request-payments-mantle)
+- [zkSync Era - Subgraph Studio](https://api.studio.thegraph.com/query/35843/request-payment-zksyncera/version/latest)
+- [Base - Subgraph Studio](https://api.studio.thegraph.com/query/35843/request-payments-base/version/latest)
 
 Testnets:
 - [Goerli](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-goerli)
@@ -137,17 +139,25 @@ For decentralized network, use:
 yarn graph deploy --studio request-payments-<network> ./subgraph.<network>.yaml --version-label v1.<bumped-version>
 ```
 
-#### Manual Deployment of zkSync Era
+#### Manual Deployment to Subgraph Studio
 
-The network zkSync Era is only supported by The Graph's Subgraph Studio so the deployment is different.
+The following networks are only supported by The Graph's Subgraph Studio so the deployment is different.
 
-Step 1: Authenticate the graph-cli with subgraph studio. Get the studio token (here)[https://thegraph.com/studio/subgraph/request-payment-zksyncera/]
+- [zkSync Era](https://thegraph.com/studio/subgraph/request-payment-zksyncera)
+- [Base](https://thegraph.com/studio/subgraph/request-payments-base)
+
+Step 1: Authenticate the graph-cli using a subgraph-specific deploy key (aka. studio token). Get the deploy keys from the links listed above.
 ```
 graph auth --studio <studio token>
 ```
 Step 2: Deploy to subgraph studio
 ```
+graph deploy --studio request-payment-<network> subgraph.<network>.yaml
+```
+Examples:
+```
 graph deploy --studio request-payment-zksyncera subgraph.zksyncera.yaml
+graph deploy --studio request-payments-base subgraph.base.yaml
 ```
 
 ### Check the deployed version
