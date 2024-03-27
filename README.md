@@ -22,15 +22,16 @@ Mainnets:
 - [Moonbeam - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-moonbeam)
 - [Arbitrum One - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-one)
 - [Arbitrum One - Decentralized Network](https://thegraph.com/explorer/subgraphs/3MtDdHbzvBVNBpzUTYXGuDDLgTd1b8bPYwoH1Hdssgp9?view=Overview&chain=arbitrum-one)
-- [Mantle - Hosted Service](https://graph.fusionx.finance/subgraphs/name/request-payments-mantle)
 - [zkSync Era - Subgraph Studio](https://api.studio.thegraph.com/query/35843/request-payment-zksyncera/version/latest)
 - [Base - Subgraph Studio](https://api.studio.thegraph.com/query/35843/request-payments-base/version/latest)
+- [Mantle - Hosted by FusionX](https://graph.fusionx.finance/subgraphs/name/request-payments-mantle)
+- [Core - Hosted by CoreDAO](https://thegraph.coredao.org/subgraphs/name/requestnetwork/request-payments-core)
 
 Testnets:
-- [Goerli](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-goerli)
-- [Near Testnet](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near-testnet)
-- [Arbitrum Rinkeby](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-rinkeby)
-- [Mantle Testnet](https://graph.testnet.mantle.xyz/subgraphs/name/request-payments-mantle-testnet)
+- [Goerli - Hosted Service](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-goerli)
+- [Near Testnet - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near-testnet)
+- [Arbitrum Rinkeby - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-rinkeby)
+- [Mantle Testnet - Hosted by Mantle](https://graph.testnet.mantle.xyz/subgraphs/name/request-payments-mantle-testnet)
 
 It indexes Request's proxy smart-contracts for easy querying of payment data.
 
@@ -118,7 +119,13 @@ Test chains like Goerli and Mantle Testnet will be deployed immediately when a r
 
 Mainnets (all others) require manual approval in [github actions](https://github.com/RequestNetwork/payments-subgraph/actions).
 
-#### Manual Deployment
+#### Manual Deployment to 3rd-party Graph Node
+
+The following networks are deployed on 3rd-party graph nodes:
+
+- Core
+- Mantle
+- Mantle Testnet
 
 The first time a subgraph is deployed to a non-hosted-service graph node, it needs to be created.
 
