@@ -28,6 +28,7 @@ Mainnets:
 - [Core - Hosted by CoreDAO](https://thegraph.coredao.org/subgraphs/name/requestnetwork/request-payments-core)
 
 Testnets:
+- [Sepolia - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-sepolia)
 - [Goerli - Hosted Service](https://thegraph.com/explorer/subgraph/requestnetwork/request-payments-goerli)
 - [Near Testnet - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-near-testnet)
 - [Arbitrum Rinkeby - Hosted Service](https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-arbitrum-rinkeby)
