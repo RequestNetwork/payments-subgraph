@@ -106,7 +106,7 @@ Graph node locations:
 * `core` uses the [graph node hosted by CoreDAO](https://thegraph.coredao.org)
 * `mantle` uses the [graph node hosted by FusionX](https://graph.fusionx.finance)
 * `mantle-testnet` uses the [graph node hosted by Mantle](https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints)
-* all other EVM chains use Subgraph Studio.
+* all other chains use Subgraph Studio.
 
 When a GitHub release is published:
 * test chains are deployed immediately, without approval
