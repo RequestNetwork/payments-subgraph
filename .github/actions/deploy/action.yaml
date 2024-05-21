@@ -5,7 +5,7 @@ inputs:
     description: The chain to deploy the subgraph for
     required: true
   deploy-key:
-    description: TheGraph Studio deploy key
+    description: Graph Node deploy key
     required: false
     default: ""
 runs:
