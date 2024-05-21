@@ -5,36 +5,51 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-hosted-service:
+  deploy-thegraph-studio-rn:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         chain:
           - "arbitrum-one"
           - "avalanche"
+          - "base"
           - "bsc"
           - "celo"
-          - "core"
           - "fantom"
           - "fuse"
-          - "goerli"
-          - "mainnet"
           - "matic"
-          - "xdai"
-          - "optimism"
           - "moonbeam"
-          - "tombchain"
+          - "near"
+          - "optimism"
           - "sepolia"
+          - "zksyncera"
     environment:
       name: ${{ matrix.chain }}
-      # Use TheGraph Hosted Service for all networks
-      url: ${{ format('https://thegraph.com/hosted-service/subgraph/requestnetwork/request-payments-{0}', matrix.chain) }}
+      url: ${{ format('https://api.studio.thegraph.com/query/67444/request-payments-{0}/version/latest', matrix.chain) }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/deploy
         with:
           chain: ${{ matrix.chain }}
-          token: ${{ secrets.THEGRAPH_TOKEN }}
+          deploy-key: ${{ secrets.SUBGRAPH_STUDIO_DEPLOY_KEY_RN }}
+
+  deploy-thegraph-studio-rf:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        chain:
+          - "mainnet"
+          - "xdai"
+    environment:
+      name: ${{ matrix.chain }}
+      url: ${{ format('https://api.studio.thegraph.com/query/35843/request-payments-{0}/version/latest', matrix.chain) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/deploy
+        with:
+          chain: ${{ matrix.chain }}
+          deploy-key: ${{ secrets.SUBGRAPH_STUDIO_DEPLOY_KEY_RF }}
+
   deploy-core:
     runs-on: ubuntu-latest
     environment:
@@ -46,7 +61,8 @@ jobs:
       - uses: ./.github/actions/deploy
         with:
           chain: "core"
-          token: ${{ secrets.THEGRAPH_CORE_TOKEN }}
+          deploy-key: ${{ secrets.THEGRAPH_CORE_TOKEN }}
+
   deploy-mantle:
     runs-on: ubuntu-latest
     strategy:
@@ -64,4 +80,4 @@ jobs:
       - uses: ./.github/actions/deploy
         with:
           chain: ${{ matrix.chain }}
-          token: ""
+          deploy-key: ""

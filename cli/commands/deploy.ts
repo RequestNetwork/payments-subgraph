@@ -1,15 +1,16 @@
 import yargs from "yargs";
 import { deploySubgraph } from "../lib/deploy";
 import networks from "../networks.json";
-import { defaultGraphNodeInfo, graphNodeInfoByNetwork } from "../graph-nodes";
+import { graphNodeInfoByNetwork } from "../graph-nodes";
 
 export const command = "deploy [network..]";
 export const desc = "Deploys one subgraph";
 export const builder = (y: yargs.Argv) =>
   y
     .middleware(argv => {
-      if (process.env.TOKEN) argv.token = process.env.TOKEN;
-      if (process.env.VERSION) argv.version = process.env.VERSION;
+      if (process.env.DEPLOY_KEY) argv["deploy-key"] = process.env.DEPLOY_KEY;
+      if (process.env.VERSION_LABEL)
+        argv["version-label"] = process.env.VERSION_LABEL;
     }, true)
     .positional("network", {
       desc: "The network to deploy to",
@@ -17,43 +18,29 @@ export const builder = (y: yargs.Argv) =>
       array: true,
       choices: networks,
     })
-    .option("all", {
-      desc: "Deploy on all networks",
-      type: "boolean",
-    })
-    .option("token", {
-      desc: "TheGraph token",
+    .option("deploy-key", {
+      desc: "Graph Node deploy key",
       type: "string",
     })
-    .check(({ all, network }) => {
-      if (all && network)
-        throw new Error("Cannot specify both -all and positional `network`");
-      if (all || network) return true;
-      throw new Error("One of --all or positional `network` must be specified");
+    .option("version-label", {
+      desc: "The version of the deployed subgraph",
+      type: "string",
     });
 
 export const handler = ({
   network,
-  token,
-  all,
+  ["deploy-key"]: deployKey,
+  ["version-label"]: versionLabel,
 }: Awaited<ReturnType<typeof builder>["argv"]>) => {
-  const networkList = all ? networks : network || [];
-  const options = token
-    ? {
-        "access-token": token,
-      }
-    : undefined;
+  const networkList = network || [];
   for (const net of networkList) {
     console.log(`Deploy on ${net}`);
-    deploySubgraph(
-      `requestnetwork/request-payments-${net}`,
-      `./subgraph.${net}.yaml`,
-      {
-        ipfs: graphNodeInfoByNetwork[net]?.ipfs || defaultGraphNodeInfo.ipfs,
-        node: `${graphNodeInfoByNetwork[net]?.deploy ||
-          defaultGraphNodeInfo.deploy}`,
-      },
-      options,
-    );
+    deploySubgraph(`request-payments-${net}`, `./subgraph.${net}.yaml`, {
+      "deploy-key": deployKey,
+      ipfs: graphNodeInfoByNetwork[net]?.ipfs,
+      node: graphNodeInfoByNetwork[net]?.deploy,
+      product: deployKey ? "subgraph-studio" : undefined,
+      "version-label": versionLabel,
+    });
   }
 };

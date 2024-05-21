@@ -25,24 +25,26 @@ export const writeManifest = (network: string) => {
   } else {
     writeFile(`subgraph.${network}.yaml`, manifest);
   }
-}
+};
 
 export const getTheGraphChainName = (chainName: string) => {
-  switch(chainName) {
+  switch (chainName) {
     case "mantle-testnet":
       return "testnet";
     case "mantle":
       return "mainnet";
+    case "zksyncera":
+      return "zksync-era";
     default:
       return chainName;
   }
-}
+};
 
 export const getRequestNetworkChainName = (chainName: string) => {
-  switch(chainName) {
+  switch (chainName) {
     case "gnosis":
       return "xdai";
     default:
       return chainName;
   }
-}
+};
