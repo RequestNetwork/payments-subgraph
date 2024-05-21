@@ -13,6 +13,8 @@
   "mantle-testnet",
   "matic",
   "moonbeam",
+  "near",
+  "near-testnet",
   "optimism",
   "sepolia",
   "tombchain",
