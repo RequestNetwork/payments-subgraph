@@ -97,35 +97,20 @@ yarn create-local
 yarn deploy-local
 ```
 
-### Networks
+### Hosted
 
-Some of the deployments are automated, others are manual
-#### Automated Deployment
-Deployment on EVM chains is semi-automated, when a GitHub release is published
+All deployments are semi-automated through GitHub action.
+The first time a subgraph is deployed, it needs to be created on the Graph Node or on Subgraph Studio.
 
-* mantle-testnet uses the [graph node hosted by Mantle](https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints).
-* mantle uses the [graph node hosted by FusionX](https://graph.fusionx.finance)
-* all other EVM chains use the Subgraph Studio.
+Graph node locations:
+* `core` uses the [graph node hosted by CoreDAO](https://thegraph.coredao.org)
+* `mantle` uses the [graph node hosted by FusionX](https://graph.fusionx.finance)
+* `mantle-testnet` uses the [graph node hosted by Mantle](https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints)
+* all other EVM chains use Subgraph Studio.
 
-Test chains like Sepolia and Mantle Testnet will be deployed immediately when a release is published.
-
-Mainnets (all others) require manual approval in [GitHub actions](https://github.com/RequestNetwork/payments-subgraph/actions).
-
-#### Manual Deployment to 3rd-party Graph Node
-
-The following networks are deployed on 3rd-party graph nodes:
-
-- Core
-- Mantle
-- Mantle Testnet
-
-The first time a subgraph is deployed, it needs to be created.
-
-For example:
-
-```bash
-yarn graph create --node https://deploy.graph.fusionx.finance requestnetwork/request-payments-mantle
-```
+When a GitHub release is published:
+* test chains are deployed immediately, without approval
+* mainnet chains require a manual approval in [GitHub actions](https://github.com/RequestNetwork/payments-subgraph/actions).
 
 ### Check the deployed version
 
