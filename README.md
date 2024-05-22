@@ -102,15 +102,19 @@ yarn deploy-local
 All deployments are semi-automated through GitHub action.
 The first time a subgraph is deployed, it needs to be created on the Graph Node or on Subgraph Studio.
 
-Graph node locations:
-* `core` uses the [graph node hosted by CoreDAO](https://thegraph.coredao.org)
-* `mantle` uses the [graph node hosted by FusionX](https://graph.fusionx.finance)
-* `mantle-testnet` uses the [graph node hosted by Mantle](https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints)
+Graph Node locations:
+* `core` uses the [Graph Node hosted by CoreDAO](https://thegraph.coredao.org)
+* `mantle` uses the [Graph Node hosted by FusionX](https://graph.fusionx.finance)
+* `mantle-testnet` uses the [Graph Node hosted by Mantle](https://docs.mantle.xyz/network/for-devs/resources-and-tooling/graph-endpoints)
 * all other chains use Subgraph Studio.
 
-When a GitHub release is published:
+When a PR is merged on `main`:
 * test chains are deployed immediately, without approval
 * mainnet chains require a manual approval in [GitHub actions](https://github.com/RequestNetwork/payments-subgraph/actions).
+
+> **Important**: Once a subgraph is deployed on Subgraph Studio,
+> a manual action is required to publish it to the decentralized network.
+> See [the documentation](https://thegraph.com/docs/en/publishing/publishing-a-subgraph/) for more information.
 
 ### Check the deployed version
 
