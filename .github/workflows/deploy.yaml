@@ -23,6 +23,7 @@ jobs:
           - "near-testnet"
           - "optimism"
           - "sepolia"
+          - "xdai"
           - "zksyncera"
     environment:
       name: ${{ matrix.chain }}
@@ -40,7 +41,6 @@ jobs:
       matrix:
         chain:
           - "mainnet"
-          - "xdai"
     environment:
       name: ${{ matrix.chain }}
       url: ${{ format('https://api.studio.thegraph.com/query/35843/request-payments-{0}/version/latest', matrix.chain) }}
