@@ -4,24 +4,18 @@ inputs:
   chain:
     description: The chain to deploy the subgraph for
     required: true
-  token:
-    description: Authentication token
+  deploy-key:
+    description: Graph Node deploy key
     required: false
     default: ""
 runs:
   using: composite
   steps:
     - uses: actions/checkout@v3
-    - name: Get yarn cache directory path
-      shell: sh
-      id: yarn-cache-dir-path
-      run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
-    - uses: actions/cache@v3
+    - uses: actions/setup-node@v4
       with:
-        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-yarn-
+        node-version: 20
+        cache: yarn
     - name: install packages
       shell: sh
       run: yarn
@@ -31,5 +25,5 @@ runs:
       shell: sh
       run: yarn subgraph deploy ${{ inputs.chain }}
       env:
-        TOKEN: ${{ inputs.token }}
-        VERSION: ${{ steps.short-sha.outputs.hash }}
+        DEPLOY_KEY: ${{ inputs.deploy-key }}
+        VERSION_LABEL: ${{ steps.short-sha.outputs.hash }}

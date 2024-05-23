@@ -4,20 +4,19 @@ export const deploySubgraph = (
   subgraphName: string,
   manifestPath: string,
   args: {
-    node: string;
-    ipfs: string;
-  },
-  options?: {
-    "access-token"?: string;
+    "deploy-key"?: string;
+    ipfs?: string;
+    node?: string;
+    product?: string;
     "version-label"?: string;
-  }
+  },
 ) => {
-  const argsString = Object.entries({...args, ...options})
-    .map(([name, value]) => `--${name} ${value}`)
+  const argsString = Object.entries(args)
+    .map(([name, value]) => (value ? `--${name}=${value}` : ""))
     .join(" ");
 
   return execSync(
-    `npx graph deploy ${subgraphName} ${argsString} ${manifestPath}`,
+    `yarn run graph deploy ${argsString} ${subgraphName} ${manifestPath}`,
     {
       stdio: "inherit",
     },

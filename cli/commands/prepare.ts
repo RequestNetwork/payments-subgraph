@@ -16,33 +16,25 @@ export const handler = () => {
 
 export const writeManifest = (network: string) => {
   console.log(`parsing network ${network}`);
-  const manifest = getManifest(
-    getTheGraphChainName(network),
-    getRequestNetworkChainName(network),
-  );
+  const manifest = getManifest(getTheGraphChainName(network), network);
   if (!manifest) {
     console.warn(`No contract found for ${network}`);
   } else {
     writeFile(`subgraph.${network}.yaml`, manifest);
   }
-}
+};
 
 export const getTheGraphChainName = (chainName: string) => {
-  switch(chainName) {
+  switch (chainName) {
     case "mantle-testnet":
       return "testnet";
     case "mantle":
       return "mainnet";
+    case "xdai":
+      return "gnosis";
+    case "zksyncera":
+      return "zksync-era";
     default:
       return chainName;
   }
-}
-
-export const getRequestNetworkChainName = (chainName: string) => {
-  switch(chainName) {
-    case "gnosis":
-      return "xdai";
-    default:
-      return chainName;
-  }
-}
+};
