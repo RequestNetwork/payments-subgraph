@@ -23,7 +23,7 @@ Mainnets:
 Testnets:
 - [Mantle Testnet - Hosted by Mantle](https://graph.testnet.mantle.xyz/subgraphs/name/request-payments-mantle-testnet)
 - [Near Testnet](https://thegraph.com/explorer/subgraphs/AusVyfndonsMVFrVzckuENLqx8t6kcXuxn6C6VbSGd7M?view=Overview&chain=arbitrum-one)
-- [Sepolia](https://thegraph.com/explorer/profile/0x68517f16b3ceeb909deba674de8560e7be3b1af9?view=Subgraphs&chain=arbitrum-one)
+- [Sepolia](https://thegraph.com/explorer/subgraphs/6e8Dcwt3cvsgNU3JYBtRQQ9Sj4P9VVVnXaPjJ3jUpYpY?view=Overview&chain=arbitrum-one)
 
 It indexes Request's proxy smart-contracts for easy querying of payment data.
 
