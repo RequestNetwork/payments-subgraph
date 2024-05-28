@@ -4,7 +4,7 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ERC20FeeProxy
-    network: xdai
+    network: gnosis
     source:
       address: "0x0DfbEe143b42B41eFC5A6F87bFD1fFC78c2f0aC9"
       abi: ERC20FeeProxy
@@ -25,7 +25,7 @@ dataSources:
       file: ./src/erc20FeeProxy.ts
   - kind: ethereum/contract
     name: ERC20ConversionProxy
-    network: xdai
+    network: gnosis
     source:
       address: "0xf0f49873C50765239F6f9534Ba13c4fe16eD5f2E"
       abi: ERC20ConversionProxy
@@ -48,7 +48,7 @@ dataSources:
       file: ./src/erc20ConversionProxy.ts
   - kind: ethereum/contract
     name: EthProxy
-    network: xdai
+    network: gnosis
     source:
       address: "0x27c60BE17e853c47A9F1d280B05365f483c2dFAF"
       abi: EthProxy
@@ -69,7 +69,7 @@ dataSources:
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
     name: EthProxy_0_3_0
-    network: xdai
+    network: gnosis
     source:
       address: "0x322F0037d272E980984F89E94Aae43BD0FC065E6"
       abi: EthProxy_0_3_0
@@ -90,7 +90,7 @@ dataSources:
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
     name: EthFeeProxy_0_2_0
-    network: xdai
+    network: gnosis
     source:
       address: "0xfCFBcfc4f5A421089e3Df45455F7f4985FE2D6a8"
       abi: EthFeeProxy_0_2_0
