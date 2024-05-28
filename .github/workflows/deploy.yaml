@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-thegraph-studio-rn:
+  deploy-thegraph-studio:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,6 +17,7 @@ jobs:
           - "celo"
           - "fantom"
           - "fuse"
+          - "mainnet"
           - "matic"
           - "moonbeam"
           - "near"
@@ -34,22 +35,6 @@ jobs:
         with:
           chain: ${{ matrix.chain }}
           deploy-key: ${{ secrets.SUBGRAPH_STUDIO_DEPLOY_KEY_RN }}
-
-  deploy-thegraph-studio-rf:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        chain:
-          - "mainnet"
-    environment:
-      name: ${{ matrix.chain }}
-      url: ${{ format('https://api.studio.thegraph.com/query/35843/request-payments-{0}/version/latest', matrix.chain) }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/deploy
-        with:
-          chain: ${{ matrix.chain }}
-          deploy-key: ${{ secrets.SUBGRAPH_STUDIO_DEPLOY_KEY_RF }}
 
   deploy-core:
     runs-on: ubuntu-latest
