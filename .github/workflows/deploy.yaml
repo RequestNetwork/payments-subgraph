@@ -53,6 +53,7 @@ jobs:
   deploy-mantle:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         chain:
           - "mantle-testnet"
