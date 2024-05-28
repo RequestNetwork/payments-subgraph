@@ -7,8 +7,9 @@
     "url": "git+https://github.com/RequestNetwork/requestNetwork.git"
   },
   "scripts": {
+    "clean": "rm -Rf ./build && rm -Rf ./generated",
     "codegen": "graph codegen ./subgraph.sepolia.yaml; graph codegen ./subgraph.near.yaml -o ./generated/near/",
-    "prepare": "yarn subgraph prepare && yarn codegen",
+    "prepare": "yarn clean && yarn subgraph prepare && yarn codegen",
     "build": "graph build",
     "create-mantle-testnet": "graph create --node https://graph.testnet.mantle.xyz/deploy/ requestnetwork/request-payments-mantle-testnet",
     "create-mantle": "graph create --node https://deploy.graph.fusionx.finance requestnetwork/request-payments-mantle",

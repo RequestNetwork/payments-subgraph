@@ -1,5 +1,5 @@
 import { log } from "@graphprotocol/graph-ts";
-import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
+import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy_0_2_0/ERC20FeeProxy_0_2_0";
 import { createPaymentForFeeProxy } from "./erc20FeeProxy";
 
 //

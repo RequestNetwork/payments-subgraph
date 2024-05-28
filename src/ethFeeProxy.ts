@@ -1,5 +1,5 @@
 import { ethereum, log } from "@graphprotocol/graph-ts";
-import { TransferWithReferenceAndFee } from "../generated/EthFeeProxy/EthFeeProxy";
+import { TransferWithReferenceAndFee } from "../generated/EthFeeProxy_0_2_0/EthFeeProxy_0_2_0";
 import { Payment } from "../generated/schema";
 import { generateId } from "./shared";
 

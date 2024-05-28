@@ -4,7 +4,7 @@ import {
   RequestFrozen,
   RevertedEmergencyClaim,
 } from "../generated/ERC20EscrowToPay/ERC20EscrowToPay";
-import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
+import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy_0_2_0/ERC20FeeProxy_0_2_0";
 import { Escrow } from "../generated/schema";
 import { ERC20EscrowToPay } from "../generated/ERC20EscrowToPay/ERC20EscrowToPay";
 import { createPaymentForFeeProxy } from "./erc20FeeProxy";

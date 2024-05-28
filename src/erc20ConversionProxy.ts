@@ -1,6 +1,6 @@
 import { BigDecimal, log } from "@graphprotocol/graph-ts";
 import { TransferWithConversionAndReference } from "../generated/ERC20ConversionProxy/ERC20ConversionProxy";
-import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy/ERC20FeeProxy";
+import { TransferWithReferenceAndFee } from "../generated/ERC20FeeProxy_0_2_0/ERC20FeeProxy_0_2_0";
 import { Payment } from "../generated/schema";
 import { createPaymentForFeeProxy } from "./erc20FeeProxy";
 import { generateId } from "./shared";

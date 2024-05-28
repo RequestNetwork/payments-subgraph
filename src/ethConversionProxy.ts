@@ -1,6 +1,6 @@
 import { log } from "@graphprotocol/graph-ts";
-import { TransferWithConversionAndReference } from "../generated/EthConversionProxy/EthConversionProxy";
-import { TransferWithReferenceAndFee } from "../generated/EthFeeProxy/EthFeeProxy";
+import { TransferWithConversionAndReference } from "../generated/EthConversionProxy_0_2_0/EthConversionProxy_0_2_0";
+import { TransferWithReferenceAndFee } from "../generated/EthFeeProxy_0_2_0/EthFeeProxy_0_2_0";
 import { createPaymentForFeeProxy } from "./ethFeeProxy";
 import { Payment } from "../generated/schema";
 import { generateId } from "./shared";
