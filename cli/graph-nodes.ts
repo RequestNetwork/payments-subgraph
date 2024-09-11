@@ -25,9 +25,9 @@ export const graphNodeInfoByNetwork: GraphNodeInfoByNetwork = {
   mantle: {
     queryBase: "https://graph.fusionx.finance",
     // FusionX Graph Node implements deploy endpoint as a subdomain
-    deploy: "https://deploy.graph.fusionx.finance",
+    deploy: "https://subgraph-api.mantle.xyz/deploy",
     index: "https://graph.fusionx.finance/graphql",
-    ipfs: "https://api.thegraph.com/ipfs",
+    ipfs: "https://subgraph-api.mantle.xyz/ipfs",
   },
   /**
    * Graph Node maintained by CORE DAO:
