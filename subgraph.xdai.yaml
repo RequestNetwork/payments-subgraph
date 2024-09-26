@@ -109,4 +109,27 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
           receipt: true
       file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: EthConversionProxy_0_2_0
+    network: gnosis
+    source:
+      address: "0x3E3B04e1bF170522a5c5DDE628C4d365c0342239"
+      abi: EthConversionProxy_0_2_0
+      startBlock: 35929105
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+      abis:
+        - name: EthConversionProxy_0_2_0
+          file: ./abis/EthConversionProxy-0.2.0.json
+      eventHandlers:
+        - event: TransferWithConversionAndReference(uint256,address,indexed bytes,uint256,uint256)
+          handler: handleTransferWithConversionAndReference
+        - event: TransferWithReferenceAndFee(address,uint256,indexed bytes,uint256,address)
+          handler: handleTransferWithReferenceAndFee
+          receipt: true
+      file: ./src/ethConversionProxy.ts
   
