@@ -11,6 +11,7 @@ import {
   ethConversionArtifact,
   erc20EscrowToPayArtifact,
   erc20TransferableReceivableArtifact,
+  singleRequestProxyFactoryArtifact,
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import { camelCase } from "lodash";
@@ -24,6 +25,7 @@ const paymentNetworks = {
   EthConversionProxy: ethConversionArtifact,
   ERC20EscrowToPay: erc20EscrowToPayArtifact,
   ERC20TransferrableReceivable: erc20TransferableReceivableArtifact,
+  SingleRequestProxyFactory: singleRequestProxyFactoryArtifact,
 };
 
 type DataSource = {
@@ -44,14 +46,14 @@ type DataSource = {
 const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
   return artifact
     .getAllAddresses(network)
-    .filter(x => Boolean(x.address))
+    .filter((x) => Boolean(x.address))
     .map(({ version }) => ({
       ...artifact.getDeploymentInformation(network, version),
       version,
     }))
     .filter(
       (artifact, index, self) =>
-        self.findIndex(x => x.address === artifact.address) === index,
+        self.findIndex((x) => x.address === artifact.address) === index,
     );
 };
 
@@ -64,6 +66,8 @@ const ignoredEvents = [
   "ApprovalForAll",
   "Transfer",
   "TransferableReceivablePayment",
+  "EthereumFeeProxyUpdated",
+  "ERC20FeeProxyUpdated",
 ];
 
 export const getManifest = (
@@ -76,6 +80,8 @@ export const getManifest = (
     let graphEntities: string[];
     if (pn === "ERC20EscrowToPay") {
       graphEntities = ["Payment", "Escrow", "EscrowEvent"];
+    } else if (pn === "SingleRequestProxyFactory") {
+      graphEntities = ["SingleRequestProxyDeployment"];
     } else {
       graphEntities = ["Payment"];
     }
@@ -91,9 +97,9 @@ export const getManifest = (
     infoArray.forEach(({ address, creationBlockNumber, version }) => {
       const events = artifact
         .getContractAbi(version)
-        .filter(x => x.type === "event")
-        .filter(x => x.name && !ignoredEvents.includes(x.name))
-        .map(x => ({
+        .filter((x) => x.type === "event")
+        .filter((x) => x.name && !ignoredEvents.includes(x.name))
+        .map((x) => ({
           handlerName: "handle" + x.name,
           eventSignature: EventFragment.fromObject(x)
             .format("minimal")
