@@ -69,13 +69,18 @@ type EscrowEvent @entity {
   gasPrice: BigInt!
 }
 
+enum SingleRequestProxyType {
+  Ethereum
+  ERC20
+}
+
 type SingleRequestProxyDeployment @entity {
   id: ID!
   proxyAddress: Bytes!
   payee: Bytes!
   tokenAddress: Bytes
   paymentReference: Bytes!
-  proxyType: String! # "Ethereum" or "ERC20"
+  proxyType: SingleRequestProxyType!
   block: Int!
   timestamp: Int!
   txHash: Bytes!
