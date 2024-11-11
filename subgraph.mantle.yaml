@@ -110,4 +110,3 @@ dataSources:
           handler: handleEthereumSingleRequestProxyCreated
           receipt: true
       file: ./src/singleRequestProxyFactory.ts
-  
