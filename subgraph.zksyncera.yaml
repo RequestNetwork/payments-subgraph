@@ -48,9 +48,9 @@ dataSources:
     name: SingleRequestProxyFactory
     network: zksync-era
     source:
-      address: "0xC52F0f36b4f0Cdf55D4349640C32929c5E85Ab1a"
+      address: "0x9Fd503e723e5EfcCde3183632b443fFF49E68715"
       abi: SingleRequestProxyFactory
-      startBlock: 48467338
+      startBlock: 48690095
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
