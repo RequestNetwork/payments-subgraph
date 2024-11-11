@@ -153,4 +153,28 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
           receipt: true
       file: ./src/ethConversionProxy.ts
+  - kind: ethereum/contract
+    name: SingleRequestProxyFactory
+    network: bsc
+    source:
+      address: "0x4D417AA04DBb207201a794E5B7381B3cde815281"
+      abi: SingleRequestProxyFactory
+      startBlock: 43839939
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - SingleRequestProxyDeployment
+      abis:
+        - name: SingleRequestProxyFactory
+          file: ./abis/SingleRequestProxyFactory.json
+      eventHandlers:
+        - event: ERC20SingleRequestProxyCreated(address,address,address,indexed bytes,address,uint256,address)
+          handler: handleERC20SingleRequestProxyCreated
+          receipt: true
+        - event: EthereumSingleRequestProxyCreated(address,address,indexed bytes,address,uint256,address)
+          handler: handleEthereumSingleRequestProxyCreated
+          receipt: true
+      file: ./src/singleRequestProxyFactory.ts
   

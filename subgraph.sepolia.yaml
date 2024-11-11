@@ -168,9 +168,9 @@ dataSources:
     name: SingleRequestProxyFactory
     network: sepolia
     source:
-      address: "0x435E81E12136414e2c09cAFe05E902E23bD46030"
+      address: "0xf8cACE7EE4c03Eb4f225434B0709527938D365b4"
       abi: SingleRequestProxyFactory
-      startBlock: 6965557
+      startBlock: 7038199
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -181,10 +181,10 @@ dataSources:
         - name: SingleRequestProxyFactory
           file: ./abis/SingleRequestProxyFactory.json
       eventHandlers:
-        - event: ERC20SingleRequestProxyCreated(address,address,address,indexed bytes)
+        - event: ERC20SingleRequestProxyCreated(address,address,address,indexed bytes,address,uint256,address)
           handler: handleERC20SingleRequestProxyCreated
           receipt: true
-        - event: EthereumSingleRequestProxyCreated(address,address,indexed bytes)
+        - event: EthereumSingleRequestProxyCreated(address,address,indexed bytes,address,uint256,address)
           handler: handleEthereumSingleRequestProxyCreated
           receipt: true
       file: ./src/singleRequestProxyFactory.ts

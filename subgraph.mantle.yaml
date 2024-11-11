@@ -86,3 +86,27 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
           receipt: true
       file: ./src/ethFeeProxy.ts
+  - kind: ethereum/contract
+    name: SingleRequestProxyFactory
+    network: mantle
+    source:
+      address: "0xf8cACE7EE4c03Eb4f225434B0709527938D365b4"
+      abi: SingleRequestProxyFactory
+      startBlock: 71485828
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - SingleRequestProxyDeployment
+      abis:
+        - name: SingleRequestProxyFactory
+          file: ./abis/SingleRequestProxyFactory.json
+      eventHandlers:
+        - event: ERC20SingleRequestProxyCreated(address,address,address,indexed bytes,address,uint256,address)
+          handler: handleERC20SingleRequestProxyCreated
+          receipt: true
+        - event: EthereumSingleRequestProxyCreated(address,address,indexed bytes,address,uint256,address)
+          handler: handleEthereumSingleRequestProxyCreated
+          receipt: true
+      file: ./src/singleRequestProxyFactory.ts

@@ -81,6 +81,9 @@ type SingleRequestProxyDeployment @entity {
   tokenAddress: Bytes
   paymentReference: Bytes!
   proxyType: SingleRequestProxyType!
+  feeAddress: Bytes!
+  feeAmount: BigInt!
+  feeProxyUsed: Bytes!
   block: Int!
   timestamp: Int!
   txHash: Bytes!
