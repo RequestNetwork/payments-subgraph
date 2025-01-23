@@ -11,7 +11,7 @@ import {
   ethConversionArtifact,
   erc20EscrowToPayArtifact,
   erc20TransferableReceivableArtifact,
-  singleRequestProxyFactoryArtifact,
+  singleRequestForwarderFactoryArtifact,
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import { camelCase } from "lodash";
@@ -25,7 +25,7 @@ const paymentNetworks = {
   EthConversionProxy: ethConversionArtifact,
   ERC20EscrowToPay: erc20EscrowToPayArtifact,
   ERC20TransferrableReceivable: erc20TransferableReceivableArtifact,
-  SingleRequestProxyFactory: singleRequestProxyFactoryArtifact,
+  SingleRequestProxyFactory: singleRequestForwarderFactoryArtifact,
 };
 
 type DataSource = {
