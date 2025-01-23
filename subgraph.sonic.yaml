@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: ERC20Proxy
-    network: sepolia
+    network: sonic
     source:
-      address: "0x88Ecc15fDC2985A7926171B938BB2Cd808A5ba40"
+      address: "0xC8D3FE2A27bB69a85F6973081FdC41103E107595"
       abi: ERC20Proxy
-      startBlock: 4733363
+      startBlock: 3974125
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -25,11 +25,11 @@ dataSources:
       file: ./src/erc20Proxy.ts
   - kind: ethereum/contract
     name: ERC20FeeProxy_0_2_0
-    network: sepolia
+    network: sonic
     source:
       address: "0x399F5EE127ce7432E4921a61b8CF52b0af52cbfE"
       abi: ERC20FeeProxy_0_2_0
-      startBlock: 4733364
+      startBlock: 3974138
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -46,11 +46,11 @@ dataSources:
       file: ./src/erc20FeeProxy.ts
   - kind: ethereum/contract
     name: ERC20ConversionProxy
-    network: sepolia
+    network: sonic
     source:
-      address: "0xaD61121DAfAAe495095Cd466022b519Cb7503a4E"
+      address: "0xe43fd55Da253628Ed7Cad5ab198664F5B3659DA9"
       abi: ERC20ConversionProxy
-      startBlock: 4733467
+      startBlock: 3974151
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -69,11 +69,11 @@ dataSources:
       file: ./src/erc20ConversionProxy.ts
   - kind: ethereum/contract
     name: EthProxy_0_3_0
-    network: sepolia
+    network: sonic
     source:
       address: "0x171Ee0881407d4c0C11eA1a2FB7D5b4cdED71e6e"
       abi: EthProxy_0_3_0
-      startBlock: 4733360
+      startBlock: 3974083
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -90,11 +90,11 @@ dataSources:
       file: ./src/ethProxy.ts
   - kind: ethereum/contract
     name: EthFeeProxy_0_2_0
-    network: sepolia
+    network: sonic
     source:
-      address: "0xe11BF2fDA23bF0A98365e1A4c04A87C9339e8687"
+      address: "0x4989F941D62bEEb3548Bf55d0D5291Ec335429f0"
       abi: EthFeeProxy_0_2_0
-      startBlock: 4733361
+      startBlock: 3974098
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -111,11 +111,11 @@ dataSources:
       file: ./src/ethFeeProxy.ts
   - kind: ethereum/contract
     name: EthConversionProxy_0_2_0
-    network: sepolia
+    network: sonic
     source:
-      address: "0xc861aE0Cd70b73b0C8F1D62Fa669E6D1d7D7e0aB"
+      address: "0x3E3B04e1bF170522a5c5DDE628C4d365c0342239"
       abi: EthConversionProxy_0_2_0
-      startBlock: 4733362
+      startBlock: 3974113
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -132,81 +132,4 @@ dataSources:
           handler: handleTransferWithReferenceAndFee
           receipt: true
       file: ./src/ethConversionProxy.ts
-  - kind: ethereum/contract
-    name: ERC20EscrowToPay
-    network: sepolia
-    source:
-      address: "0x26d4912fA5aC84F185843E19eeEdcc47f4Cc9F1a"
-      abi: ERC20EscrowToPay
-      startBlock: 4733475
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Payment
-        - Escrow
-        - EscrowEvent
-      abis:
-        - name: ERC20EscrowToPay
-          file: ./abis/ERC20EscrowToPay.json
-      eventHandlers:
-        - event: InitiatedEmergencyClaim(indexed bytes)
-          handler: handleInitiatedEmergencyClaim
-          receipt: true
-        - event: RequestFrozen(indexed bytes)
-          handler: handleRequestFrozen
-          receipt: true
-        - event: RevertedEmergencyClaim(indexed bytes)
-          handler: handleRevertedEmergencyClaim
-          receipt: true
-        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
-          handler: handleTransferWithReferenceAndFee
-          receipt: true
-      file: ./src/erc20EscrowToPay.ts
-  - kind: ethereum/contract
-    name: ERC20TransferrableReceivable_0_2_0
-    network: sepolia
-    source:
-      address: "0xB5E53C3d145Cbaa61C7028736A1fF0bC6817A4c5"
-      abi: ERC20TransferrableReceivable_0_2_0
-      startBlock: 6194071
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - Payment
-      abis:
-        - name: ERC20TransferrableReceivable_0_2_0
-          file: ./abis/ERC20TransferrableReceivable-0.2.0.json
-      eventHandlers:
-        - event: TransferWithReferenceAndFee(address,address,uint256,indexed bytes,uint256,address)
-          handler: handleTransferWithReferenceAndFee
-          receipt: true
-      file: ./src/erc20TransferrableReceivable.ts
-  - kind: ethereum/contract
-    name: SingleRequestProxyFactory
-    network: sepolia
-    source:
-      address: "0xf8cACE7EE4c03Eb4f225434B0709527938D365b4"
-      abi: SingleRequestProxyFactory
-      startBlock: 7038199
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.7
-      language: wasm/assemblyscript
-      entities:
-        - SingleRequestProxyDeployment
-      abis:
-        - name: SingleRequestProxyFactory
-          file: ./abis/SingleRequestProxyFactory.json
-      eventHandlers:
-        - event: ERC20SingleRequestProxyCreated(address,address,address,indexed bytes,address,uint256,address)
-          handler: handleERC20SingleRequestProxyCreated
-          receipt: true
-        - event: EthereumSingleRequestProxyCreated(address,address,indexed bytes,address,uint256,address)
-          handler: handleEthereumSingleRequestProxyCreated
-          receipt: true
-      file: ./src/singleRequestProxyFactory.ts
   
