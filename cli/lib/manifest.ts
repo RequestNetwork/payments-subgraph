@@ -12,6 +12,7 @@ import {
   erc20EscrowToPayArtifact,
   erc20TransferableReceivableArtifact,
   singleRequestForwarderFactoryArtifact,
+  erc20CommerceEscrowWrapperArtifact,
 } from "@requestnetwork/smart-contracts";
 import { EventFragment } from "@ethersproject/abi";
 import { camelCase } from "lodash";
@@ -26,6 +27,7 @@ const paymentNetworks = {
   ERC20EscrowToPay: erc20EscrowToPayArtifact,
   ERC20TransferrableReceivable: erc20TransferableReceivableArtifact,
   SingleRequestProxyFactory: singleRequestForwarderFactoryArtifact,
+  ERC20CommerceEscrowWrapper: erc20CommerceEscrowWrapperArtifact,
 };
 
 type DataSource = {
@@ -45,14 +47,14 @@ type DataSource = {
 
 const getArtifactInfo = (artifact: ContractArtifact<any>, network: string) => {
   return artifact
-    .getAllAddresses(network)
-    .filter((x) => Boolean(x.address))
-    .map(({ version }) => ({
-      ...artifact.getDeploymentInformation(network, version),
+    .getAllAddresses(network as any)
+    .filter((x: any) => Boolean(x.address))
+    .map(({ version }: any) => ({
+      ...artifact.getDeploymentInformation(network as any, version),
       version,
     }))
     .filter(
-      (artifact, index, self) =>
+      (artifact: any, index: number, self: any[]) =>
         self.findIndex((x) => x.address === artifact.address) === index,
     );
 };
@@ -70,6 +72,14 @@ const ignoredEvents = [
   "ERC20FeeProxyUpdated",
 ];
 
+// Contract-specific events to ignore
+const contractSpecificIgnoredEvents: Record<string, string[]> = {
+  ERC20CommerceEscrowWrapper: [
+    "CommercePaymentAuthorized", // Redundant with PaymentAuthorized
+    "TransferWithReferenceAndFee", // Declared but never emitted by this contract (emitted by ERC20FeeProxy)
+  ],
+};
+
 export const getManifest = (
   TheGraphChainName: string,
   RequestNetworkChainName: string,
@@ -82,6 +92,8 @@ export const getManifest = (
       graphEntities = ["Payment", "Escrow", "EscrowEvent"];
     } else if (pn === "SingleRequestProxyFactory") {
       graphEntities = ["SingleRequestProxyDeployment"];
+    } else if (pn === "ERC20CommerceEscrowWrapper") {
+      graphEntities = ["Payment", "CommerceEscrow", "CommerceEscrowEvent"];
     } else {
       graphEntities = ["Payment"];
     }
@@ -95,10 +107,12 @@ export const getManifest = (
       );
     });
     infoArray.forEach(({ address, creationBlockNumber, version }) => {
+      const contractIgnoredEvents = contractSpecificIgnoredEvents[pn] || [];
+      const allIgnoredEvents = [...ignoredEvents, ...contractIgnoredEvents];
       const events = artifact
         .getContractAbi(version)
         .filter((x) => x.type === "event")
-        .filter((x) => x.name && !ignoredEvents.includes(x.name))
+        .filter((x) => x.name && !allIgnoredEvents.includes(x.name))
         .map((x) => ({
           handlerName: "handle" + x.name,
           eventSignature: EventFragment.fromObject(x)
