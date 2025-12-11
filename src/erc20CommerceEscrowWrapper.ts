@@ -104,6 +104,8 @@ export function handlePaymentCharged(event: PaymentCharged): void {
   let escrowId = generateCommerceEscrowId(paymentReference);
   let escrow = CommerceEscrow.load(escrowId);
 
+  let escrow = CommerceEscrow.load(escrowId);
+
   if (escrow == null) {
     escrow = new CommerceEscrow(escrowId);
     escrow.contractAddress = event.address;
@@ -115,9 +117,9 @@ export function handlePaymentCharged(event: PaymentCharged): void {
     escrow.amount = event.params.amount.toBigDecimal();
     escrow.payer = event.params.payer;
     escrow.merchant = event.params.merchant;
-    escrow.escrowState = "charged";
-    escrow.save();
   }
+  escrow.escrowState = "charged";
+  escrow.save();
 
   createCommerceEscrowEvent(
     event,
