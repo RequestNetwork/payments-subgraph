@@ -52,7 +52,7 @@ export function generateCommerceEscrowEventId(
 ): string {
   var id =
     "commerce-" + transaction.hash.toHex() + paymentReference.toHex().slice(2);
-  return crypto.keccak256(ByteArray.fromHexString(id)).toHex();
+  return crypto.keccak256(Bytes.fromUTF8(id)).toHex();
 }
 
 export function createCommerceEscrowEvent(
