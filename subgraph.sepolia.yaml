@@ -213,9 +213,9 @@ dataSources:
     name: ERC20CommerceEscrowWrapper
     network: sepolia
     source:
-      address: "0x4062C5c38b14A90f9293010a72b53FA3b400bD46"
+      address: "0xc9b2eCBc2bfb38908f0Ee59729875959A09E6Ea5"
       abi: ERC20CommerceEscrowWrapper
-      startBlock: 0
+      startBlock: 9822153
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
