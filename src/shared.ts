@@ -50,9 +50,8 @@ export function generateCommerceEscrowEventId(
   transaction: ethereum.Transaction,
   paymentReference: Bytes,
 ): string {
-  var id =
-    "commerce-" + transaction.hash.toHex() + paymentReference.toHex().slice(2);
-  return crypto.keccak256(Bytes.fromUTF8(id)).toHex();
+  var id = transaction.hash.toHex() + paymentReference.toHex().slice(2);
+  return "commerce-" + crypto.keccak256(ByteArray.fromHexString(id)).toHex();
 }
 
 export function createCommerceEscrowEvent(
