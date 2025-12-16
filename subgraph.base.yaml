@@ -156,4 +156,42 @@ dataSources:
           handler: handleEthereumSingleRequestProxyCreated
           receipt: true
       file: ./src/singleRequestProxyFactory.ts
+  - kind: ethereum/contract
+    name: ERC20CommerceEscrowWrapper
+    network: base
+    source:
+      address: "0x9A73b3774183d07d4a2b585B04982F2Ec672B03b"
+      abi: ERC20CommerceEscrowWrapper
+      startBlock: 39363932
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Payment
+        - CommerceEscrow
+        - CommerceEscrowEvent
+      abis:
+        - name: ERC20CommerceEscrowWrapper
+          file: ./abis/ERC20CommerceEscrowWrapper.json
+      eventHandlers:
+        - event: PaymentAuthorized(indexed bytes8,address,address,address,uint256,bytes32)
+          handler: handlePaymentAuthorized
+          receipt: true
+        - event: PaymentCaptured(indexed bytes8,bytes32,uint256,address)
+          handler: handlePaymentCaptured
+          receipt: true
+        - event: PaymentCharged(indexed bytes8,address,address,address,uint256,bytes32)
+          handler: handlePaymentCharged
+          receipt: true
+        - event: PaymentReclaimed(indexed bytes8,bytes32,uint256,address)
+          handler: handlePaymentReclaimed
+          receipt: true
+        - event: PaymentRefunded(indexed bytes8,bytes32,uint256,address)
+          handler: handlePaymentRefunded
+          receipt: true
+        - event: PaymentVoided(indexed bytes8,bytes32,uint256,address)
+          handler: handlePaymentVoided
+          receipt: true
+      file: ./src/erc20CommerceEscrowWrapper.ts
   

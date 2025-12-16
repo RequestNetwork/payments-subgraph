@@ -88,3 +88,51 @@ type SingleRequestProxyDeployment @entity {
   timestamp: Int!
   txHash: Bytes!
 }
+
+enum CommerceEscrowState {
+  authorized
+  captured
+  voided
+  charged
+  reclaimed
+  refunded
+}
+
+type CommerceEscrow @entity {
+  id: ID!
+  contractAddress: Bytes!
+  reference: Bytes!
+  commercePaymentHash: Bytes!
+  creationBlock: Int!
+  creationTimestamp: Int!
+  escrowState: CommerceEscrowState!
+  tokenAddress: Bytes!
+  amount: BigDecimal!
+  payer: Bytes!
+  merchant: Bytes!
+  events: [CommerceEscrowEvent!] @derivedFrom(field: "escrow")
+}
+
+enum CommerceEscrowEventName {
+  authorized
+  captured
+  voided
+  charged
+  reclaimed
+  refunded
+}
+
+type CommerceEscrowEvent @entity {
+  id: ID!
+  contractAddress: Bytes!
+  reference: Bytes!
+  escrow: CommerceEscrow!
+  block: Int!
+  timestamp: Int!
+  txHash: Bytes!
+  eventName: CommerceEscrowEventName!
+  from: Bytes!
+  gasUsed: BigInt!
+  gasPrice: BigInt!
+  amount: BigDecimal
+}
