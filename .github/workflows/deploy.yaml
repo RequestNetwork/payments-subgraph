@@ -28,6 +28,7 @@ jobs:
           - "xdai"
           - "zksyncera"
           - "sonic"
+          - "boba"
     environment:
       name: ${{ matrix.chain }}
       url: ${{ format('https://api.studio.thegraph.com/query/67444/request-payments-{0}/version/latest', matrix.chain) }}
